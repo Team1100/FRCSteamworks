@@ -284,7 +284,7 @@ public class GripPipeline implements VisionPipeline {
 			
 		}
 		for(int i = 0; i < data.length; i++){
-			NetworkTable.getTable("GRIP/conts").putNumberArray("data", data[i]);
+			NetworkTable.getTable("GRIP/conts").putNumberArray("data"+i, data[i]);
 		}
 	}
 
