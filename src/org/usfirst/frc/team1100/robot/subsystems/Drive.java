@@ -1,6 +1,10 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
-public class Drive {
+import org.usfirst.frc.team1100.robot.commands.MecanumDrive;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class Drive extends Subsystem {
 	
 	private static Drive drive;
 	
@@ -9,6 +13,11 @@ public class Drive {
 			drive = new Drive();
 		}
 		return drive;
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new MecanumDrive());
 	}
 
 }

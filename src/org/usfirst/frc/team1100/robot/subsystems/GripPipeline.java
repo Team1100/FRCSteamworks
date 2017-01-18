@@ -1,4 +1,9 @@
+package org.usfirst.frc.team1100.robot.subsystems;
 import java.io.File;
+
+
+
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +29,12 @@ import org.opencv.objdetect.*;
 * @author GRIP
 */
 public class GripPipeline implements VisionPipeline {
+	
+	public static int AREA = 0;
+	public static int CENTER_X = 1;
+	public static int CENTER_Y = 2;
+	public static int  WIDTH = 3;
+	public static int HEIGHT = 4;
 
 	//Outputs
 	private Mat blurOutput = new Mat();
@@ -71,7 +82,7 @@ public class GripPipeline implements VisionPipeline {
 		double filterContoursMinRatio = 0.0;
 		double filterContoursMaxRatio = 1000.0;
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
-
+		
 	}
 
 	/**
@@ -234,6 +245,7 @@ public class GripPipeline implements VisionPipeline {
 		final MatOfInt hull = new MatOfInt();
 		output.clear();
 		//operation
+		double[][] data = new double[inputContours.size()][5];
 		for (int i = 0; i < inputContours.size(); i++) {
 			final MatOfPoint contour = inputContours.get(i);
 			final Rect bb = Imgproc.boundingRect(contour);
@@ -256,6 +268,23 @@ public class GripPipeline implements VisionPipeline {
 			final double ratio = bb.width / (double)bb.height;
 			if (ratio < minRatio || ratio > maxRatio) continue;
 			output.add(contour);
+			
+			MatOfPoint2f approxCurve = new MatOfPoint2f();
+			 MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
+			 MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
+			 Rect rect = Imgproc.boundingRect(points);
+			
+			data[i][0] = area;
+			data[i][1] = rect.width/2 + rect.x;
+			data[i][2] = rect.height/2 + rect.y;
+			data[i][3] = rect.width;
+			data[i][4] = rect.height;
+			
+			
+			
+		}
+		for(int i = 0; i < data.length; i++){
+			NetworkTable.getTable("GRIP/conts").putNumberArray("data", data[i]);
 		}
 	}
 
