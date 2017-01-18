@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class Vision extends Subsystem {
+	
+	public final static double ACCEPTABLE_ERROR = 10; //pixels
 
 	private static Vision vision;
 	private static GripPipeline gp;
@@ -50,6 +52,11 @@ public class Vision extends Subsystem {
 			conts.add(currentCont);
 		}
 		return conts;
+	}
+	
+	public void centerContours() {
+		
+		
 	}
 
 }
