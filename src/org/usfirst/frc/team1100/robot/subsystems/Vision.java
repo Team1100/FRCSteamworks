@@ -12,7 +12,7 @@ public class Vision extends Subsystem {
 	public final static double ACCEPTABLE_ERROR = 10; //ten pixels is probably good enough at the distances we plan to operate from
 
 	private static Vision vision; //Standard Team 1100 Style©
-	private static GripPipeline gp;
+	private static GripPipeline gp; //This allows us to to do actual vision processing by 
 	
 	NetworkTable table;
 	
