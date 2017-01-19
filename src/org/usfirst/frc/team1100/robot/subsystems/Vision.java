@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class Vision extends Subsystem {
 	
-	public final static double ACCEPTABLE_ERROR = 10; //pixels
+	public final static double ACCEPTABLE_ERROR = 10; //ten pixels is probably good enough at the distances we plan to operate from
 
-	private static Vision vision;
+	private static Vision vision; //Standard Team 1100 Style©
 	private static GripPipeline gp;
 	
 	NetworkTable table;

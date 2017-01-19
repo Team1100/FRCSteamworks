@@ -1,9 +1,6 @@
 package org.usfirst.frc.team1100.robot.subsystems;
+
 import java.io.File;
-
-
-
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.vision.VisionPipeline;
 
 import org.opencv.core.*;
@@ -29,12 +27,6 @@ import org.opencv.objdetect.*;
 * @author GRIP
 */
 public class GripPipeline implements VisionPipeline {
-	
-	public static int AREA = 0;
-	public static int CENTER_X = 1;
-	public static int CENTER_Y = 2;
-	public static int  WIDTH = 3;
-	public static int HEIGHT = 4;
 
 	//Outputs
 	private Mat blurOutput = new Mat();
@@ -52,15 +44,15 @@ public class GripPipeline implements VisionPipeline {
 	@Override	public void process(Mat source0) {
 		// Step Blur0:
 		Mat blurInput = source0;
-		BlurType blurType = BlurType.get("Gaussian Blur");
-		double blurRadius = 3.6036036036036037;
+		BlurType blurType = BlurType.get("Box Blur");
+		double blurRadius = 12.612612612612612;
 		blur(blurInput, blurType, blurRadius, blurOutput);
 
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = blurOutput;
-		double[] hslThresholdHue = {74.46043165467626, 106.27986348122867};
-		double[] hslThresholdSaturation = {165.10791366906474, 255.0};
-		double[] hslThresholdLuminance = {27.51798561151079, 255.0};
+		double[] hslThresholdHue = {74.46043165467626, 180.0};
+		double[] hslThresholdSaturation = {27.51798561151079, 255.0};
+		double[] hslThresholdLuminance = {151.34892086330936, 255.0};
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
@@ -82,7 +74,7 @@ public class GripPipeline implements VisionPipeline {
 		double filterContoursMinRatio = 0.0;
 		double filterContoursMaxRatio = 1000.0;
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
-		
+
 	}
 
 	/**
@@ -245,13 +237,14 @@ public class GripPipeline implements VisionPipeline {
 		final MatOfInt hull = new MatOfInt();
 		output.clear();
 		//operation
+		double area;
 		double[][] data = new double[inputContours.size()][5];
 		for (int i = 0; i < inputContours.size(); i++) {
 			final MatOfPoint contour = inputContours.get(i);
 			final Rect bb = Imgproc.boundingRect(contour);
 			if (bb.width < minWidth || bb.width > maxWidth) continue;
 			if (bb.height < minHeight || bb.height > maxHeight) continue;
-			final double area = Imgproc.contourArea(contour);
+			area = Imgproc.contourArea(contour);
 			if (area < minArea) continue;
 			if (Imgproc.arcLength(new MatOfPoint2f(contour.toArray()), true) < minPerimeter) continue;
 			Imgproc.convexHull(contour, hull);
@@ -286,10 +279,10 @@ public class GripPipeline implements VisionPipeline {
 		for(int i = 0; i < data.length; i++){
 			NetworkTable.getTable("GRIP/conts").putNumberArray("data"+i, data[i]);
 		}
+		}
 	}
 
 
 
 
-}
 
