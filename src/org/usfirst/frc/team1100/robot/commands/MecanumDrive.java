@@ -21,7 +21,7 @@ public class MecanumDrive extends Command {
 	@Deprecated
 	@Override
 	public void execute() {
-		Drive.getInstance().driveMecanum(OI.getInstance().getLeftStick().getX(), OI.getInstance().getLeftStick().getY(),OI.getInstance().getRightStick().getY(), 0.0);
+		Drive.getInstance().driveMecanum(OI.getInstance().getLeftStick().getX(), OI.getInstance().getLeftStick().getY(),OI.getInstance().getRightStick().getY());
 	}
 	
 	@Deprecated

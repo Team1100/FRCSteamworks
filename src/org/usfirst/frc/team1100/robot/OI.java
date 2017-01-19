@@ -22,8 +22,8 @@ private static OI instance;
 	}
 	
 	private OI() {
-		leftStick = new AttackThree(RobotMap.J_LEFT, .1);
-		rightStick = new AttackThree(RobotMap.J_RIGHT, .1);
+		leftStick = new AttackThree(RobotMap.I_LEFT, .1);
+		rightStick = new AttackThree(RobotMap.I_RIGHT, .1);
 	}
 	
 	/**

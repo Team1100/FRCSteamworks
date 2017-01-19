@@ -24,7 +24,7 @@ public class UserDrive extends Command {
 		double leftJVY = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
 		double rightJVY = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
 		
-		Drive.getInstance().driveMecanum(leftJVX, leftJVY, rightJVY, 0); // In the future we should add in the proper gyro support
+		Drive.getInstance().driveMecanum(leftJVX, leftJVY, rightJVY); // In the future we should add in the proper gyro support
 	}
 	
 	// This is always going to be false because we will always be running it unless we are specifically running something else
