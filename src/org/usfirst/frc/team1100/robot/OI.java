@@ -10,6 +10,7 @@ public class OI {
 	
 private static OI instance;
 	
+	// These are the two joysticks we have on the driver station; the left one and the right one.
 	private AttackThree leftStick;
 	private AttackThree rightStick;
 	
