@@ -261,8 +261,8 @@ public class GripPipeline implements VisionPipeline {
 			final double ratio = bb.width / (double)bb.height;
 			if (ratio < minRatio || ratio > maxRatio) continue;
 			output.add(contour);
-			
-			
+
+
 			/*
 			 * I feel I owe some explanation for this. You see, I am a simple code farmer who gets up at the crack of dawn and works all day tending to my
 			 * loop indices. On weekends, I travel half of a day to the market and sell my semicolons for some spending money I can put towards comments like
@@ -270,28 +270,23 @@ public class GripPipeline implements VisionPipeline {
 			 * took some code from StackOverflow to convert it to a rectangle where I can approximate the center from. We're using box blur anyway, so I may
 			 * as well bank on rectilinear contours.
 			 */
-			MatOfPoint2f approxCurve = new MatOfPoint2f();
+			 //MatOfPoint2f approxCurve = new MatOfPoint2f();
 			 MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
-			 MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
+			 MatOfPoint points = new MatOfPoint( contour2f.toArray() );
 			 Rect rect = Imgproc.boundingRect(points);
-			
+
 			 //This is going in the network table
 			data[i][0] = area;
 			data[i][1] = rect.width/2 + rect.x;
 			data[i][2] = rect.height/2 + rect.y;
 			data[i][3] = rect.width;
 			data[i][4] = rect.height;
-			
-			
-			
+
+
+
 		}
 		for(int i = 0; i < data.length; i++){
 			NetworkTable.getTable("GRIP/conts").putNumberArray("data"+i, data[i]); //Here we take a huge steaming dump into the network table, and flush to the driver station
 		}
-		}
 	}
-
-
-
-
-
+}
