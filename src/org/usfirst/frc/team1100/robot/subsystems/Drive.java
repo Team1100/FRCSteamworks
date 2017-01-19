@@ -19,11 +19,12 @@ public class Drive extends Subsystem {
 	}
 	
 	public Drive(){
-		driveTrain = new RobotDrive(RobotMap.D_MOTOR_0, RobotMap.D_MOTOR_1, RobotMap.D_MOTOR_2, RobotMap.D_MOTOR_3);
+		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
 	}
 	
-	public void driveMecanum(double x, double y, double rotation, double gyroAngle ){
-		driveTrain.mecanumDrive_Cartesian(x, y, rotation, gyroAngle);
+	public void driveMecanum(double x, double y, double rotation){
+		//driveTrain.mecanumDrive_Cartesian(x, y, rotation,0.0);
+		driveTrain.tankDrive(x,rotation);
 	}
 	
 	@Override

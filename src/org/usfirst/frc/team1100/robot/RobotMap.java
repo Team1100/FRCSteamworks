@@ -27,10 +27,10 @@ public class RobotMap {
 	private static final int USB_2 = 2;
 	
 	//[D]rive
-	public final static int D_MOTOR_0 = PWM_0;
-	public final static int D_MOTOR_1 = PWM_1;
-	public final static int D_MOTOR_2 = PWM_2;
-	public final static int D_MOTOR_3 = PWM_3;
+	public final static int D_BACK_RIGHT = PWM_0;
+	public final static int D_FRONT_RIGHT = PWM_1;
+	public final static int D_FRONT_LEFT = PWM_2;
+	public final static int D_BACK_LEFT = PWM_3;
 	//[J]OYSTICKS
 	public static final int J_LEFT = USB_0;
 	public static final int J_RIGHT = USB_1;
