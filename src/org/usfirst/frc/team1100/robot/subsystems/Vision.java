@@ -32,31 +32,27 @@ public class Vision extends Subsystem {
 		return vision;
 	}
 	
-	public ArrayList<double[]> getContours() {
-		ArrayList<double[]> conts = new ArrayList<>();
-		double[] currentCont;
-		double[] error = new double[5];
+	public ArrayList<double[]> getContours() { //This gets the contours from the network table
+		ArrayList<double[]> conts = new ArrayList<>(); //Conts m8
+		double[] currentCont; //This represents the contour currently being iterated over in the network table
+		double[] error = new double[5]; //This is the default set of values that we can use to detect error. If this ever comes up, we know something is on
 		for(int i = 0; i < 5; i++) {
-			error[i] = -i;
+			error[i] = -i; //Negative values should not come up with our vision
 		}
-		boolean finished = false;
-		int i = -1;
-		while(!finished) {
-			++i;
-			currentCont = new double[5];
-			currentCont = table.getNumberArray("data" + i, error);
-			if(currentCont.equals(error)) {
-				finished = true;
+		boolean finished = false; //Loop sentinel. Sort of.
+		int i = -1; //Loop index.
+		while(!finished) { //Loop
+			++i; //Saves one CPU cycle AND looks cool.
+			currentCont = new double[5]; //Reset or initialize the array
+			currentCont = table.getNumberArray("data" + i, error); //Fishing out said steaming dump.
+																   //If there is nothing here, it will return the error array
+			if(currentCont.equals(error)) { //Checking for error
+				finished = true; //Exit loop
 				break;
 			}
-			conts.add(currentCont);
+			conts.add(currentCont); //Add onto arraylist
 		}
-		return conts;
-	}
-	
-	public void centerContours() {
-		
-		
+		return conts; //Return
 	}
 
 }
