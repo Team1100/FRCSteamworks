@@ -31,8 +31,8 @@ public class RobotMap {
 	public final static int D_FRONT_RIGHT = PWM_1;
 	public final static int D_FRONT_LEFT = PWM_2;
 	public final static int D_BACK_LEFT = PWM_3;
-	//[J]OYSTICKS
-	public static final int J_LEFT = USB_0;
-	public static final int J_RIGHT = USB_1;
-	public static final int J_X = USB_2;
+	//[I]nput
+	public static final int I_LEFT = USB_0;
+	public static final int I_RIGHT = USB_1;
+	public static final int I_XBOX = USB_2;
 }
