@@ -30,6 +30,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		// PLEASE: remember to initialize all of the subsystems by calling their respective getInstance() method
+		// If you fail to do this, it will not work and then it will be considered a software issue
 		OI.getInstance();
 		Drive.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
