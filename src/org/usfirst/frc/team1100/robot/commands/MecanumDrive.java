@@ -1,15 +1,11 @@
 package org.usfirst.frc.team1100.robot.commands;
 
 import org.usfirst.frc.team1100.robot.OI;
-import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MecanumDrive extends Command {
-	
-	private static RobotDrive robotDrive;
 	
 	public MecanumDrive() {
 		requires(Drive.getInstance());
@@ -22,7 +18,6 @@ public class MecanumDrive extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
