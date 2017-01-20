@@ -28,7 +28,7 @@ public void execute() {
 	double difference;
 	while(Math.abs(centerX - trueCenterX) > Vision.getInstance().ACCEPTABLE_ERROR) {
 		difference = centerX - trueCenterX;
-		Drive.getInstance().driveMecanum(difference/10/*For slowing things down a bit*/, 0, 0, 0);
+		//TODO: Implement rotation with actual robot
 		//This will need much tweaking once the robot is built
 	}
 	finished = true;
