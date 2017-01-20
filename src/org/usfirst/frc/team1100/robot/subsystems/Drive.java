@@ -17,11 +17,16 @@ public class Drive extends Subsystem {
 		}
 		return drive;
 	}
-	
 	public Drive(){
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
 	}
 	
+	/**
+	 * This drives the robot with mecanum
+	 * @param x x distance
+	 * @param y y distance
+	 * @param rotation is it radians or degrees? We just do not know.
+	 */
 	public void driveMecanum(double x, double y, double rotation){
 		//driveTrain.mecanumDrive_Cartesian(x, y, rotation,0.0);
 		driveTrain.tankDrive(x,rotation);
@@ -33,3 +38,5 @@ public class Drive extends Subsystem {
 	}
 
 }
+//Here we can write actual words.
+//Hello Sven
