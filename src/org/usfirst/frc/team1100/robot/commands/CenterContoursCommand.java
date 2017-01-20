@@ -7,11 +7,11 @@ import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class centerContoursCommand extends Command {
+public class CenterContoursCommand extends Command {
 
 	private boolean finished;
 	
-	public centerContoursCommand() {
+	public CenterContoursCommand() {
 		finished = false;
 	}
 	
