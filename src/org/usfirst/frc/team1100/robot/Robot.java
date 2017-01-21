@@ -36,8 +36,11 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// PLEASE: remember to initialize all of the subsystems by calling their respective getInstance() method
 		// If you fail to do this, it will not work and then it will be considered a software issue
-		OI.getInstance();
 		Drive.getInstance();
+		Intake.getInstance();
+		Augar.getInstance();
+		Shooter.getInstance();
+		OI.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -47,10 +50,10 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
 		LiveWindow.addActuator("Augar", "Augar", Augar.getInstance().getAugarLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
-		LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
-		LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
-		LiveWindow.addActuator("Drive Train", "Rear Left", new Talon(RobotMap.D_BACK_LEFT));
-		LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));
+		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
+		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
+		//LiveWindow.addActuator("Drive Train", "Rear Left", new Talon(RobotMap.D_BACK_LEFT));
+		//LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));
 	}
 
 	/**

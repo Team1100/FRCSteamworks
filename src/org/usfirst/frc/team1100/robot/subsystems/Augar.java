@@ -17,7 +17,7 @@ public class Augar extends Subsystem {
 	private SpeedController augarMotor;
 	
 	public static Augar getInstance() {
-		if(augar != null) {
+		if(augar == null) {
 			augar = new Augar();
 		}
 		return augar;
@@ -35,7 +35,7 @@ public class Augar extends Subsystem {
 	 * @return the augar LiveWindowSendable
 	 */
     public LiveWindowSendable getAugarLWS() {
-		return (LiveWindowSendable) augar;
+		return (LiveWindowSendable) augarMotor;
 	}
     
     public void setAugarSpeed(double speed) {
