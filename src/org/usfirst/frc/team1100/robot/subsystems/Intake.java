@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Intake extends Subsystem {
 	private static Intake intake;
@@ -27,6 +28,14 @@ public class Intake extends Subsystem {
 	
 	protected void initDefaultCommand() {
 		// Nothing right now as OI handles it all
+	}
+	
+	/**
+	 * Gets the roller LiveWindowSendable
+	 * @return the roller LiveWindowSendable
+	 */
+	public LiveWindowSendable getRollerLWS() {
+		return (LiveWindowSendable) roller;
 	}
 	
 	public void setRollerSpeed(double speed) {

@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Augar extends Subsystem {
 	
@@ -29,6 +30,13 @@ public class Augar extends Subsystem {
     public void initDefaultCommand() {
         //Nothing right now as OI handles it all
     }
+    /**
+	 * Gets the augar LiveWindowSendable
+	 * @return the augar LiveWindowSendable
+	 */
+    public LiveWindowSendable getAugarLWS() {
+		return (LiveWindowSendable) augar;
+	}
     
     public void setAugarSpeed(double speed) {
     	augarMotor.set(speed);
