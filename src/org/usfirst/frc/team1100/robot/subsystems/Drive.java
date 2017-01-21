@@ -19,6 +19,8 @@ public class Drive extends Subsystem {
 	}
 	public Drive(){
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
+		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true);
+		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
 	}
 	
 	/**
@@ -28,8 +30,8 @@ public class Drive extends Subsystem {
 	 * @param rotation is it radians or degrees? We just do not know.
 	 */
 	public void driveMecanum(double x, double y, double rotation){
-		//driveTrain.mecanumDrive_Cartesian(x, y, rotation,0.0);
-		driveTrain.tankDrive(x,rotation);
+		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
+		//driveTrain.tankDrive(x,rotation);
 	}
 	
 	@Override
