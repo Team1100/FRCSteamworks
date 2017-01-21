@@ -19,7 +19,7 @@ public class Drive extends Subsystem {
 	}
 	public Drive(){
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
-		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true);
+		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true); // The left side has to be inverted for mecanum to work
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
 	}
 	
@@ -31,7 +31,15 @@ public class Drive extends Subsystem {
 	 */
 	public void driveMecanum(double x, double y, double rotation){
 		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
-		//driveTrain.tankDrive(x,rotation);
+	}
+	
+	/**
+	 * This drives the robot with tank (in case you want that)
+	 * @param left the left joystick value for the left side of the drive train
+	 * @param right the right joystick value for the right side of the drive train
+	 */
+	public void driveTank(double left, double right) {
+		driveTrain.tankDrive(left, right);
 	}
 	
 	@Override
