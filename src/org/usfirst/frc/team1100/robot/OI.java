@@ -1,9 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.augar.SetAugarSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
+import org.usfirst.frc.team1100.robot.subsystems.Augar;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
@@ -35,7 +37,8 @@ private static OI instance;
 		// Now the assignments
 		xbox.getButtonA().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_IN_SPEED)); // Roll in the fuel while the A button is pressed
 		xbox.getButtonB().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_OUT_SPEED)); // Roll out the fuel while the B button is pressed
-		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED)); // Spin up the flywheel to shoot fuel when the X button is pressed
+		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED)); // Spin up the flywheel to shoot fuel while the X button is pressed
+		xbox.getButtonY().whileHeld(new SetAugarSpeedCommand(Augar.AUGAR_OUT_SPEED)); // Spin the augar outwards to dispense fuel while the Y button is pressed
 		
 	}
 	
