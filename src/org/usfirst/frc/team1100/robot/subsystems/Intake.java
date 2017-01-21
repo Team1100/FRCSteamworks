@@ -4,13 +4,17 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Intake {
+public class Intake extends Subsystem {
 	private static Intake intake;
+	
+	public static final double ROLL_IN_SPEED = 1;
+	public static final double ROLL_OUT_SPEED = -1;
 	
 	private SpeedController roller;
 	
-	public Intake getInstance() {
+	public static Intake getInstance() {
 		if(intake == null) {
 			intake = new Intake();
 		}
@@ -22,6 +26,14 @@ public class Intake {
 	}
 	
 	protected void initDefaultCommand() {
-		
+		// Nothing right now as OI handles it all
+	}
+	
+	public void setRollerSpeed(double speed) {
+		roller.set(speed);
+	}
+	
+	public void stopRoller() {
+		roller.set(0);
 	}
 }
