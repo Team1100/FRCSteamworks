@@ -17,10 +17,16 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public final static int PWM_0 = 0;
-	public final static int PWM_1 = 1;
-	public final static int PWM_2 = 2;
-	public final static int PWM_3 = 3;
+	private final static int PWM_0 = 0;
+	private final static int PWM_1 = 1;
+	private final static int PWM_2 = 2;
+	private final static int PWM_3 = 3;
+	private final static int PWM_4 = 4;
+	private final static int PWM_5 = 5;
+	private final static int PWM_6 = 6;
+	private final static int PWM_7 = 7;
+	private final static int PWM_8 = 8;
+	private final static int PWM_9 = 9;
 	
 	private static final int USB_0 = 0;
 	private static final int USB_1 = 1;
@@ -31,8 +37,11 @@ public class RobotMap {
 	public final static int D_FRONT_RIGHT = PWM_1;
 	public final static int D_FRONT_LEFT = PWM_2;
 	public final static int D_BACK_LEFT = PWM_3;
-	//[I]nput
-	public static final int I_LEFT = USB_0;
-	public static final int I_RIGHT = USB_1;
-	public static final int I_XBOX = USB_2;
+	//[U]ser Input
+	public static final int U_LEFT = USB_0;
+	public static final int U_RIGHT = USB_1;
+	public static final int U_XBOX = USB_2;
+	//[I]ntake
+	public static final int I_ROLLER = PWM_9;
+	
 }
