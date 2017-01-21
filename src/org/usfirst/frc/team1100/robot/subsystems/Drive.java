@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.UserDrive;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -10,6 +11,8 @@ public class Drive extends Subsystem {
 	
 	private static Drive drive;
 	private RobotDrive driveTrain;
+	
+	private AnalogGyro gyro;
 	
 	public static Drive getInstance() {
 		if(drive==null) {
@@ -21,6 +24,8 @@ public class Drive extends Subsystem {
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true); // The left side has to be inverted for mecanum to work
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
+		
+		gyro = new AnalogGyro(RobotMap.D_GYRO);
 	}
 	
 	/**
@@ -45,6 +50,10 @@ public class Drive extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new UserDrive());
+	}
+	
+	public double getAngle() {
+		return gyro.getAngle();
 	}
 
 }

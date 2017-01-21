@@ -28,6 +28,11 @@ public class RobotMap {
 	private final static int PWM_8 = 8;
 	private final static int PWM_9 = 9;
 	
+	private final static int ANALOG_0 = 0;
+	private final static int ANALOG_1 = 1;
+	private final static int ANALOG_2 = 2;
+	private final static int ANALOG_3 = 3;
+	
 	private static final int USB_0 = 0;
 	private static final int USB_1 = 1;
 	private static final int USB_2 = 2;
@@ -37,6 +42,7 @@ public class RobotMap {
 	public final static int D_FRONT_RIGHT = PWM_1;
 	public final static int D_FRONT_LEFT = PWM_2;
 	public final static int D_BACK_LEFT = PWM_3;
+	public final static int D_GYRO = ANALOG_0;
 	//[U]ser Input
 	public static final int U_LEFT = USB_0;
 	public static final int U_RIGHT = USB_1;
