@@ -26,6 +26,7 @@ public class Drive extends Subsystem {
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
 		
 		gyro = new AnalogGyro(RobotMap.D_GYRO);
+		resetGyro();
 	}
 	
 	/**
@@ -52,8 +53,20 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new UserDrive());
 	}
 	
+	/**
+	 * Gets the current angle of the gyro
+	 * @return the current angle of the gyro
+	 */
 	public double getAngle() {
 		return gyro.getAngle();
+	}
+	
+	/**
+	 * Resets the gyro to 0
+	 * Mainly useful at the beginning of the match when we are in a known position
+	 */
+	public void resetGyro() {
+		gyro.reset();
 	}
 
 }
