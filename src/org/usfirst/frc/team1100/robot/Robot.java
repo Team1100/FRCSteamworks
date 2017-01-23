@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -34,6 +35,8 @@ public class Robot extends IterativeRobot {
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		OI.getInstance();
 		Drive.getInstance();
+		Vision.getInstance();
+		
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

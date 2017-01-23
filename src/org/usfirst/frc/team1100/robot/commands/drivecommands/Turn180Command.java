@@ -18,13 +18,13 @@ public class Turn180Command extends Command {
 	
 	public void execute() {
 		
-		Drive.getInstance().driveMecanum(0,0,Math.PI); //Move
+		Drive.getInstance().driveMecanum(0,0,Math.PI); //Move TODO: Check if this actually uses radians.
 		finished = true;
 		
 	}
 	
 	public void interrupted() {
-		end();
+		finished = true;
 	}
 	
 	@Override
