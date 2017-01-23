@@ -36,7 +36,7 @@ public class Drive extends Subsystem {
 	 * @param rotation is it radians or degrees? We just do not know.
 	 */
 	public void driveMecanum(double x, double y, double rotation){
-		driveTrain.mecanumDrive_Cartesian(x, y, rotation, getAngle());
+		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
 	}
 	
 	/**
