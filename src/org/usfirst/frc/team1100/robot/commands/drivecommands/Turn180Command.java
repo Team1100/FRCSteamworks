@@ -17,14 +17,11 @@ public class Turn180Command extends Command {
 	}
 	
 	public void execute() {
-		
-		Drive.getInstance().driveMecanum(0,0,Math.PI); //Move
-		finished = true;
-		
+		// I'll fix this if the git stuff works
 	}
 	
 	public void interrupted() {
-		end();
+		finished = true;
 	}
 	
 	@Override

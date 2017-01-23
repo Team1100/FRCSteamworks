@@ -52,6 +52,7 @@ public class Vision extends Subsystem {
 			}
 			conts.add(currentCont); //Add onto arraylist
 		}
+		System.err.println("Test working!");
 		return conts; //Return
 	}
 
