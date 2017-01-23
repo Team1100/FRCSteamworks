@@ -1,25 +1,25 @@
-package org.usfirst.frc.team1100.robot.commands.augar;
+package org.usfirst.frc.team1100.robot.commands.auger;
 
-import org.usfirst.frc.team1100.robot.subsystems.Augar;
+import org.usfirst.frc.team1100.robot.subsystems.Auger;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SetAugarSpeedCommand extends Command {
+public class SetAugerSpeedCommand extends Command {
 
 	private double speed;
 	private double timeout;
 	
-    public SetAugarSpeedCommand(double speed) {
-        requires(Augar.getInstance());
+    public SetAugerSpeedCommand(double speed) {
+        requires(Auger.getInstance());
         this.speed = speed;
         this.timeout = 0;
     }
     
-    public SetAugarSpeedCommand(double speed, double timeout) {
-        requires(Augar.getInstance());
+    public SetAugerSpeedCommand(double speed, double timeout) {
+        requires(Auger.getInstance());
         this.speed = speed;
         this.timeout = timeout;
     }
@@ -33,7 +33,7 @@ public class SetAugarSpeedCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Augar.getInstance().setAugarSpeed(speed);
+    	Auger.getInstance().setAugarSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +43,7 @@ public class SetAugarSpeedCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Augar.getInstance().stopAugar();
+    	Auger.getInstance().stopAugar();
     }
 
     // Called when another command which requires one or more of the same

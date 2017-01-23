@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team1100.robot;
 
-import org.usfirst.frc.team1100.robot.subsystems.Augar;
+import org.usfirst.frc.team1100.robot.subsystems.Auger;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 		Drive.getInstance();
 		Vision.getInstance();
 		Intake.getInstance();
-		Augar.getInstance();
+		Auger.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
-		LiveWindow.addActuator("Augar", "Augar", Augar.getInstance().getAugarLWS());
+		LiveWindow.addActuator("Augar", "Augar", Auger.getInstance().getAugarLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
 		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));

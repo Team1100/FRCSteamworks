@@ -7,24 +7,24 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
-public class Augar extends Subsystem {
+public class Auger extends Subsystem {
 	
-	private static Augar augar;
+	private static Auger auger;
 	
-	public static final double AUGAR_OUT_SPEED = 1;
-	public static final double AUGAR_UNJAM_SPEED = -0.7;
+	public static final double AUGER_OUT_SPEED = 1;
+	public static final double AUGER_UNJAM_SPEED = -0.7;
 	
 	private SpeedController augarMotor;
 	
-	public static Augar getInstance() {
-		if(augar == null) {
-			augar = new Augar();
+	public static Auger getInstance() {
+		if(auger == null) {
+			auger = new Auger();
 		}
-		return augar;
+		return auger;
 	}
 	
-	public Augar() {
-		augarMotor = new Talon(RobotMap.A_AUGAR);
+	public Auger() {
+		augarMotor = new Talon(RobotMap.A_AUGER);
 	}
 	
     public void initDefaultCommand() {
