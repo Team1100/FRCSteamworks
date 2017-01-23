@@ -22,7 +22,7 @@ public class UserDrive extends Command {
 		// Get the values for all the joystick axis that we will use for mecanum drive
 		double leftJVX = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);
 		double leftJVY = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
-		double rightJVY = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
+		double rightJVY = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kX);
 		
 		Drive.getInstance().driveMecanum(leftJVX, leftJVY, rightJVY); // In the future we should add in the proper gyro support
 	}
