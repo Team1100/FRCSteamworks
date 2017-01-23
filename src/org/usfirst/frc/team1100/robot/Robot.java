@@ -3,12 +3,9 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.subsystems.Augar;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-<<<<<<< HEAD
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
-=======
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
->>>>>>> origin/dev
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Talon;
@@ -41,15 +38,11 @@ public class Robot extends IterativeRobot {
 		// PLEASE: remember to initialize all of the subsystems by calling their respective getInstance() method
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		Drive.getInstance();
-<<<<<<< HEAD
 		Vision.getInstance();
-		
-=======
 		Intake.getInstance();
 		Augar.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
->>>>>>> origin/dev
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
