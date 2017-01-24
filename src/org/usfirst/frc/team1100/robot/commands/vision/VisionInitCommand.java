@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands;
+package org.usfirst.frc.team1100.robot.commands.vision;
 
 import org.usfirst.frc.team1100.robot.subsystems.GripPipeline;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
@@ -14,6 +14,10 @@ public class VisionInitCommand extends Command{
 	public VisionInitCommand(NetworkTable table, GripPipeline gp) {
 		table = NetworkTable.getTable("GRIP/conts");
 		this.gp = gp;
+	}
+	
+	public void execute() {
+		
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands;
+package org.usfirst.frc.team1100.robot.commands.spline;
 
 import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
