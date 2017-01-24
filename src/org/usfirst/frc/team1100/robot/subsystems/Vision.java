@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import java.util.ArrayList;
 
+import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.vision.VisionInitCommand;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,6 +31,10 @@ public class Vision extends Subsystem {
 			vision = new Vision();
 		}
 		return vision;
+	}
+	
+	public void process(Mat image) {
+		gp.process(image);
 	}
 	
 	public ArrayList<double[]> getContours() { //This gets the contours from the network table
