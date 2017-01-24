@@ -33,6 +33,22 @@ public class RobotMap {
 	private final static int ANALOG_2 = 2;
 	private final static int ANALOG_3 = 3;
 	
+	private final static int RELAY_0 = 0;
+	private final static int RELAY_1 = 1;
+	private final static int RELAY_2 = 2;
+	private final static int RELAY_3 = 3;
+	
+	private final static int DIO_0 = 0;
+	private final static int DIO_1 = 1;
+	private final static int DIO_2 = 2;
+	private final static int DIO_3 = 3;
+	private final static int DIO_4 = 4;
+	private final static int DIO_5 = 5;
+	private final static int DIO_6 = 6;
+	private final static int DIO_7 = 7;
+	private final static int DIO_8 = 8;
+	private final static int DIO_9 = 9;
+	
 	private static final int USB_0 = 0;
 	private static final int USB_1 = 1;
 	private static final int USB_2 = 2;
