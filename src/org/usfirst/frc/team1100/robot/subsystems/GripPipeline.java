@@ -282,7 +282,7 @@ public class GripPipeline implements VisionPipeline {
 			data[i][3] = rect.width;
 			data[i][4] = rect.height;
 
-
+			System.err.println("This is a debug test");
 
 		}
 		for(int i = 0; i < data.length; i++){
