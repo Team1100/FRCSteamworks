@@ -48,9 +48,7 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new CenterContoursCommand());
-		setDefaultCommand(new UserDrive());
-		System.err.println("Center contour command set!");
+		setDefaultCommand(new CenterContoursCommand());
 	}
 
 }
