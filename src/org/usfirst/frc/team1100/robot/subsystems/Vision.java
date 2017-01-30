@@ -17,9 +17,10 @@ public class Vision extends Subsystem {
 	
 	NetworkTable table;
 	
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new VisionInitCommand(table, gp));
+	public Vision() {
+		//setDefaultCommand(new VisionInitCommand(table, gp));
+		table = NetworkTable.getTable("GRIP/conts");
+		gp = new GripPipeline();
 	}
 	
 	public NetworkTable getTable() {
@@ -34,6 +35,12 @@ public class Vision extends Subsystem {
 	}
 	
 	public void process(Mat image) {
+		if(gp == null) {
+			System.err.println("Its gracious professionalism!!!!");
+		}
+		if(image == null) {
+			System.err.println("Its the image!!!!");
+		}
 		gp.process(image);
 	}
 	
@@ -57,8 +64,13 @@ public class Vision extends Subsystem {
 			}
 			conts.add(currentCont); //Add onto arraylist
 		}
-		System.err.println("Test working!");
 		return conts; //Return
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

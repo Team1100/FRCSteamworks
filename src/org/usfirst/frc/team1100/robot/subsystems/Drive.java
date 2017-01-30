@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.UserDrive;
+import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -10,9 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
 	
 	private static Drive drive;
-	private RobotDrive driveTrain;
-	
-	private AnalogGyro gyro;
+	private static RobotDrive driveTrain;
 	
 	public static Drive getInstance() {
 		if(drive==null) {
@@ -24,9 +23,6 @@ public class Drive extends Subsystem {
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true); // The left side has to be inverted for mecanum to work
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
-		
-		gyro = new AnalogGyro(RobotMap.D_GYRO);
-		resetGyro();
 	}
 	
 	/**
@@ -37,6 +33,8 @@ public class Drive extends Subsystem {
 	 */
 	public void driveMecanum(double x, double y, double rotation){
 		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
+		//System.err.println(Gyro.getInstance().getGyroDriftPerMillisecond());
+		//System.err.println(System.currentTimeMillis() + "	" + Gyro.getInstance().getAngleAverage()%360);
 	}
 	
 	/**
@@ -50,23 +48,9 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
+		//setDefaultCommand(new CenterContoursCommand());
 		setDefaultCommand(new UserDrive());
-	}
-	
-	/**
-	 * Gets the current angle of the gyro
-	 * @return the current angle of the gyro
-	 */
-	public double getAngle() {
-		return gyro.getAngle();
-	}
-	
-	/**
-	 * Resets the gyro to 0
-	 * Mainly useful at the beginning of the match when we are in a known position
-	 */
-	public void resetGyro() {
-		gyro.reset();
+		System.err.println("Center contour command set!");
 	}
 
 }

@@ -2,19 +2,18 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team1100.robot.subsystems.Auger;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
+import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -49,6 +48,7 @@ public class Robot extends IterativeRobot {
 		Auger.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
+		Gyro.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -77,11 +77,10 @@ public class Robot extends IterativeRobot {
                  cvSink.grabFrame(source);
                  //Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
                 // outputStream.putFrame(output);
-                 System.err.println("This is the first test");
+                 //System.err.println("This is the first test");
                  Vision.getInstance().process(source);
              }
          }).start();
-		
 	}
 
 	/**

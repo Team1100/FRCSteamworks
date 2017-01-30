@@ -3,35 +3,38 @@ import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj.command.Command;
 // ^
 public class AutoDrive extends Command {
-	public boolean finished; //This is the sentinel of the abstract loop this command runs in
-	public long startTime; //This is the time the command starts to run. Approximately.
 	
-	public AutoDrive() {
+	private double x;
+	private double y;
+	private double rotation;
+	
+	public AutoDrive(double x, double y, double rotation, double time) {
 		requires(Drive.getInstance()); //Gotta go fast
+		setTimeout(time);
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
 	}
 	
 	public void initialize() {
-		finished = false; //Initialize variable
-		startTime = System.currentTimeMillis(); //At this point, the time starts
+		
 	}
 	
-	public void execute(double x, double y, double rotation, long time) {
-		
+	public void execute() {
 		Drive.getInstance().driveMecanum(x,y,rotation); //Move
-		if(System.currentTimeMillis() - startTime > time) { //Check if enough time has passed
-			finished = true; //If so, stop
-		}
-		
 	}
 	
 	public void interrupted() {
 		end();
 	}
 	
+	public void end() {
+		Drive.getInstance().driveMecanum(0, 0, 0);
+	}
+	
 	@Override
 	protected boolean isFinished() {
-		
-		return finished;
+		return isTimedOut();
 	}
 
 }

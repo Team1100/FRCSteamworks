@@ -2,7 +2,9 @@ package org.usfirst.frc.team1100.robot.commands.vision;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team1100.robot.commands.drivecommands.AutoDrive;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,27 +14,34 @@ public class CenterContoursCommand extends Command {
 	private boolean finished;
 	
 	public CenterContoursCommand() {
+		requires(Vision.getInstance());
+		requires(Drive.getInstance());
+		requires(Gyro.getInstance());
 		finished = false;
 	}
 	
-public void execute() {
-	requires(Vision.getInstance());
-	requires(Drive.getInstance());
-	ArrayList<double[]> conts = Vision.getInstance().getContours();
-	double centerX = 0;
-	for(double[] d : conts) {
-		centerX+=d[1];
-	}
-	centerX/=conts.size();
-	double trueCenterX = 640.0;
-	double difference;
-	while(Math.abs(centerX - trueCenterX) > Vision.getInstance().ACCEPTABLE_ERROR) {
+	public void execute() {
+		Gyro.getInstance().resetGyro();
+		ArrayList<double[]> conts = Vision.getInstance().getContours();
+		double centerX = 0;
+		for(double[] d : conts) {
+			centerX+=d[1];
+		}
+		centerX/=conts.size();
+		double trueCenterX = 640.0;
+		double difference;
+		
+		if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
+			finished = true;
+		}
 		difference = centerX - trueCenterX;
-		//TODO: Implement rotation with actual robot
-		//This will need much tweaking once the robot is built
+		System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
+		if(difference > 0 ) {
+			new AutoDrive(0.0, -1 + 3*(1/difference), 0.0, (long) 0.1).start();
+		} else {
+			new AutoDrive(0.0,  1 - 3*(1/difference), 0.0, (long) 0.1).start();
+		}
 	}
-	finished = true;
-}
 	
 	@Override
 	protected boolean isFinished() {

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.ResetGyroCommand;
 import org.usfirst.frc.team1100.robot.commands.auger.SetAugerSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
@@ -31,7 +33,7 @@ private static OI instance;
 	
 	private OI() {
 		leftStick = new AttackThree(RobotMap.U_LEFT, 0.1);
-		rightStick = new AttackThree(RobotMap.U_RIGHT, 0.1);
+		rightStick = new AttackThree(RobotMap.U_RIGHT, 0.05);
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
 		
 		// Now the assignments
@@ -40,6 +42,8 @@ private static OI instance;
 		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED)); // Spin up the flywheel to shoot fuel while the X button is pressed
 		xbox.getButtonY().whileHeld(new SetAugerSpeedCommand(Auger.AUGER_OUT_SPEED)); // Spin the Auger outwards to dispense fuel while the Y button is pressed
 		
+		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
+		//rightStick.getButton(4).whenPressed(new RotateCommand(90));
 	}
 	
 	/**
