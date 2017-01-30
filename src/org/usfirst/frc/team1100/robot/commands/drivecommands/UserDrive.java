@@ -35,40 +35,6 @@ public class UserDrive extends Command {
 		double forwardSpeed = 0.0;
 		double strafeSpeed = 0.0;
 		
-		if(OI.getInstance().getRightStick().getButton(2).get()) { // Triangle button, left translate
-			// Strafe left
-			switch(speedLevel) {
-				case 1:
-					strafeSpeed = -0.3;
-					break;
-				case 2:
-					strafeSpeed = -0.5;
-					break;
-				case 3:
-					strafeSpeed = -0.7;
-					break;
-				case 4:
-					strafeSpeed = -1.0;
-					break;
-			}
-		}
-		if(OI.getInstance().getRightStick().getButton(1).get()) { // Circle button, right translate
-			// Strafe right
-			switch(speedLevel) {
-				case 1:
-					strafeSpeed = 0.3;
-					break;
-				case 2:
-					strafeSpeed = 0.5;
-					break;
-				case 3:
-					strafeSpeed = 0.7;
-					break;
-				case 4:
-					strafeSpeed = 1.0;
-					break;
-			}
-		}
 		if(OI.getInstance().getRightStick().getButton(7).get() && !prevDownVal) { // Left paddle, down speed
 			// Speed down
 			speedLevel--;
@@ -88,6 +54,12 @@ public class UserDrive extends Command {
 			prevUpVal = true;
 		} else if(!OI.getInstance().getRightStick().getButton(8).get()) {
 			prevUpVal = false;
+		}
+		if(OI.getInstance().getRightStick().getButton(9).get()) { // The select button, make speed full
+			speedLevel = 4;
+		}
+		if(OI.getInstance().getRightStick().getButton(10).get()) { // The start button, make speed low
+			speedLevel = 1;
 		}
 		if(OI.getInstance().getRightStick().getButton(4).get()) { // Brake, backwards
 			// Reverse
@@ -120,6 +92,40 @@ public class UserDrive extends Command {
 					break;
 				case 4:
 					forwardSpeed = 1.0;
+					break;
+			}
+		}
+		if(OI.getInstance().getRightStick().getButton(2).get()) { // Triangle button, left translate
+			// Strafe left
+			switch(speedLevel) {
+				case 1:
+					strafeSpeed = -0.3;
+					break;
+				case 2:
+					strafeSpeed = -0.5;
+					break;
+				case 3:
+					strafeSpeed = -0.7;
+					break;
+				case 4:
+					strafeSpeed = -1.0;
+					break;
+			}
+		}
+		if(OI.getInstance().getRightStick().getButton(1).get()) { // Circle button, right translate
+			// Strafe right
+			switch(speedLevel) {
+				case 1:
+					strafeSpeed = 0.3;
+					break;
+				case 2:
+					strafeSpeed = 0.5;
+					break;
+				case 3:
+					strafeSpeed = 0.7;
+					break;
+				case 4:
+					strafeSpeed = 1.0;
 					break;
 			}
 		}
