@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
 		//LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));
 		
 		 new Thread(() -> {
-             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
              camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
