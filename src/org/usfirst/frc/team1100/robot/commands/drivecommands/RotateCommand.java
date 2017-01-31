@@ -12,7 +12,7 @@ public class RotateCommand extends Command {
 
 	private double endAngle;
 	private final double DEADZONE = 3;
-	private final double RAMP_FACTOR = 70;
+	private final double RAMP_FACTOR = 90;
 	private final double SPEED_LIMIT = 0.5;
 	private boolean finished;
 	
@@ -20,6 +20,7 @@ public class RotateCommand extends Command {
     	requires(Drive.getInstance());
     	requires(Gyro.getInstance());
     	endAngle = Gyro.getInstance().getAngleAverage() + angle;
+    	setTimeout(3); // Ensure the gyro doesn't get stuck
     }
 
     // Called just before this Command runs the first time
