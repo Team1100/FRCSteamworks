@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.vision.VisionPipeline;
 
 import org.opencv.core.*;
@@ -29,7 +28,6 @@ import org.opencv.objdetect.*;
 public class GripPipeline implements VisionPipeline {
 
 	//Outputs
-	private Mat blurOutput = new Mat();
 	private Mat hslThresholdOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
 	private ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
@@ -42,47 +40,33 @@ public class GripPipeline implements VisionPipeline {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	@Override	public void process(Mat source0) {
-		// Step Blur0:
-		Mat blurInput = source0;
-		BlurType blurType = BlurType.get("Box Blur");
-		double blurRadius = 12.612612612612612;
-		blur(blurInput, blurType, blurRadius, blurOutput);
-
 		// Step HSL_Threshold0:
-		Mat hslThresholdInput = blurOutput;
-		double[] hslThresholdHue = {74.46043165467626, 180.0};
-		double[] hslThresholdSaturation = {27.51798561151079, 255.0};
-		double[] hslThresholdLuminance = {151.34892086330936, 255.0};
+		Mat hslThresholdInput = source0;
+		double[] hslThresholdHue = {55.03597122302158, 118.56655290102391};
+		double[] hslThresholdSaturation = {146.76258992805754, 255.0};
+		double[] hslThresholdLuminance = {133.00359712230215, 255.0};
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
 		Mat findContoursInput = hslThresholdOutput;
-		boolean findContoursExternalOnly = false;
+		boolean findContoursExternalOnly = true;
 		findContours(findContoursInput, findContoursExternalOnly, findContoursOutput);
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 400.0;
-		double filterContoursMinPerimeter = 0.0;
-		double filterContoursMinWidth = 0.0;
-		double filterContoursMaxWidth = 1000.0;
-		double filterContoursMinHeight = 0.0;
-		double filterContoursMaxHeight = 1000.0;
-		double[] filterContoursSolidity = {75.1798561151079, 100.0};
-		double filterContoursMaxVertices = 1000000.0;
-		double filterContoursMinVertices = 0.0;
-		double filterContoursMinRatio = 0.0;
-		double filterContoursMaxRatio = 1000.0;
+		double filterContoursMinArea = 0.0;
+		double filterContoursMinPerimeter = 0;
+		double filterContoursMinWidth = 0;
+		double filterContoursMaxWidth = 1000;
+		double filterContoursMinHeight = 0;
+		double filterContoursMaxHeight = 1000;
+		double[] filterContoursSolidity = {0, 100};
+		double filterContoursMaxVertices = 1000000;
+		double filterContoursMinVertices = 0;
+		double filterContoursMinRatio = 0;
+		double filterContoursMaxRatio = 1000;
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
 
-	}
-
-	/**
-	 * This method is a generated getter for the output of a Blur.
-	 * @return Mat output from Blur.
-	 */
-	public Mat blurOutput() {
-		return blurOutput;
 	}
 
 	/**
@@ -109,71 +93,6 @@ public class GripPipeline implements VisionPipeline {
 		return filterContoursOutput;
 	}
 
-
-	/**
-	 * An indication of which type of filter to use for a blur.
-	 * Choices are BOX, GAUSSIAN, MEDIAN, and BILATERAL
-	 */
-	enum BlurType{
-		BOX("Box Blur"), GAUSSIAN("Gaussian Blur"), MEDIAN("Median Filter"),
-			BILATERAL("Bilateral Filter");
-
-		private final String label;
-
-		BlurType(String label) {
-			this.label = label;
-		}
-
-		public static BlurType get(String type) {
-			if (BILATERAL.label.equals(type)) {
-				return BILATERAL;
-			}
-			else if (GAUSSIAN.label.equals(type)) {
-			return GAUSSIAN;
-			}
-			else if (MEDIAN.label.equals(type)) {
-				return MEDIAN;
-			}
-			else {
-				return BOX;
-			}
-		}
-
-		@Override
-		public String toString() {
-			return this.label;
-		}
-	}
-
-	/**
-	 * Softens an image using one of several filters.
-	 * @param input The image on which to perform the blur.
-	 * @param type The blurType to perform.
-	 * @param doubleRadius The radius for the blur.
-	 * @param output The image in which to store the output.
-	 */
-	private void blur(Mat input, BlurType type, double doubleRadius,
-		Mat output) {
-		int radius = (int)(doubleRadius + 0.5);
-		int kernelSize;
-		switch(type){
-			case BOX:
-				kernelSize = 2 * radius + 1;
-				Imgproc.blur(input, output, new Size(kernelSize, kernelSize));
-				break;
-			case GAUSSIAN:
-				kernelSize = 6 * radius + 1;
-				Imgproc.GaussianBlur(input,output, new Size(kernelSize, kernelSize), radius);
-				break;
-			case MEDIAN:
-				kernelSize = 2 * radius + 1;
-				Imgproc.medianBlur(input, output, kernelSize);
-				break;
-			case BILATERAL:
-				Imgproc.bilateralFilter(input, output, -1, radius, radius);
-				break;
-		}
-	}
 
 	/**
 	 * Segment an image based on hue, saturation, and luminance ranges.
@@ -237,14 +156,12 @@ public class GripPipeline implements VisionPipeline {
 		final MatOfInt hull = new MatOfInt();
 		output.clear();
 		//operation
-		double area;
-		double[][] data = new double[inputContours.size()][5];
 		for (int i = 0; i < inputContours.size(); i++) {
 			final MatOfPoint contour = inputContours.get(i);
 			final Rect bb = Imgproc.boundingRect(contour);
 			if (bb.width < minWidth || bb.width > maxWidth) continue;
 			if (bb.height < minHeight || bb.height > maxHeight) continue;
-			area = Imgproc.contourArea(contour);
+			final double area = Imgproc.contourArea(contour);
 			if (area < minArea) continue;
 			if (Imgproc.arcLength(new MatOfPoint2f(contour.toArray()), true) < minPerimeter) continue;
 			Imgproc.convexHull(contour, hull);
@@ -261,33 +178,25 @@ public class GripPipeline implements VisionPipeline {
 			final double ratio = bb.width / (double)bb.height;
 			if (ratio < minRatio || ratio > maxRatio) continue;
 			output.add(contour);
-
-
-			/*
-			 * I feel I owe some explanation for this. You see, I am a simple code farmer who gets up at the crack of dawn and works all day tending to my
-			 * loop indices. On weekends, I travel half of a day to the market and sell my semicolons for some spending money I can put towards comments like
-			 * these, or even for each loops. Anyway, I don't have the infrastructure in my code barn to deal with OpenCV mats that represent contours, so I
-			 * took some code from StackOverflow to convert it to a rectangle where I can approximate the center from. We're using box blur anyway, so I may
-			 * as well bank on rectilinear contours.
-			 */
-			 //MatOfPoint2f approxCurve = new MatOfPoint2f();
-			 MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
+			
+			MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
 			 MatOfPoint points = new MatOfPoint( contour2f.toArray() );
 			 Rect rect = Imgproc.boundingRect(points);
 
-			 //This is going in the network table
-			data[i][0] = area;
+			 double[][] data = new double[inputContours.size()][5];
+			 System.out.println("Rectangle width: " + rect.width);
+			//This is going in the network table
+			data [i][0] = area;
 			data[i][1] = rect.width/2 + rect.x;
 			data[i][2] = rect.height/2 + rect.y;
 			data[i][3] = rect.width;
 			data[i][4] = rect.height;
-
-			//System.err.println("This is a debug test");
 			
-
-		}
-		for(int i = 0; i < data.length; i++){
-			NetworkTable.getTable("GRIP/conts").putNumberArray("data"+i, data[i]); //Here we take a huge steaming dump into the network table, and flush to the driver station
 		}
 	}
+
+
+
+
 }
+

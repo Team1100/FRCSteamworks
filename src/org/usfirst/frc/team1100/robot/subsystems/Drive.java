@@ -48,7 +48,7 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new CenterContoursCommand());
+		setDefaultCommand(new CenterContoursCommand(1000));
 	}
 
 }

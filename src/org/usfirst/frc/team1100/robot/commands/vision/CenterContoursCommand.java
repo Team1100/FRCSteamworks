@@ -13,10 +13,11 @@ public class CenterContoursCommand extends Command {
 
 	private boolean finished;
 	
-	public CenterContoursCommand() {
+	public CenterContoursCommand(double time) {
 		requires(Vision.getInstance());
 		requires(Drive.getInstance());
 		requires(Gyro.getInstance());
+		setTimeout(time);
 		finished = false;
 	}
 	
@@ -43,9 +44,17 @@ public class CenterContoursCommand extends Command {
 		}
 	}
 	
+	public void interrupted() {
+		end();
+	}
+	
+	public void end() {
+		Drive.getInstance().driveMecanum(0, 0, 0);
+	}
+	
 	@Override
 	protected boolean isFinished() {
-		return finished;
+		return isTimedOut();
 	}
 
 }
