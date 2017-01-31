@@ -43,7 +43,7 @@ private static OI instance;
 		xbox.getButtonY().whileHeld(new SetAugerSpeedCommand(Auger.AUGER_OUT_SPEED)); // Spin the Auger outwards to dispense fuel while the Y button is pressed
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
-		//rightStick.getButton(4).whenPressed(new RotateCommand(90));
+		rightStick.getButton(5).whenPressed(new RotateCommand(90));
 	}
 	
 	/**

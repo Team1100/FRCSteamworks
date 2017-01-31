@@ -2,9 +2,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.UserDrive;
-import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -48,7 +46,8 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new CenterContoursCommand());
+		setDefaultCommand(new UserDrive());
+		//setDefaultCommand(new CenterContoursCommand());
 	}
 
 }
