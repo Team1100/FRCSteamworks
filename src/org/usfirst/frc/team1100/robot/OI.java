@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.commands.auger.SetAugerSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Auger;
@@ -44,6 +45,7 @@ private static OI instance;
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
 		rightStick.getButton(5).whenPressed(new RotateCommand(90));
+		rightStick.getButton(6).whenPressed(new CenterContoursCommand());
 	}
 	
 	/**

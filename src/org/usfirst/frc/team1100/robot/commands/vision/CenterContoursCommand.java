@@ -21,27 +21,33 @@ public class CenterContoursCommand extends Command {
 		finished = false;
 	}
 	
+	public CenterContoursCommand() {
+		requires(Vision.getInstance());
+		requires(Drive.getInstance());
+		requires(Gyro.getInstance());
+		finished = false;
+	}
+	
 	public void execute() {
+		//System.err.println("Center contour command executed!");
 		Gyro.getInstance().resetGyro();
 		ArrayList<double[]> conts = Vision.getInstance().getContours();
 		double centerX = 0;
-		for(double[] d : conts) {
+		for(double[] d : conts) {	
 			centerX+=d[1];
 		}
-		centerX/=conts.size();
-		double trueCenterX = 640.0;
-		double difference;
+		centerX/=conts.size(); /*average of the x values (d[1]) from the contour*/
+		double trueCenterX = 320;
+		double difference = 320;
 		
-		if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
+		/*if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
 			finished = true;
-		}
+			return;
+		}*/
 		difference = centerX - trueCenterX;
-		System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
-		if(difference > 0 ) {
-			new AutoDrive(0.0, -1 + 3*(1/difference), 0.0, (long) 0.1).start();
-		} else {
-			new AutoDrive(0.0,  1 - 3*(1/difference), 0.0, (long) 0.1).start();
-		}
+		//System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
+		difference /= 320;
+		Drive.getInstance().driveMecanum(0.0, difference, 0); /*parameters: x,y,rotation*/
 	}
 	
 	public void interrupted() {
@@ -54,7 +60,7 @@ public class CenterContoursCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut();
+		return finished;
 	}
 
 }

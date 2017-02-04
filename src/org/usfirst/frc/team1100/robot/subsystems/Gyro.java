@@ -28,7 +28,7 @@ public class Gyro extends Subsystem {
 	public Gyro() {
 		gyro0 = new AnalogGyro(RobotMap.D_GYRO0);
 		gyro1 = new AnalogGyro(RobotMap.D_GYRO1);
-		System.err.println("Test");
+		//System.err.println("Test");
 		resetGyro();
 	}
 	
@@ -70,7 +70,7 @@ public class Gyro extends Subsystem {
 	 * Mainly useful at the beginning of the match when we are in a known position
 	 */
 	public void resetGyro() {
-		System.err.println("Gyro reset");
+		//System.err.println("Gyro reset");
 		gyro0.reset();
 		gyro1.reset();
 		resetTime = System.currentTimeMillis();

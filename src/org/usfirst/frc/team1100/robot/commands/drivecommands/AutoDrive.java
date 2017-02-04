@@ -16,6 +16,13 @@ public class AutoDrive extends Command {
 		this.rotation = rotation;
 	}
 	
+	public AutoDrive(double x, double y, double rotation) {
+		requires(Drive.getInstance()); //Gotta go fast
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
+	}
+	
 	public void initialize() {
 		
 	}

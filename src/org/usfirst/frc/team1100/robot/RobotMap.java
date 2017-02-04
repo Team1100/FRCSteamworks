@@ -60,6 +60,7 @@ public class RobotMap {
 	public final static int D_BACK_LEFT = PWM_3;
 	public final static int D_GYRO0 = ANALOG_0;
 	public final static int D_GYRO1 = ANALOG_1;
+	public final static int D_ACCEL_1 = ANALOG_2;
 	//[U]ser Input
 	public static final int U_LEFT = USB_0;
 	public static final int U_RIGHT = USB_1;

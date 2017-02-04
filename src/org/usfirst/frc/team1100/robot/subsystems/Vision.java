@@ -44,8 +44,8 @@ public class Vision extends Subsystem {
 		gp.process(image);
 	}
 	
-	public ArrayList<double[]> getContours() { //This gets the contours from the network table
-		ArrayList<double[]> conts = new ArrayList<>(); //Conts m8
+	public synchronized ArrayList<double[]> getContours() { //This gets the contours from the network table
+		/*ArrayList<double[]> conts = new ArrayList<>(); //Conts m8
 		double[] currentCont; //This represents the contour currently being iterated over in the network table
 		double[] error = new double[5]; //This is the default set of values that we can use to detect error. If this ever comes up, we know something is on
 		for(int i = 0; i < 5; i++) {
@@ -56,15 +56,19 @@ public class Vision extends Subsystem {
 		while(!finished) { //Loop
 			++i; //Saves one CPU cycle AND looks cool.
 			currentCont = new double[5]; //Reset or initialize the array
-			currentCont = table.getNumberArray("data" + i, error); //Fishing out said steaming dump.
-																   //If there is nothing here, it will return the error array
 			if(currentCont.equals(error)) { //Checking for error
 				finished = true; //Exit loop
+				System.err.println("Error contour");
 				break;
 			}
+			currentCont = table.getNumberArray("data" + i, error); //Fishing out said steaming dump.
+			System.err.println(table.getNumberArray("data" + i, error)[1]);
+			table.delete("data" + i);
+			i--;
 			conts.add(currentCont); //Add onto arraylist
 		}
-		return conts; //Return
+		return conts; //Return*/
+		return gp.getContourList();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.vision.VisionPipeline;
 
 import org.opencv.core.*;
@@ -27,11 +28,14 @@ import org.opencv.objdetect.*;
 */
 public class GripPipeline implements VisionPipeline {
 
+	private NetworkTable table = NetworkTable.getTable("GRIP/conts");
+	private ArrayList<double[]> contours = new ArrayList<>();
+	
 	//Outputs
 	private Mat hslThresholdOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
 	private ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
-
+	
 	static {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
@@ -182,17 +186,32 @@ public class GripPipeline implements VisionPipeline {
 			MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
 			 MatOfPoint points = new MatOfPoint( contour2f.toArray() );
 			 Rect rect = Imgproc.boundingRect(points);
+			 
+			 if((rect.width > 50 || rect.height > 50) && !(rect.width > 50 && rect.height > 50)) {
 
 			 double[][] data = new double[inputContours.size()][5];
-			 System.out.println("Rectangle width: " + rect.width);
+			 //if(i%3==0)System.out.println("Center X from GRIP Pipeline: " + (rect.width/2 + rect.x));
 			//This is going in the network table
 			data [i][0] = area;
 			data[i][1] = rect.width/2 + rect.x;
 			data[i][2] = rect.height/2 + rect.y;
 			data[i][3] = rect.width;
 			data[i][4] = rect.height;
+			contours.add(data[i]);
+			table.putNumberArray("data" + i, data[i]);
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) { //Test this today. Code has not been deployed yet.
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 }
 			
 		}
+	}
+	
+	public ArrayList<double[]> getContourList() {
+		return contours;
 	}
 
 

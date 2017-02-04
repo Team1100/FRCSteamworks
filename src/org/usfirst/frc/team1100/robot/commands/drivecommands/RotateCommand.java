@@ -44,7 +44,7 @@ public class RotateCommand extends Command {
     		//new AutoDrive(0, 0, -power, 0.1).start();
     		finished = true;
     	}
-    	System.err.println("Current angle: " + Gyro.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
+    	//System.err.println("Current angle: " + Gyro.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
     }
 
     // Make this return true when this Command no longer needs to run execute()

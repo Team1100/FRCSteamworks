@@ -1,9 +1,12 @@
 package org.usfirst.frc.team1100.robot.commands.drivecommands;
 
 import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -34,6 +37,10 @@ public class UserDrive extends Command {
 		
 		double forwardSpeed = 0.0;
 		double strafeSpeed = 0.0;
+		
+		//System.err.println("Built in: (" + Drive.getInstance().getAccelX() + "," + Drive.getInstance().getAccelY() + ", " + Drive.getInstance().getAccelZ() + ")");
+		//System.err.println("Z:"+(1-accel2.getZ())/diff+"Y:"+(0-accel2.getY())/diff+"X:"+(0-accel2.getX())/diff);
+		//System.err.println("Velocity: " + Drive.getInstance().getCurrentVelocity() + ", Distance: " + Drive.getInstance().getDistance() + ", Y Vel Inst: " + Drive.getInstance().getYVelocity());
 		
 		if(OI.getInstance().getRightStick().getButton(7).get() && !prevDownVal) { // Left paddle, down speed
 			// Speed down
@@ -129,7 +136,7 @@ public class UserDrive extends Command {
 					break;
 			}
 		}
-		System.err.println("Forward speed: " + forwardSpeed + ", Strafe speed: " + strafeSpeed + ", Speed level: " + speedLevel);
+		//System.err.println("Forward speed: " + forwardSpeed + ", Strafe speed: " + strafeSpeed + ", Speed level: " + speedLevel);
 		Drive.getInstance().driveMecanum(strafeSpeed, forwardSpeed, rightJVY); // In the future we should add in the proper gyro support
 	}
 	
