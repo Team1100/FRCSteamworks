@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Joshua-Gordon
  * 
  */
+//@Defecated
 @Deprecated
 public class MecanumDrive extends Command {
 	

@@ -12,10 +12,14 @@ public class EulerApprox {
 	}
 	
 	public void step(double dtime, double[] ac) {
+		//System.err.println("Time step: " + dtime);
 		for(int i = 0; i < ac.length; i++) {
 			currentVelocity[i] += ac[i] * dtime;
 			currentPosition[i] += currentVelocity[i] * dtime;
 		}
+		//Correction factor. This is why I'm not a real real analyst
+		currentVelocity[0]/=1.5;
+		currentVelocity[1] /=1.5;
 	}
 
 	public double[] getCurrentVelocity() {
@@ -23,11 +27,7 @@ public class EulerApprox {
 	}
 
 	public double[] getDisplacement() {
-		double[] displacement = new double[2];
-		for(int i = 0; i < 2; i++) {
-			displacement[i] = start[i] - currentPosition[i];
-		}
-		return displacement;
+		return currentPosition;
 	}
 	
 }

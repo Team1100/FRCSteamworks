@@ -1,14 +1,12 @@
 package org.usfirst.frc.team1100.robot.commands.drivecommands;
 
 import org.usfirst.frc.team1100.robot.OI;
-import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class UserDrive extends Command {
 	
@@ -29,6 +27,7 @@ public class UserDrive extends Command {
 	}
 
 	protected void execute() {
+		System.err.println("User drive!!!");
 		// leftJVX means "LEFT Joystick Value X"
 		// Get the values for all the joystick axis that we will use for mecanum drive
 		//double leftJVX = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);
@@ -40,8 +39,8 @@ public class UserDrive extends Command {
 		
 		//System.err.println("Built in: (" + Drive.getInstance().getAccelX() + "," + Drive.getInstance().getAccelY() + ", " + Drive.getInstance().getAccelZ() + ")");
 		//System.err.println("Z:"+(1-accel2.getZ())/diff+"Y:"+(0-accel2.getY())/diff+"X:"+(0-accel2.getX())/diff);
-		//System.err.println("Velocity: " + Drive.getInstance().getCurrentVelocity() + ", Distance: " + Drive.getInstance().getDistance() + ", Y Vel Inst: " + Drive.getInstance().getYVelocity());
-		
+		//System.err.println("Velocity: " + Drive.getInstance().getYVelocity() + ", Distance: " + Drive.getInstance().getDistance());
+		SmartDashboard.putDouble("Current Speed", speedLevel);
 		if(OI.getInstance().getRightStick().getButton(7).get() && !prevDownVal) { // Left paddle, down speed
 			// Speed down
 			speedLevel--;
@@ -101,6 +100,9 @@ public class UserDrive extends Command {
 					forwardSpeed = 1.0;
 					break;
 			}
+		}
+		if(OI.getInstance().getRightStick().getButton(3).get() && OI.getInstance().getRightStick().getButton(4).get()) {
+			forwardSpeed = 0;
 		}
 		if(OI.getInstance().getRightStick().getButton(2).get()) { // Triangle button, left translate
 			// Strafe left

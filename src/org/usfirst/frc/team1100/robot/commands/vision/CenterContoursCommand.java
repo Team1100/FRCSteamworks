@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.commands.vision;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team1100.robot.commands.drivecommands.AutoDrive;
+import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
@@ -29,7 +30,7 @@ public class CenterContoursCommand extends Command {
 	}
 	
 	public void execute() {
-		//System.err.println("Center contour command executed!");
+		System.err.println("Centering contours!!!");
 		Gyro.getInstance().resetGyro();
 		ArrayList<double[]> conts = Vision.getInstance().getContours();
 		double centerX = 0;
@@ -38,16 +39,28 @@ public class CenterContoursCommand extends Command {
 		}
 		centerX/=conts.size(); /*average of the x values (d[1]) from the contour*/
 		double trueCenterX = 320;
-		double difference = 320;
-		
-		/*if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
+		double difference = centerX - trueCenterX;
+		final double RAMP_FACTOR = 70;
+		final double SPEED_LIMIT = 0.3;
+		double power = 1 - (Math.pow(Math.E, -difference/RAMP_FACTOR));
+    	if(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)) > 0) {
+    		power = Math.min(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)),SPEED_LIMIT);
+    	} else {
+    		power = Math.max(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)),-SPEED_LIMIT);
+    	}
+		/*
+		if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
 			finished = true;
 			return;
-		}*/
+		}
 		difference = centerX - trueCenterX;
-		//System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
-		difference /= 320;
-		Drive.getInstance().driveMecanum(0.0, difference, 0); /*parameters: x,y,rotation*/
+		System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
+		difference /= 320.0;*/
+		Drive.getInstance().driveMecanum(0, difference, 0); /*parameters: x,y,rotation*/
+		//new RotateCommand(centerX - trueCenterX);
+		if(difference < Vision.ACCEPTABLE_ERROR) {
+			finished = true;
+		}
 	}
 	
 	public void interrupted() {
@@ -60,7 +73,7 @@ public class CenterContoursCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return finished;
+		return finished | isTimedOut();
 	}
 
 }

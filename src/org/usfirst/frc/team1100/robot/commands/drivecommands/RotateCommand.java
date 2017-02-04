@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateCommand extends Command {
 
 	private double endAngle;
-	private final double DEADZONE = 3;
-	private final double RAMP_FACTOR = 90;
+	private final double DEADZONE = 30;
+	private final double RAMP_FACTOR = 70;
 	private final double SPEED_LIMIT = 0.5;
 	private boolean finished;
 	
@@ -31,6 +31,7 @@ public class RotateCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.err.println("Rotate!!!");
     	double currentAngleDifference = Gyro.getInstance().getAngleAverage() + endAngle;
     	double power = 1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR));
     	if(1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR)) > 0) {
@@ -42,6 +43,7 @@ public class RotateCommand extends Command {
     		Drive.getInstance().driveMecanum(0, 0, -power);
     	} else {
     		//new AutoDrive(0, 0, -power, 0.1).start();
+    		System.err.println("All set");
     		finished = true;
     	}
     	//System.err.println("Current angle: " + Gyro.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
@@ -49,7 +51,7 @@ public class RotateCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return finished;
+        return finished | isTimedOut();
     }
 
     // Called once after isFinished returns true
@@ -60,5 +62,6 @@ public class RotateCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
