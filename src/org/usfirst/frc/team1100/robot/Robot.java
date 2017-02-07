@@ -2,7 +2,6 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.subsystems.Auger;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -45,7 +44,6 @@ public class Robot extends IterativeRobot {
 		Drive.getInstance();
 		Vision.getInstance();
 		Intake.getInstance();
-		Auger.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
 		Gyro.getInstance();
@@ -56,7 +54,6 @@ public class Robot extends IterativeRobot {
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
-		LiveWindow.addActuator("Augar", "Augar", Auger.getInstance().getAugarLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
 		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
@@ -68,10 +65,12 @@ public class Robot extends IterativeRobot {
              camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
-             CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+             @SuppressWarnings("unused")
+			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
              
              Mat source = new Mat();
-             Mat output = new Mat();
+             @SuppressWarnings("unused")
+			 Mat output = new Mat();
              
              while(!Thread.interrupted()) {
                  cvSink.grabFrame(source);

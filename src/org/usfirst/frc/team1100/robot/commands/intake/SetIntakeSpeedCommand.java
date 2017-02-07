@@ -5,49 +5,58 @@ import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * A command which sets the speed of the intake
+ * @author supremesteak1
  */
 public class SetIntakeSpeedCommand extends Command {
 	
 	private double speed;
 	private double timeout;
 
+	/**
+	 * The constructor for the SetIntakeSpeedCommand
+	 * @param speed the speed for the intake to be set too
+	 */
 	public SetIntakeSpeedCommand(double speed) {
     	requires(Intake.getInstance());
     	this.speed = speed;
     	this.timeout = 0;
     }
-	
-    public SetIntakeSpeedCommand(double speed, double timeout) {
-    	requires(Intake.getInstance());
-    	this.speed = speed;
-    	this.timeout = timeout;
-    }
 
-    // Called just before this Command runs the first time
+    /**
+     * Called just before the command is run the first time
+     */
     protected void initialize() {
     	if(timeout != 0) {
     		setTimeout(timeout);
     	}
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Called many times a second while the command is running
+     */
     protected void execute() {
     	Intake.getInstance().setRollerSpeed(speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    /**
+     * Returns if the command is finished or not
+     */
     protected boolean isFinished() {
         return true;
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Called when the command ends
+     */
     protected void end() {
     	Intake.getInstance().stopRoller();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    /**
+     * Called if the command is interrupted
+     */
     protected void interrupted() {
+    	end();
     }
 }

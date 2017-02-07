@@ -5,7 +5,7 @@ import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command resets the gyro to 0 degrees
  */
 public class ResetGyroCommand extends Command {
 

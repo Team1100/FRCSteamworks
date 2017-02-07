@@ -8,24 +8,36 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * The command which allows the user control of the drive train
+ * @author supremesteak1
+ */
 public class UserDrive extends Command {
 	
 	private int speedLevel;
 	private boolean prevUpVal;
 	private boolean prevDownVal;
 	
+	/**
+	 * The constructor for the UserDrive command
+	 */
 	public UserDrive() {
 		requires(Drive.getInstance());
 		requires(Gyro.getInstance());
 	}
 	
-	// Initializes the command right before it is run
+	/**
+	 * Called right before the command is run for the first time
+	 */
 	protected void initialize() {
 		speedLevel = 1;
 		prevUpVal = false;
 		prevDownVal = false;
 	}
 
+	/**
+	 * Called many times a second while the command is running
+	 */
 	protected void execute() {
 		System.err.println("User drive!!!");
 		// leftJVX means "LEFT Joystick Value X"
@@ -142,13 +154,17 @@ public class UserDrive extends Command {
 		Drive.getInstance().driveMecanum(strafeSpeed, forwardSpeed, rightJVY); // In the future we should add in the proper gyro support
 	}
 	
-	// This is always going to be false because we will always be running it unless we are specifically running something else
+	/**
+	 * Returns if the command is finished or not
+	 */
 	@Override
 	protected boolean isFinished() {
 		return false;
 	}
 	
-	// Called when another command force stops this one to use the subsystem for something else
+	/**
+	 * Called if the command is interrupted
+	 */
 	protected void interrupted() {
 		
 	}

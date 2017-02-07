@@ -6,7 +6,8 @@ import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * A command to rotate the robot an number of degrees with a fake PID like loop
+ * @author supremesteak1
  */
 public class RotateCommand extends Command {
 
@@ -16,6 +17,10 @@ public class RotateCommand extends Command {
 	private final double SPEED_LIMIT = 0.5;
 	private boolean finished;
 	
+	/**
+	 * The constructor for the RotateCommand
+	 * @param angle the angle in degrees to rotate. Positive is clockwise
+	 */
     public RotateCommand(double angle) {
     	requires(Drive.getInstance());
     	requires(Gyro.getInstance());
@@ -23,13 +28,17 @@ public class RotateCommand extends Command {
     	setTimeout(3); // Ensure the gyro doesn't get stuck
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Called right before the command runs
+     */
     protected void initialize() {
     	Gyro.getInstance().resetGyro();
     	finished = false;
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Called many times a second while the command is running
+     */
     protected void execute() {
     	System.err.println("Rotate!!!");
     	double currentAngleDifference = Gyro.getInstance().getAngleAverage() + endAngle;
@@ -49,18 +58,23 @@ public class RotateCommand extends Command {
     	//System.err.println("Current angle: " + Gyro.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    /**
+     * Returns if the command has either timed out or has finished running
+     */
     protected boolean isFinished() {
         return finished | isTimedOut();
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Called when the command is finished
+     */
     protected void end() {
     	
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    /**
+     * Called if the command is interrupted
+     */
     protected void interrupted() {
     	end();
     }
