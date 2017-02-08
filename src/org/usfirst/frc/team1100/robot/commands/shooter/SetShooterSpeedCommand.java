@@ -5,49 +5,54 @@ import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * The SetShooterSpeedCommand sets the speed of the shooter
  */
 public class SetShooterSpeedCommand extends Command {
 	
 	private double speed;
-	private double timeout;
 	
-	public SetShooterSpeedCommand(double speed) {
-        requires(Shooter.getInstance());
-        this.speed = speed;
-        this.timeout = 0;
-    }
-	
+	/**
+	 * Creates a new SetShooterSpeedCommand
+	 * @param speed the speed to set the shooter (between -1 and 1)
+	 * @param timeout the time in second until the command is force stopped
+	 */
     public SetShooterSpeedCommand(double speed, double timeout) {
         requires(Shooter.getInstance());
         this.speed = speed;
-        this.timeout = timeout;
+        setTimeout(timeout);
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Called once just before the command starts
+     */
     protected void initialize() {
-    	if(timeout != 0) {
-    		setTimeout(timeout);
-    	}
+    	
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Called many times a second while the command is running
+     */
     protected void execute() {
     	Shooter.getInstance().setFlywheelSpeed(speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    /**
+     * Returns if the command is finished or not
+     */
     protected boolean isFinished() {
         return true;
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Called when the command is finished according to the isFinished() command
+     */
     protected void end() {
     	Shooter.getInstance().stopFlywheel();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    /**
+     * Called when the command is interrupted
+     */
     protected void interrupted() {
     }
 }
