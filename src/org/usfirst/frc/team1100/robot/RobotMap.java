@@ -71,5 +71,23 @@ public class RobotMap {
 	public static final int S_FLYWHEEL = PWM_8;
 	//[A]ugar
 	public static final int A_AUGER = PWM_7;
+	//[P]neumatics
+	public static final int P_0 = 0;
+	public static final int P_1 = 1;
+	public static final int P_2 = 2;
+	public static final int P_3 = 3;
+	public static final int P_4 = 4;
+	public static final int P_5 = 5;
+	public static final int P_6 = 6;
+	public static final int P_7 = 7;
+	
+	public static final int P_FIRER_0_FORWARD = P_0;
+	public static final int P_FIRER_0_REVERSE = P_1;
+	public static final int P_FIRER_1_FORWARD = P_2;
+	public static final int P_FIRER_1_REVERSE = P_3;
+	public static final int P_FIRER_2_FORWARD = P_4;
+	public static final int P_FIRER_2_REVERSE = P_5;
+	public static final int P_FIRER_3_FORWARD = P_6;
+	public static final int P_FIRER_3_REVERSE = P_7;
 	
 }

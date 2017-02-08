@@ -199,6 +199,7 @@ public class GripPipeline implements VisionPipeline {
 			data[i][4] = rect.height;
 			contours.add(data[i]);
 			table.putNumberArray("data" + i, data[i]);
+		
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) { //Test this today. Code has not been deployed yet.
