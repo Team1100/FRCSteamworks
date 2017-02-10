@@ -44,6 +44,7 @@ public class GripPipeline implements VisionPipeline {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	@Override	public void process(Mat source0) {
+		contours.clear();
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = source0;
 		double[] hslThresholdHue = {55.03597122302158, 118.56655290102391};

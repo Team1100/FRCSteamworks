@@ -37,11 +37,11 @@ private static OI instance;
 		// Now the assignments
 		xbox.getButtonA().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_IN_SPEED)); // Roll in the fuel while the A button is pressed
 		xbox.getButtonB().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_OUT_SPEED)); // Roll out the fuel while the B button is pressed
-		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED)); // Spin up the flywheel to shoot fuel while the X button is pressed
+		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED,1)); // Spin up the flywheel to shoot fuel while the X button is pressed
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
 		rightStick.getButton(5).whenPressed(new RotateCommand(90));
-		rightStick.getButton(6).whenPressed(new CenterContoursCommand());
+		rightStick.getButton(6).whenPressed(new CenterContoursCommand(10));
 	}
 	
 	/**

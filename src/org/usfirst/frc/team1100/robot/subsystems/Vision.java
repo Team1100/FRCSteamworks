@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class Vision extends Subsystem {
 	
+	public static boolean imageRequested;
+	
 	public final static double ACCEPTABLE_ERROR = 10; //ten pixels is probably good enough at the distances we plan to operate from
 
 	private static Vision vision; //Standard Team 1100 Style
@@ -20,6 +22,7 @@ public class Vision extends Subsystem {
 	public Vision() {
 		//setDefaultCommand(new VisionInitCommand(table, gp));
 		table = NetworkTable.getTable("GRIP/conts");
+		imageRequested = false;
 		gp = new GripPipeline();
 	}
 	
@@ -44,6 +47,7 @@ public class Vision extends Subsystem {
 		gp.process(image);
 	}
 	
+	@Deprecated
 	public synchronized ArrayList<double[]> getContours() { //This gets the contours from the network table
 		/*ArrayList<double[]> conts = new ArrayList<>(); //Conts m8
 		double[] currentCont; //This represents the contour currently being iterated over in the network table
@@ -70,7 +74,20 @@ public class Vision extends Subsystem {
 		return conts; //Return*/
 		return gp.getContourList();
 	}
+	
+	public synchronized ArrayList<double[]> requestContours() {
+		imageRequested = true;
+		for(int i = 0; i < 100; i++) {
+			i++;
+			i--; //This is how I wait
+		}
+		return gp.getContourList();
+	}
 
+	public static synchronized boolean isImageRequested() {
+		return imageRequested;
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

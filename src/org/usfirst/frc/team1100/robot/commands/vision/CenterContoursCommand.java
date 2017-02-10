@@ -2,13 +2,12 @@ package org.usfirst.frc.team1100.robot.commands.vision;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team1100.robot.commands.drivecommands.AutoDrive;
-import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CenterContoursCommand extends Command {
 
@@ -22,17 +21,10 @@ public class CenterContoursCommand extends Command {
 		finished = false;
 	}
 	
-	public CenterContoursCommand() {
-		requires(Vision.getInstance());
-		requires(Drive.getInstance());
-		requires(Gyro.getInstance());
-		finished = false;
-	}
-	
 	public void execute() {
 		System.err.println("Centering contours!!!");
 		Gyro.getInstance().resetGyro();
-		ArrayList<double[]> conts = Vision.getInstance().getContours();
+		ArrayList<double[]> conts = Vision.getInstance().requestContours();
 		double centerX = 0;
 		for(double[] d : conts) {	
 			centerX+=d[1];
@@ -40,14 +32,38 @@ public class CenterContoursCommand extends Command {
 		centerX/=conts.size(); /*average of the x values (d[1]) from the contour*/
 		double trueCenterX = 320;
 		double difference = centerX - trueCenterX;
-		final double RAMP_FACTOR = 70;
-		final double SPEED_LIMIT = 0.3;
-		double power = 1 - (Math.pow(Math.E, -difference/RAMP_FACTOR));
-    	if(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)) > 0) {
-    		power = Math.min(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)),SPEED_LIMIT);
+		
+		
+		SmartDashboard.putNumber("Difference", difference);
+		SmartDashboard.putNumber("CenterX", centerX);
+		
+		/*
+		if(difference > 0) {
+			Drive.getInstance().driveMecanum(0, 0.3, 0);
+		} else {
+			Drive.getInstance().driveMecanum(0, -0.3, 0);
+		}
+		*/
+		
+		
+		
+		final double RAMP_FACTOR = 300;
+		final double SPEED_LIMIT = 0.25;
+		final double SPEED_MINIMUM = 0.06;
+		final double BRUTE_FORCE_DIVIDE = 2.5;
+		final double FORWARD_SPEED = -0.2;
+		final double COUNTER_ROTATION = 0;
+		double power = 0;
+    	if(1 - (Math.pow(Math.E, difference/RAMP_FACTOR)) > 0) {
+    		power = Math.min((1 - (Math.pow(Math.E, difference/RAMP_FACTOR)))/BRUTE_FORCE_DIVIDE,SPEED_LIMIT);
+    		power = Math.max(power, SPEED_MINIMUM);
     	} else {
-    		power = Math.max(1 - (Math.pow(Math.E, -difference/RAMP_FACTOR)),-SPEED_LIMIT);
+    		power = Math.max((1 - (Math.pow(Math.E, difference/RAMP_FACTOR)))/BRUTE_FORCE_DIVIDE,-SPEED_LIMIT);
+    		power = Math.min(power, -SPEED_MINIMUM);
     	}
+    	Drive.getInstance().driveMecanum(FORWARD_SPEED, power, COUNTER_ROTATION);
+    	SmartDashboard.putNumber("Power", power);
+    	
 		/*
 		if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {
 			finished = true;
@@ -56,10 +72,10 @@ public class CenterContoursCommand extends Command {
 		difference = centerX - trueCenterX;
 		System.err.println("Diff: " + difference + " centerX: " + centerX + " trueCenterX: " + trueCenterX);
 		difference /= 320.0;*/
-		Drive.getInstance().driveMecanum(0, difference, 0); /*parameters: x,y,rotation*/
+		//Drive.getInstance().driveMecanum(0, difference, 0); /*parameters: x,y,rotation*/
 		//new RotateCommand(centerX - trueCenterX);
-		if(difference < Vision.ACCEPTABLE_ERROR) {
-			finished = true;
+		if(Math.abs(difference) < Vision.ACCEPTABLE_ERROR) {
+			//finished = true;
 		}
 	}
 	
@@ -73,7 +89,7 @@ public class CenterContoursCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return finished | isTimedOut();
+		return finished || isTimedOut();
 	}
 
 }
