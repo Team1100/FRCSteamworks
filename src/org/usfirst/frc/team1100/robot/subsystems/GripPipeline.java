@@ -184,11 +184,11 @@ public class GripPipeline implements VisionPipeline {
 			if (ratio < minRatio || ratio > maxRatio) continue;
 			output.add(contour);
 			
-			MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
+			 MatOfPoint2f contour2f = new MatOfPoint2f( inputContours.get(i).toArray() );
 			 MatOfPoint points = new MatOfPoint( contour2f.toArray() );
 			 Rect rect = Imgproc.boundingRect(points);
 			 
-			 if((rect.width > 50 || rect.height > 50) && !(rect.width > 50 && rect.height > 50)) {
+			 if(rect.width > 50 ^ rect.height > 50) {
 
 			 double[][] data = new double[inputContours.size()][5];
 			 //if(i%3==0)System.out.println("Center X from GRIP Pipeline: " + (rect.width/2 + rect.x));

@@ -5,6 +5,7 @@ import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
+import org.usfirst.frc.team1100.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.Vision;
 
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		OI.getInstance();
 		Gyro.getInstance();
+		Pneumatics.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

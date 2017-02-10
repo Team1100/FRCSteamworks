@@ -69,6 +69,7 @@ public class RobotMap {
 	public static final int I_ROLLER = PWM_9;
 	//[S]hooter
 	public static final int S_FLYWHEEL = PWM_8;
+	public static final int S_ENCODER = ANALOG_3;
 	//[A]ugar
 	public static final int A_AUGER = PWM_7;
 	//[P]neumatics
