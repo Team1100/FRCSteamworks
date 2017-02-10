@@ -22,6 +22,10 @@ public class SetShooterSpeedCommand extends Command {
         setTimeout(timeout);
     }
 
+    public SetShooterSpeedCommand(double speed) {
+        requires(Shooter.getInstance());
+        this.speed = speed;
+    }
     /**
      * Called once just before the command starts
      */

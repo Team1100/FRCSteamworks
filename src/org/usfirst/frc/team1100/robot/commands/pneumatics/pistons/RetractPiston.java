@@ -23,13 +23,6 @@ public class RetractPiston extends Command {
 	
 	public void execute() {
 		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kReverse);
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kOff);
 	}
 
 	

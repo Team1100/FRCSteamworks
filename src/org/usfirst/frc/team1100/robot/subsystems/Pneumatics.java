@@ -9,6 +9,8 @@ public class Pneumatics extends Subsystem {
 
 	private DoubleSolenoid[] firers;
 	
+	
+	
 	public Pneumatics() {
 		for(int i = 0; i < 4; i++) {
 			firers[i] = new DoubleSolenoid(i,i+4); //Efficiency mofongos

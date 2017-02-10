@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.subsystems.Pneumatics;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FirePiston extends Command {
 
@@ -24,13 +25,6 @@ public class FirePiston extends Command {
 	
 	public void execute() {
 		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kForward);
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kOff);
 	}
 
 	

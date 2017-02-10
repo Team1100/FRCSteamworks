@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
@@ -42,6 +43,7 @@ private static OI instance;
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
 		rightStick.getButton(5).whenPressed(new RotateCommand(90));
 		rightStick.getButton(6).whenPressed(new CenterContoursCommand());
+		rightStick.getButton(4).whenPressed(new FireSequence());
 	}
 	
 	/**
