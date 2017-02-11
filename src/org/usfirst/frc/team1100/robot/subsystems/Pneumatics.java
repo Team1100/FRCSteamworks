@@ -9,16 +9,17 @@ public class Pneumatics extends Subsystem {
 
 	private DoubleSolenoid[] firers;
 	
-	
-	
 	public Pneumatics() {
+		firers = new DoubleSolenoid[4];
 		for(int i = 0; i < 4; i++) {
 			firers[i] = new DoubleSolenoid(i,i+4); //Efficiency mofongos
 		}
-		p = new Pneumatics();
 	}
 	
-	public static synchronized Pneumatics getInstance() {
+	public static Pneumatics getInstance() {
+		if(p == null) {
+			p = new Pneumatics();
+		}
 		return p;
 	}
 	
