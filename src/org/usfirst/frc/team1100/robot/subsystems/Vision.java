@@ -3,7 +3,6 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import java.util.ArrayList;
 
 import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.commands.vision.VisionInitCommand;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
