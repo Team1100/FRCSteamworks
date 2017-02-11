@@ -20,7 +20,7 @@ public class FireSequence extends CommandGroup {
 			addSequential(new FirePiston(i));
 			
 			double wait = (SmartDashboard.getNumber("Fire sequence wait value", 1));
-			addSequential(new WaitCommand(wait));
+				addSequential(new WaitCommand(wait));
 			
 			addSequential(new RetractPiston(i));
 			

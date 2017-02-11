@@ -34,7 +34,7 @@ public class Drive extends Subsystem {
 		}
 		return drive;
 	}
-	@SuppressWarnings("unchecked")
+
 	public Drive(){
 		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
 		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true); // The left side has to be inverted for mecanum to work
@@ -61,7 +61,6 @@ public class Drive extends Subsystem {
 	 * @param y y distance
 	 * @param rotation is it radians or degrees? We just do not know.
 	 */
-	@SuppressWarnings("unchecked")
 	public void driveMecanum(double x, double y, double rotation){
 		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
 		double[] ac = new double[2];
