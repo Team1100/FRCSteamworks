@@ -76,11 +76,14 @@ public class Robot extends IterativeRobot {
 			 Mat output = new Mat();
              
              while(!Thread.interrupted()) {
+            	 if(Vision.isImageRequested()) {
                  cvSink.grabFrame(source);
                  //Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
                 // outputStream.putFrame(output);
                  //System.err.println("This is the first test");
                  Vision.getInstance().process(source);
+                 Vision.imageRequested = false;
+            	 }
              }
          }).start();
 	}

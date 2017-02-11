@@ -2,12 +2,10 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Shooter extends PIDSubsystem {
@@ -17,7 +15,7 @@ public class Shooter extends PIDSubsystem {
 	public static final double SHOOT_REVERSE_SPEED = -0.5; // In case something happens
 	
 	private SpeedController flywheel;
-	private Encoder flyShaftEncoder = new Encoder(RobotMap.S_ENCODER,RobotMap.S_ENCODER);
+	private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);//Encoder(RobotMap.S_ENCODER,);
 	
 	public static Shooter getInstance() {
 		if(shooter == null) {
@@ -50,7 +48,7 @@ public class Shooter extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		
-		return flyShaftEncoder.getRate();
+		return flyShaftEncoder.getValue();
 	}
 
 	@Override

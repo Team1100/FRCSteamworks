@@ -10,20 +10,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FireSequence extends CommandGroup {
 	
-	boolean finished;
-	
+	/**
+	 * Fires the shooter penumatics in order, with a certain wait time in between as specified by the SmartDashboard
+	 */
 	public FireSequence() {
 		
 		requires(Pneumatics.getInstance());
-		for(int i = 0; i < 3; i++) {
-			finished = false;
-			addSequential(new FirePiston(i));
+		
+		for(int i = 0; i < 3; i++) { // Loop through all of the pistons in order
+			addSequential(new FirePiston(i,2)); // Start off by firing the piston
 			
-			double wait = (SmartDashboard.getNumber("Fire sequence wait value", 1));
-				addSequential(new WaitCommand(wait));
+			double wait = SmartDashboard.getNumber("Fire sequence wait value", 1); // Get the wait time specified on the SmartDashboard
+			addSequential(new WaitCommand(wait)); // Wait for the time gotten in the previous line
 			
-			addSequential(new RetractPiston(i));
-			
+			addSequential(new RetractPiston(i)); // Retract the piston when the wait is over
 		}
 		
 	}
