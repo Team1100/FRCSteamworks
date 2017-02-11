@@ -48,17 +48,13 @@ public class CenterContoursCommand extends Command {
 		
 		
 		final double RAMP_FACTOR = 300;
-		final double SPEED_LIMIT = 0.25;
+		final double SPEED_LIMIT = 0.20;
 		final double SPEED_MINIMUM = 0.1;
 		final double BRUTE_FORCE_DIVIDE = 2.5;
 		final double FORWARD_SPEED = -0.3;
 		final double COUNTER_ROTATION = 0.05;
 		double power = 0;
 		
-		
-		
-		Drive.getInstance().driveMecanum(FORWARD_SPEED, 0, COUNTER_ROTATION);
-		/*
     	if(1 - (Math.pow(Math.E, difference/RAMP_FACTOR)) > 0) {
     		power = Math.min((1 - (Math.pow(Math.E, difference/RAMP_FACTOR)))/BRUTE_FORCE_DIVIDE,SPEED_LIMIT);
     		power = Math.max(power, SPEED_MINIMUM);
@@ -66,8 +62,7 @@ public class CenterContoursCommand extends Command {
     		power = Math.max((1 - (Math.pow(Math.E, difference/RAMP_FACTOR)))/BRUTE_FORCE_DIVIDE,-SPEED_LIMIT);
     		power = Math.min(power, -SPEED_MINIMUM);
     	}
-    	Drive.getInstance().driveMecanum(FORWARD_SPEED, power, COUNTER_ROTATION);
-    	*/
+    	Drive.getInstance().driveMecanum(0, power, 0);
     	SmartDashboard.putNumber("Power", power);
     	
 		/*
@@ -81,6 +76,7 @@ public class CenterContoursCommand extends Command {
 		//Drive.getInstance().driveMecanum(0, difference, 0); /*parameters: x,y,rotation*/
 		//new RotateCommand(centerX - trueCenterX);
 		if(Math.abs(difference) < Vision.ACCEPTABLE_ERROR) {
+			Drive.getInstance().driveMecanum(FORWARD_SPEED, 0, COUNTER_ROTATION);
 			//finished = true;
 		}
 	}
