@@ -34,8 +34,8 @@ public class CenterContoursCommand extends Command {
 		double difference = centerX - trueCenterX;
 		
 		
-		SmartDashboard.putNumber("Difference", difference);
-		SmartDashboard.putNumber("CenterX", centerX);
+		//SmartDashboard.putNumber("Difference", difference);
+		//SmartDashboard.putNumber("CenterX", centerX);
 		
 		/*
 		if(difference > 0) {
@@ -63,7 +63,7 @@ public class CenterContoursCommand extends Command {
     		power = Math.min(power, -SPEED_MINIMUM);
     	}
     	Drive.getInstance().driveMecanum(0, power, 0);
-    	SmartDashboard.putNumber("Power", power);
+    	//SmartDashboard.putNumber("Power", power);
     	
 		/*
 		if(Math.abs(centerX - trueCenterX) < Vision.getInstance().ACCEPTABLE_ERROR) {

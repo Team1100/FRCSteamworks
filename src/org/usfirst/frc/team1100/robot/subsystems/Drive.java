@@ -7,6 +7,7 @@ import org.usfirst.frc.team1100.robot.commands.drivecommands.EulerApprox;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.UserDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,6 +16,7 @@ public class Drive extends Subsystem {
 	private static Drive drive;
 	private static RobotDrive driveTrain;
 	private static BuiltInAccelerometer accel;
+	//private static Encoder encoder;
 	private static long lastTime;
 	private static long lastTimeDist;
 	private static double totalDistance;
@@ -53,6 +55,7 @@ public class Drive extends Subsystem {
 		prevValues.add(new double[]{0.0,0.0});
 		prevValues.add(new double[]{0.0,0.0});
 		prevValues.add(new double[]{0.0,0.0});
+		//encoder = new Encoder(RobotMap.D_ENC_A,RobotMap.D_ENC_B,false,Encoder.EncodingType.k4X);
 	}
 	
 	/**
