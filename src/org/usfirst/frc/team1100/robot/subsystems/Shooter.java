@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -14,7 +15,13 @@ public class Shooter extends PIDSubsystem {
 	public static final double SHOOT_OUT_SPEED = 1;
 	public static final double SHOOT_REVERSE_SPEED = -0.5; // In case something happens
 	
-	private SpeedController flywheel;
+	private PIDController pid;
+	
+	public static double P = 0.0;
+	public static double I = 0.0; //Integrate by parts
+	public static double D = 0.0;
+	
+	private SpeedController flyWheel;
 	private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);//Encoder(RobotMap.S_ENCODER,);
 	
 	public static Shooter getInstance() {
@@ -25,24 +32,29 @@ public class Shooter extends PIDSubsystem {
 	}
 	
 	public Shooter() {
-		super("Shooter",0.0,0.0,0.0); //TODO: Figure out constants later
-		flywheel = new Talon(RobotMap.S_FLYWHEEL);
-		}
+		super("Shooter",P,I,D); //TODO: Figure out constants later
+		flyWheel = new Talon(RobotMap.S_FLYWHEEL);
+		pid = new PIDController(P,I,D,flyShaftEncoder,flyWheel);
+	}
+	
+	public PIDController getPIDController() {
+		return pid;
+	}
 	
 	/**
 	 * Gets the flywheel LiveWindowSendable
 	 * @return the flywheel LiveWindowSendable
 	 */
 	public LiveWindowSendable getFlywheelLWS() {
-		return (LiveWindowSendable) flywheel;
+		return (LiveWindowSendable) flyWheel;
 	}
 	
 	public void setFlywheelSpeed(double speed) {
-		flywheel.set(speed);
+		flyWheel.set(speed);
 	}
 	
 	public void stopFlywheel() {
-		flywheel.set(0);
+		flyWheel.set(0);
 	}
 
 	@Override
@@ -53,7 +65,7 @@ public class Shooter extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		flywheel.set(output);
+		flyWheel.set(output);
 	}
 
 	@Override
