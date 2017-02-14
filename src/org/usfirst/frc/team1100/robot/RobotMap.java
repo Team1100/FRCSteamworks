@@ -93,4 +93,9 @@ public class RobotMap {
 	public static final int P_FIRER_3_FORWARD = P_6;
 	public static final int P_FIRER_3_REVERSE = P_7;
 	
+	//[T]est
+	public static final int T_TALON_PORT = PWM_9;
+	public static final int T_ENCODER_PORT_1 = DIO_2;
+	public static final int T_ENCODER_PORT_2 = DIO_3;
+	
 }

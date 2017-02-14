@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
@@ -39,6 +40,7 @@ private static OI instance;
 		xbox.getButtonA().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_IN_SPEED)); // Roll in the fuel while the A button is pressed
 		xbox.getButtonB().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_OUT_SPEED)); // Roll out the fuel while the B button is pressed
 		xbox.getButtonX().whileHeld(new SetShooterSpeedCommand(Shooter.SHOOT_OUT_SPEED,1)); // Spin up the flywheel to shoot fuel while the X button is pressed
+		//xbox.getButtonY().whenPressed(new TestEncoderCommand(100, 2*Math.PI));
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
 		rightStick.getButton(5).whenPressed(new RotateCommand(90));

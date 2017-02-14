@@ -39,7 +39,7 @@ public class UserDrive extends Command {
 	 * Called many times a second while the command is running
 	 */
 	protected void execute() {
-		System.err.println("User drive!!!");
+		//System.err.println("User drive!!!");
 		// leftJVX means "LEFT Joystick Value X"
 		// Get the values for all the joystick axis that we will use for mecanum drive
 		//double leftJVX = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);

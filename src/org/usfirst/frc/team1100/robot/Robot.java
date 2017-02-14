@@ -2,6 +2,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot {
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		
+		//SmartDashboard.putData("Test encoder command", new TestEncoderCommand(100,Math.PI*2));
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
