@@ -3,8 +3,8 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import java.util.ArrayList;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.drivecommands.EulerApprox;
-import org.usfirst.frc.team1100.robot.commands.drivecommands.UserDrive;
+import org.usfirst.frc.team1100.robot.commands.drive.EulerApprox;
+import org.usfirst.frc.team1100.robot.commands.drive.UserDrive;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;

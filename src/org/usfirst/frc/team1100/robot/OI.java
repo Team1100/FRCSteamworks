@@ -2,7 +2,7 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.ShooterSpeedPID;
 import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
-import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
@@ -21,7 +21,7 @@ public class OI {
 private static OI instance;
 	
 	// These are the two joysticks we have on the driver station; the left one and the right one.
-	private AttackThree leftStick;
+	private AttackThree leftStick;//Also Steering Wheel
 	private AttackThree rightStick;
 	private XboxController xbox;
 	

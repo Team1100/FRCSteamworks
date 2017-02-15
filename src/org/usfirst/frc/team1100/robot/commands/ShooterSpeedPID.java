@@ -13,14 +13,14 @@ public class ShooterSpeedPID extends Command {
 	private final double ACCEPTABLE_ERROR = 500;
 	
     public ShooterSpeedPID(double speed) {
-    	System.err.println("JOOOOOOSSSSSSHHHHHHH!!!");
+    	System.err.println("Jx1Ox6Sx6Hx7!x3");
         requires(Shooter.getInstance());
         this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.err.println("The shooter speed is set!");
+    	System.err.println("Shooter speed set.");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,7 +41,7 @@ public class ShooterSpeedPID extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.err.println("Finished");
+    	System.err.println("Finished " + this.getName());
     }
 
     // Called when another command which requires one or more of the same

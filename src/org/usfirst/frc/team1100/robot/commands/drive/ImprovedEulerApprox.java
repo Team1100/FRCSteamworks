@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.drivecommands;
+package org.usfirst.frc.team1100.robot.commands.drive;
 
 public class ImprovedEulerApprox {
 	

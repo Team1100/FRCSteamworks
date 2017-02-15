@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
@@ -51,7 +50,7 @@ public class Robot extends IterativeRobot {
 		OI.getInstance();
 		Gyro.getInstance();
 		Pneumatics.getInstance();
-		//chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser.addDefault("Default Auto", new ExampleCommand()); TODO: Auto Chooser
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -59,7 +58,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		LiveWindow.addActuator("ShooterPID", "Shooter Pid", Shooter.getInstance().getPIDController());
-		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
+		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT)); TODO: Re add before competition
 		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
 		//LiveWindow.addActuator("Drive Train", "Rear Left", new Talon(RobotMap.D_BACK_LEFT));
 		//LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));

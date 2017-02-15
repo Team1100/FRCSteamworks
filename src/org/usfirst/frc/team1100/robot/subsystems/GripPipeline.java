@@ -203,13 +203,7 @@ public class GripPipeline implements VisionPipeline {
 			}
 		}
 	}
-	
 	public ArrayList<double[]> getContourList() {
 		return contours;
 	}
-
-
-
-
 }
-

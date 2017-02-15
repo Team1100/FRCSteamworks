@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.drivecommands;
+package org.usfirst.frc.team1100.robot.commands.drive;
 
 /**
  * A class for use wherever a Euler Approximation is needed.
