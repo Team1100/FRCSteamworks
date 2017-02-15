@@ -43,7 +43,7 @@ private static OI instance;
 		//xbox.getButtonY().whenPressed(new TestEncoderCommand(100, 2*Math.PI));
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
-		rightStick.getButton(5).whenPressed(new RotateCommand(90));
+		//rightStick.getButton(5).whenPressed(new RotateCommand(90));
 		rightStick.getButton(6).whenPressed(new CenterContoursCommand(20));
 		rightStick.getButton(4).whenPressed(new FireSequence());
 	}

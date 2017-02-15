@@ -71,7 +71,8 @@ public class RobotMap {
 	public static final int I_ROLLER = PWM_4;
 	//[S]hooter
 	public static final int S_FLYWHEEL = PWM_8;
-	public static final int S_ENCODER = ANALOG_3;
+	public static final int S_ENCODER_A = DIO_2;
+	public static final int S_ENCODER_B = DIO_3;
 	//[A]ugar
 	public static final int A_AUGER = PWM_7;
 	//[P]neumatics
@@ -95,7 +96,5 @@ public class RobotMap {
 	
 	//[T]est
 	public static final int T_TALON_PORT = PWM_9;
-	public static final int T_ENCODER_PORT_1 = DIO_2;
-	public static final int T_ENCODER_PORT_2 = DIO_3;
 	
 }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -22,7 +23,7 @@ public class Shooter extends PIDSubsystem {
 	public static double D = 0.0;
 	
 	private SpeedController flyWheel;
-	private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);//Encoder(RobotMap.S_ENCODER,);
+	private Encoder encoder;
 	
 	public static Shooter getInstance() {
 		if(shooter == null) {
@@ -34,7 +35,13 @@ public class Shooter extends PIDSubsystem {
 	public Shooter() {
 		super("Shooter",P,I,D); //TODO: Figure out constants later
 		flyWheel = new Talon(RobotMap.S_FLYWHEEL);
-		pid = new PIDController(P,I,D,flyShaftEncoder,flyWheel);
+		encoder = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
+		encoder.setMaxPeriod(0.1);
+		encoder.setMinRate(10);
+		encoder.setDistancePerPulse(5);
+		encoder.setReverseDirection(true);
+		encoder.setSamplesToAverage(7);
+		pid = new PIDController(P,I,D,encoder,flyWheel);
 	}
 	
 	public PIDController getPIDController() {
@@ -60,7 +67,7 @@ public class Shooter extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		
-		return flyShaftEncoder.getValue();
+		return encoder.getRate();
 	}
 
 	@Override
