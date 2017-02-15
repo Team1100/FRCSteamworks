@@ -2,6 +2,8 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -15,13 +17,13 @@ public class Shooter extends PIDSubsystem {
 	public static final double SHOOT_OUT_SPEED = 1;
 	public static final double SHOOT_REVERSE_SPEED = -0.5; // In case something happens
 	
-	private PIDController pid;
 	
 	public static double P = 1.0;
 	public static double I = 1.0; //Integrate by parts
 	public static double D = 1.0;
 	
-	private SpeedController flyWheel;
+	private CANTalon flyWheel;
+	
 	private Encoder encoder;
 	
 	public static Shooter getInstance() {
@@ -33,18 +35,14 @@ public class Shooter extends PIDSubsystem {
 	
 	public Shooter() {
 		super("Shooter",P,I,D); //TODO: Figure out constants later
-		flyWheel = new Talon(RobotMap.S_FLYWHEEL);
+		flyWheel = new CANTalon(RobotMap.S_FLYWHEEL);
 		encoder = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
 		encoder.setMaxPeriod(0.1);
 		encoder.setMinRate(10);
 		encoder.setDistancePerPulse(5);
 		encoder.setReverseDirection(true);
 		encoder.setSamplesToAverage(7);
-		pid = new PIDController(P,I,D,encoder,flyWheel);
-	}
-	
-	public PIDController getPIDController() {
-		return pid;
+		flyWheel.setPID(P, I, D);
 	}
 	
 	/**
@@ -56,7 +54,7 @@ public class Shooter extends PIDSubsystem {
 	}
 	
 	public void setFlywheelSpeed(double speed) {
-		flyWheel.set(speed);
+		flyWheel.setSetpoint(speed);
 	}
 	
 	public void stopFlywheel() {
@@ -70,7 +68,7 @@ public class Shooter extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		flyWheel.set(output);
+		flyWheel.setSetpoint(output);
 	}
 
 	@Override

@@ -26,6 +26,12 @@ public class ShooterSpeedPID extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Shooter.getInstance().setSetpoint(speed);
+    	try {
+			wait((long) 0.02);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()
