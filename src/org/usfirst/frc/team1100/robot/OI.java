@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.ShooterSpeedPID;
 import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
 import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
@@ -46,6 +47,7 @@ private static OI instance;
 		//rightStick.getButton(5).whenPressed(new RotateCommand(90));
 		rightStick.getButton(6).whenPressed(new CenterContoursCommand(20));
 		rightStick.getButton(4).whenPressed(new FireSequence());
+		rightStick.getButton(5).whenPressed(new ShooterSpeedPID(2048*5*2));
 	}
 	
 	/**

@@ -2,7 +2,6 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -18,9 +17,9 @@ public class Shooter extends PIDSubsystem {
 	
 	private PIDController pid;
 	
-	public static double P = 0.0;
-	public static double I = 0.0; //Integrate by parts
-	public static double D = 0.0;
+	public static double P = 1.0;
+	public static double I = 1.0; //Integrate by parts
+	public static double D = 1.0;
 	
 	private SpeedController flyWheel;
 	private Encoder encoder;
@@ -66,7 +65,6 @@ public class Shooter extends PIDSubsystem {
 
 	@Override
 	protected double returnPIDInput() {
-		
 		return encoder.getRate();
 	}
 
