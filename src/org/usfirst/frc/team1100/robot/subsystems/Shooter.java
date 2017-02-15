@@ -5,12 +5,18 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
+/**
+ * The shooter subsystem which using space age technology discovered by Sir. Randal P.I.D. can change the speed of a heavily weighted array of flywheels to a precise speed,
+ * comparable only to when you do a very poorly timed and executed gravity boost around a disintegrating asteroid going in the wrong direction. We can only use this on the
+ * robot if we have at least as much computing power as the Saturn V guidance computer! It takes as much skill to tune as it takes to ~~ We apologise for this run away
+ * tangent by the auto-javadocer 3000TM. A programmer is quoted as saying, "Yeah, it uses some numbers to make something else work better... I think. Ask [Josh] if you
+ * have any questions. I have to go wait for my code to compile!"
+ * @author Josh-Gordon
+ *
+ */
 public class Shooter extends PIDSubsystem {
 	private static Shooter shooter;
 	
@@ -53,10 +59,17 @@ public class Shooter extends PIDSubsystem {
 		return (LiveWindowSendable) flyWheel;
 	}
 	
+	/**
+	 * Sets the flywheel speed using a PID loop (hopefully)
+	 * @param speed the speed between -1 and 1 to set the motors to
+	 */
 	public void setFlywheelSpeed(double speed) {
 		flyWheel.setSetpoint(speed);
 	}
 	
+	/**
+	 * Sets the flywheel speed to 0, stopping it
+	 */
 	public void stopFlywheel() {
 		flyWheel.set(0);
 	}
