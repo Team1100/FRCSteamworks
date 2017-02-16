@@ -25,7 +25,7 @@ public class FirePiston extends Command {
 	 * Called many times a second while the FirePiston command is being run
 	 */
 	public void execute() {
-		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kForward);
+		Pneumatics.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kForward);
 		finished = true;
 	}
 
