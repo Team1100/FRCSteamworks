@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -14,7 +14,6 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -50,8 +49,10 @@ public class Robot extends IterativeRobot {
 		OI.getInstance();
 		Gyro.getInstance();
 		Pneumatics.getInstance();
-		//chooser.addDefault("Default Auto", new ExampleCommand()); TODO: Auto Chooser
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		//chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addObject("Gear then Ball", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
+		chooser.addObject("Ball then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
+		chooser.addObject("Hopper then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// The following is the test mode stuff
