@@ -32,11 +32,16 @@ public class UserDriveJoysticks extends Command {
 	protected void execute() {
 		// leftJVX means "LEFT Joystick Value X"
 		// Get the values for all the joystick axis that we will use for mecanum drive
-		double leftJVX = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);
+		/*double leftJVX = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kX);
 		double leftJVY = OI.getInstance().getLeftStick().getAxis(Joystick.AxisType.kY);
-		double rightJVX = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kX);
+		double rightJVX = OI.getInstance().getRightStick().getAxis(Joystick.AxisType.kX);*/
 		
-		Drive.getInstance().driveMecanum(leftJVY, leftJVX, rightJVX); // In the future we should add in the proper gyro support
+		double x = OI.getInstance().getStick().getAxis(Joystick.AxisType.kX);
+		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
+		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
+		
+		
+		Drive.getInstance().driveMecanum(y, x, z); // In the future we should add in the proper gyro support
 	}
 	
 	/**

@@ -1,13 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
-import org.usfirst.frc.team1100.robot.commands.ShooterSpeedPID;
-import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;
+import org.usfirst.frc.team1100.robot.input.Extreme3DPro;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
@@ -20,9 +18,7 @@ public class OI {
 	
 private static OI instance;
 	
-	// These are the two joysticks we have on the driver station; the left one and the right one.
-	private AttackThree leftStick;//Also Steering Wheel
-	private AttackThree rightStick;
+	private Extreme3DPro stick;
 	private XboxController xbox;
 	
 	public static OI getInstance() {
@@ -33,9 +29,9 @@ private static OI instance;
 	}
 	
 	private OI() {
-		leftStick = new AttackThree(RobotMap.U_LEFT, 0.15);
-		rightStick = new AttackThree(RobotMap.U_RIGHT, 0.15);
+		//Initialize input devices
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
+		stick = new Extreme3DPro(RobotMap.U_STICK,.15,.2);
 		
 		// Now the assignments
 		xbox.getButtonA().whileHeld(new SetIntakeSpeedCommand(Intake.ROLL_IN_SPEED)); // Roll in the fuel while the A button is pressed
@@ -45,25 +41,18 @@ private static OI instance;
 		
 		//rightStick.getButton(3).whenPressed(new ResetGyroCommand());
 		//rightStick.getButton(5).whenPressed(new RotateCommand(90));
-		rightStick.getButton(6).whenPressed(new CenterContoursCommand(20));
-		rightStick.getButton(4).whenPressed(new FireSequence());
+		stick.getButton(6).whenPressed(new CenterContoursCommand(20));
+		stick.getButton(4).whenPressed(new FireSequence());
 		//rightStick.getButton(5).whenPressed(new ShooterSpeedPID(2048*5*2));
 	}
 	
 	/**
-	 * Returns the Left Joystick.
-	 * @return the Left AttackThree
+	 * Returns the Joystick
+	 * @return the joystick
 	 */
-	public AttackThree getLeftStick() {
-		return leftStick;
-	}
-
-	/**
-	 * Returns the Right Joystick
-	 * @return the Right AttackThree
-	 */
-	public AttackThree getRightStick() {
-		return rightStick;
+	
+	public Extreme3DPro getStick(){
+		return stick;
 	}
 	
 	/**

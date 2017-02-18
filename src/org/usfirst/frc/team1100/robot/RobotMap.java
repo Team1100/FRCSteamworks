@@ -61,6 +61,7 @@ public class RobotMap {
 	private static final int USB_0 = 0;
 	private static final int USB_1 = 1;
 	private static final int USB_2 = 2;
+	private static final int USB_3 = 3;
 	
 	//[D]rive
 	public final static int D_BACK_RIGHT = PWM_0;
@@ -73,9 +74,8 @@ public class RobotMap {
 	public final static int D_ENC_A = DIO_0;
 	public final static int D_ENC_B = DIO_0;
 	//[U]ser Input
-	public static final int U_LEFT = USB_0; //Also serves as steering wheel
-	public static final int U_RIGHT = USB_1;
-	public static final int U_XBOX = USB_2;
+	public static final int U_XBOX = USB_1;
+	public static final int U_STICK = USB_0;
 	//[I]ntake
 	public static final int I_ROLLER = PWM_4;
 	//[S]hooter
