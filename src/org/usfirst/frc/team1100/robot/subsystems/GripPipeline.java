@@ -49,7 +49,7 @@ public class GripPipeline implements VisionPipeline {
 		Mat hslThresholdInput = source0;
 		double[] hslThresholdHue = {55.03597122302158, 118.56655290102391};
 		double[] hslThresholdSaturation = {146.76258992805754, 255.0};
-		double[] hslThresholdLuminance = {133.00359712230215, 255.0};
+		double[] hslThresholdLuminance = {41, 144.0};
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
@@ -200,24 +200,10 @@ public class GripPipeline implements VisionPipeline {
 			data[i][4] = rect.height;
 			contours.add(data[i]);
 			table.putNumberArray("data" + i, data[i]);
-		
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) { //Test this today. Code has not been deployed yet.
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			 }
-			
 		}
 	}
-	
 	public ArrayList<double[]> getContourList() {
 		return contours;
 	}
-
-
-
-
 }
-

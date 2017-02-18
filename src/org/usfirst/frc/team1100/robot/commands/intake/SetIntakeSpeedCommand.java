@@ -43,7 +43,7 @@ public class SetIntakeSpeedCommand extends Command {
      * Returns if the command is finished or not
      */
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     /**

@@ -70,16 +70,21 @@ public class RobotMap {
 	public final static int D_GYRO0 = ANALOG_0;
 	public final static int D_GYRO1 = ANALOG_1;
 	public final static int D_ACCEL_1 = ANALOG_2;
+	public final static int D_ENC_A = DIO_0;
+	public final static int D_ENC_B = DIO_0;
 	//[U]ser Input
-	public static final int U_LEFT = USB_0;
+	public static final int U_LEFT = USB_0; //Also serves as steering wheel
 	public static final int U_RIGHT = USB_1;
 	public static final int U_XBOX = USB_2;
 	//[I]ntake
-	public static final int I_ROLLER = PWM_9;
+	public static final int I_ROLLER = PWM_4;
 	//[S]hooter
 	public static final int S_ENCODER = ANALOG_3;
-	//[A]ugar
-	public static final int A_AUGER = PWM_7;
+
+	public static final int S_FLYWHEEL = PWM_8;
+	public static final int S_ENCODER_A = DIO_2;
+	public static final int S_ENCODER_B = DIO_3;
+
 	//[P]neumatics
 	public static final int P_0 = 0;
 	public static final int P_1 = 1;
@@ -99,4 +104,12 @@ public class RobotMap {
 	public static final int P_FIRER_3_FORWARD = P_6;
 	public static final int P_FIRER_3_REVERSE = P_7;
 	
+	//[T]est
+	public static final int T_TALON_PORT = PWM_9;
+	
+	/*@Deprecated
+	 
+	//[A]ugar*/
+	@Deprecated
+	public static final int A_AUGER = PWM_7;
 }

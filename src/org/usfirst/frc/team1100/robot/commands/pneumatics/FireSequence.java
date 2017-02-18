@@ -16,16 +16,33 @@ public class FireSequence extends CommandGroup {
 	public FireSequence() {
 		
 		requires(Pneumatics.getInstance());
+		int i = 0;
 		
-		for(int i = 0; i < 3; i++) { // Loop through all of the pistons in order
+		while(i != 4) {
 			addSequential(new FirePiston(i,2)); // Start off by firing the piston
-			
+				
 			double wait = SmartDashboard.getNumber("Fire sequence wait value", 1); // Get the wait time specified on the SmartDashboard
 			addSequential(new WaitCommand(wait)); // Wait for the time gotten in the previous line
-			
+				
 			addSequential(new RetractPiston(i)); // Retract the piston when the wait is over
+			switch(i) {
+				case 0:
+					i = 2;
+					break;
+				case 1:
+					i = 3;
+					break;
+				case 2:
+					i = 1;
+					break;
+				case 3:
+					i = 4;
+					break;
+				default:
+					i = 0;
+					break;
+			}
 		}
-		
 	}
 
 }

@@ -7,7 +7,13 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
+/**
+ * The Intake subsystem for the roller that intakes balls
+ * @author supremesteak1
+ *
+ */
 public class Intake extends Subsystem {
+	
 	private static Intake intake;
 	
 	public static final double ROLL_IN_SPEED = 1;
@@ -38,10 +44,17 @@ public class Intake extends Subsystem {
 		return (LiveWindowSendable) roller;
 	}
 	
+	/**
+	 * Sets the rollers speed, often using the constants defined in this class as parameters
+	 * @param speed a value between -1 and 1 to set the roller motor to
+	 */
 	public void setRollerSpeed(double speed) {
 		roller.set(speed);
 	}
 	
+	/**
+	 * Sets the rollers speed to 0, stopping it
+	 */
 	public void stopRoller() {
 		roller.set(0);
 	}

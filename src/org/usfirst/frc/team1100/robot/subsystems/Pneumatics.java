@@ -9,11 +9,15 @@ public class Pneumatics extends Subsystem {
 
 	private DoubleSolenoid[] firers;
 	
+	/**
+	 * The constructor for Pneumatics which sets up firers 1-4 in order with 0-1+2x as the PCM spots
+	 */
 	public Pneumatics() {
 		firers = new DoubleSolenoid[4];
-		for(int i = 0; i < 4; i++) {
-			firers[i] = new DoubleSolenoid(i,i+4); //Efficiency mofongos
-		}
+		firers[0] = new DoubleSolenoid(0,1);
+		firers[1] = new DoubleSolenoid(2,3);
+		firers[2] = new DoubleSolenoid(4,5);
+		firers[3] = new DoubleSolenoid(6,7);
 	}
 	
 	public static Pneumatics getInstance() {
@@ -23,7 +27,11 @@ public class Pneumatics extends Subsystem {
 		return p;
 	}
 	
-	public DoubleSolenoid[] getFireers() {
+	/**
+	 * Returns the array of firers
+	 * @return the array of firers
+	 */
+	public DoubleSolenoid[] getFirers() {
 		return firers;
 	}
 	
