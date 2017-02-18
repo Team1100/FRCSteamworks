@@ -28,6 +28,15 @@ public class RobotMap {
 	private final static int PWM_8 = 8;
 	private final static int PWM_9 = 9;
 	
+	public final static int CAN_0 = 0;
+	public final static int CAN_1 = 1;
+	public final static int CAN_2 = 2;
+	public final static int CAN_3 = 3;
+	public final static int CAN_4 = 4;
+	public final static int CAN_5 = 5;
+	public final static int CAN_6 = 6;
+	public final static int CAN_7 = 7;
+	
 	private final static int ANALOG_0 = 0;
 	private final static int ANALOG_1 = 1;
 	private final static int ANALOG_2 = 2;
@@ -68,7 +77,6 @@ public class RobotMap {
 	//[I]ntake
 	public static final int I_ROLLER = PWM_9;
 	//[S]hooter
-	public static final int S_FLYWHEEL = PWM_8;
 	public static final int S_ENCODER = ANALOG_3;
 	//[A]ugar
 	public static final int A_AUGER = PWM_7;
