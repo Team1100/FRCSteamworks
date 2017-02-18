@@ -92,15 +92,6 @@ public class Drive extends Subsystem {
 		//System.err.println(arrayListTostring(prevValues));
 		return average;
 	}
-	private String arrayListTostring(ArrayList<double[]> list) {
-		String total = "{";
-		for(double[] o : list) {
-			for(double d : o) {
-				total += d + ",";
-			}
-		}
-		return total.substring(0,total.length()-1) + "}";
-	}
 	
 	/**
 	 * This drives the robot with tank (in case you want that)
@@ -155,7 +146,7 @@ public class Drive extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new UserDrive());
+		setDefaultCommand(new UserDrive()); //TODO: Change to UserDriveJoysticks as soon as we switch to, well... joysticks
 	}
 
 }
