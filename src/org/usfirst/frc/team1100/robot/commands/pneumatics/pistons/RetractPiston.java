@@ -22,7 +22,7 @@ public class RetractPiston extends Command {
 	}
 	
 	public void execute() {
-		Pneumatics.getInstance().getFireers()[piston].set(DoubleSolenoid.Value.kReverse);
+		Pneumatics.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kReverse);
 	}
 
 	

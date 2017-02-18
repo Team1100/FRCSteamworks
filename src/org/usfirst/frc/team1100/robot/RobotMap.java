@@ -28,6 +28,15 @@ public class RobotMap {
 	private final static int PWM_8 = 8;
 	private final static int PWM_9 = 9;
 	
+	public final static int CAN_0 = 0;
+	public final static int CAN_1 = 1;
+	public final static int CAN_2 = 2;
+	public final static int CAN_3 = 3;
+	public final static int CAN_4 = 4;
+	public final static int CAN_5 = 5;
+	public final static int CAN_6 = 6;
+	public final static int CAN_7 = 7;
+	
 	private final static int ANALOG_0 = 0;
 	private final static int ANALOG_1 = 1;
 	private final static int ANALOG_2 = 2;
@@ -64,17 +73,18 @@ public class RobotMap {
 	public final static int D_ENC_A = DIO_0;
 	public final static int D_ENC_B = DIO_0;
 	//[U]ser Input
-	public static final int U_LEFT = USB_0;
+	public static final int U_LEFT = USB_0; //Also serves as steering wheel
 	public static final int U_RIGHT = USB_1;
 	public static final int U_XBOX = USB_2;
 	//[I]ntake
 	public static final int I_ROLLER = PWM_4;
 	//[S]hooter
+	public static final int S_ENCODER = ANALOG_3;
+
 	public static final int S_FLYWHEEL = PWM_8;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
-	//[A]ugar
-	public static final int A_AUGER = PWM_7;
+
 	//[P]neumatics
 	public static final int P_0 = 0;
 	public static final int P_1 = 1;
@@ -97,4 +107,9 @@ public class RobotMap {
 	//[T]est
 	public static final int T_TALON_PORT = PWM_9;
 	
+	/*@Deprecated
+	 
+	//[A]ugar*/
+	@Deprecated
+	public static final int A_AUGER = PWM_7;
 }

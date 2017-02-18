@@ -2,7 +2,7 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.ShooterSpeedPID;
 import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
-import org.usfirst.frc.team1100.robot.commands.drivecommands.RotateCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
@@ -21,7 +21,7 @@ public class OI {
 private static OI instance;
 	
 	// These are the two joysticks we have on the driver station; the left one and the right one.
-	private AttackThree leftStick;
+	private AttackThree leftStick;//Also Steering Wheel
 	private AttackThree rightStick;
 	private XboxController xbox;
 	
@@ -33,8 +33,8 @@ private static OI instance;
 	}
 	
 	private OI() {
-		leftStick = new AttackThree(RobotMap.U_LEFT, 0.1);
-		rightStick = new AttackThree(RobotMap.U_RIGHT, 0.05);
+		leftStick = new AttackThree(RobotMap.U_LEFT, 0.15);
+		rightStick = new AttackThree(RobotMap.U_RIGHT, 0.15);
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
 		
 		// Now the assignments
@@ -47,7 +47,7 @@ private static OI instance;
 		//rightStick.getButton(5).whenPressed(new RotateCommand(90));
 		rightStick.getButton(6).whenPressed(new CenterContoursCommand(20));
 		rightStick.getButton(4).whenPressed(new FireSequence());
-		rightStick.getButton(5).whenPressed(new ShooterSpeedPID(2048*5*2));
+		//rightStick.getButton(5).whenPressed(new ShooterSpeedPID(2048*5*2));
 	}
 	
 	/**

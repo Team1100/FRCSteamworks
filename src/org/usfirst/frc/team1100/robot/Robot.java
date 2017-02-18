@@ -1,8 +1,7 @@
-
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.commands.TestEncoderCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
@@ -15,7 +14,6 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -52,14 +50,15 @@ public class Robot extends IterativeRobot {
 		Gyro.getInstance();
 		Pneumatics.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addObject("Gear then Ball", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
+		chooser.addObject("Ball then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
+		chooser.addObject("Hopper then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
-		LiveWindow.addActuator("ShooterPID", "Shooter Pid", Shooter.getInstance().getPIDController());
-		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT));
+		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT)); TODO: Re add before competition
 		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
 		//LiveWindow.addActuator("Drive Train", "Rear Left", new Talon(RobotMap.D_BACK_LEFT));
 		//LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));
