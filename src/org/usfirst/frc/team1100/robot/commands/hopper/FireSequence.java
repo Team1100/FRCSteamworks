@@ -1,8 +1,8 @@
-package org.usfirst.frc.team1100.robot.commands.pneumatics;
+package org.usfirst.frc.team1100.robot.commands.hopper;
 
-import org.usfirst.frc.team1100.robot.commands.pneumatics.pistons.FirePiston;
-import org.usfirst.frc.team1100.robot.commands.pneumatics.pistons.RetractPiston;
-import org.usfirst.frc.team1100.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team1100.robot.commands.hopper.pistons.FirePiston;
+import org.usfirst.frc.team1100.robot.commands.hopper.pistons.RetractPiston;
+import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -15,12 +15,11 @@ public class FireSequence extends CommandGroup {
 	 */
 	public FireSequence() {
 		
-		requires(Pneumatics.getInstance());
+		requires(Hopper.getInstance());
 		int i = 0;
 		
 		while(i != 4) {
-			addSequential(new FirePiston(i,2)); // Start off by firing the piston
-				
+			addSequential(new FirePiston(i)); // Start off by firing the piston
 			double wait = SmartDashboard.getNumber("Fire sequence wait value", 1); // Get the wait time specified on the SmartDashboard
 			addSequential(new WaitCommand(wait)); // Wait for the time gotten in the previous line
 				

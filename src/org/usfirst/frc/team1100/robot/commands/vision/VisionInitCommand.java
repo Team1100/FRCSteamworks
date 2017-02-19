@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.vision;
 
-import org.usfirst.frc.team1100.robot.subsystems.GripPipeline;
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
+import org.usfirst.frc.team1100.robot.subsystems.vision.GripPipeline;
+import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;

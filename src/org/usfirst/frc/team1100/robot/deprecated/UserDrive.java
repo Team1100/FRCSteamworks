@@ -1,8 +1,7 @@
-package org.usfirst.frc.team1100.robot.commands.drive;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Gyro;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * The command which allows the user control of the drive train
  * @author supremesteak1
  */
-public class UserDrive extends Command {
+@Deprecated
+public class UserDrive /*extends Command */{
 	
 	private int speedLevel;
 	private boolean prevUpVal;
@@ -21,23 +21,23 @@ public class UserDrive extends Command {
 	/**
 	 * The constructor for the UserDrive command
 	 */
+	/*
 	public UserDrive() {
 		requires(Drive.getInstance());
-		requires(Gyro.getInstance());
-	}
+	}*/
 	
 	/**
 	 * Called right before the command is run for the first time
-	 */
+	 *//*
 	protected void initialize() {
 		speedLevel = 1;
 		prevUpVal = false;
 		prevDownVal = false;
-	}
+	}*/
 
 	/**
 	 * Called many times a second while the command is running
-	 */
+	 *//*
 	protected void execute() {
 		//System.err.println("User drive!!!");
 		// leftJVX means "LEFT Joystick Value X"
@@ -149,12 +149,12 @@ public class UserDrive extends Command {
 		}
 		//System.err.println("Forward speed: " + forwardSpeed + ", Strafe speed: " + strafeSpeed + ", Speed level: " + speedLevel);
 		Drive.getInstance().driveMecanum(strafeSpeed, forwardSpeed, rightJVY); // In the future we should add in the proper gyro support
-	}
+	}*/
 	
 	/**
 	 * Returns if the command is finished or not
 	 */
-	@Override
+	//@Override
 	protected boolean isFinished() {
 		return false;
 	}

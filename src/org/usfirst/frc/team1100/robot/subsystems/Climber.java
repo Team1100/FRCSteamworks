@@ -19,8 +19,8 @@ public class Climber extends Subsystem {
 	private int D;
 	
 	public Climber() {
-	talon1 = new CANTalon(RobotMap.CAN_2);
-	talon2 = new CANTalon(RobotMap.CAN_3);
+	talon1 = new CANTalon(RobotMap.C_MOTOR_1);
+	talon2 = new CANTalon(RobotMap.C_MOTOR_2);
 	
 	talon1.setPID(P, I, D);
 		

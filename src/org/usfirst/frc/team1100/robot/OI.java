@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.usfirst.frc.team1100.robot.commands.hopper.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
-import org.usfirst.frc.team1100.robot.commands.pneumatics.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.input.AttackThree;

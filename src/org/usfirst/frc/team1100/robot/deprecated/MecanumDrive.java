@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.drive;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
@@ -22,7 +22,7 @@ public class MecanumDrive extends Command {
 	@Deprecated
 	@Override
 	public void execute() {
-		Drive.getInstance().driveMecanum(OI.getInstance().getLeftStick().getX(), OI.getInstance().getLeftStick().getY(),OI.getInstance().getRightStick().getY());
+		//Drive.getInstance().driveMecanum(OI.getInstance().getLeftStick().getX(), OI.getInstance().getLeftStick().getY(),OI.getInstance().getRightStick().getY());
 	}
 	
 	@Deprecated

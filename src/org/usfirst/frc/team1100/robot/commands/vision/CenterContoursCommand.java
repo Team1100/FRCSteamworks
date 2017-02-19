@@ -2,9 +2,9 @@ package org.usfirst.frc.team1100.robot.commands.vision;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team1100.robot.deprecated.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Gyro;
-import org.usfirst.frc.team1100.robot.subsystems.Vision;
+import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,14 +16,15 @@ public class CenterContoursCommand extends Command {
 	public CenterContoursCommand(double time) {
 		requires(Vision.getInstance());
 		requires(Drive.getInstance());
-		requires(Gyro.getInstance());
+		//requires(Gyro.getInstance());
 		setTimeout(time);
 		finished = false;
 	}
 	
 	public void execute() {
 		System.err.println("Centering contours!!!");
-		Gyro.getInstance().resetGyro();
+		//Gyro.getInstance().resetGyro();
+		Drive.getInstance().resetGyro();
 		ArrayList<double[]> conts = Vision.getInstance().requestContours();
 		double centerX = 0;
 		for(double[] d : conts) {	

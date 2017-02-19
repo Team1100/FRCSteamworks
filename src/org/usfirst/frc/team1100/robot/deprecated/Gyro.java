@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.subsystems;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 
@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+@Deprecated
 public class Gyro extends Subsystem {
 	
 	private static Gyro gyro;
@@ -18,6 +19,7 @@ public class Gyro extends Subsystem {
 	private AnalogGyro gyro1;
 	private long resetTime; // The time the gyro was last reset
 
+	@Deprecated
 	public static Gyro getInstance() {
 		if(gyro == null) {
 			gyro = new Gyro();

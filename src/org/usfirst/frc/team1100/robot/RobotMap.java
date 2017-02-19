@@ -63,6 +63,15 @@ public class RobotMap {
 	private static final int USB_2 = 2;
 	private static final int USB_3 = 3;
 	
+	public static final int P_0 = 0;
+	public static final int P_1 = 1;
+	public static final int P_2 = 2;
+	public static final int P_3 = 3;
+	public static final int P_4 = 4;
+	public static final int P_5 = 5;
+	public static final int P_6 = 6;
+	public static final int P_7 = 7;
+	
 	//[D]rive
 	public final static int D_BACK_RIGHT = PWM_0;
 	public final static int D_FRONT_RIGHT = PWM_1;
@@ -80,35 +89,34 @@ public class RobotMap {
 	public static final int I_ROLLER = PWM_4;
 	//[S]hooter
 	public static final int S_ENCODER = ANALOG_3;
-
-	public static final int S_FLYWHEEL = PWM_8;
+	public static final int S_FLYWHEEL = CAN_3;
+	public static final int S_FLYWHEEL_FOLLOWER = CAN_4;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
-
-	//[P]neumatics
-	public static final int P_0 = 0;
-	public static final int P_1 = 1;
-	public static final int P_2 = 2;
-	public static final int P_3 = 3;
-	public static final int P_4 = 4;
-	public static final int P_5 = 5;
-	public static final int P_6 = 6;
-	public static final int P_7 = 7;
-	
-	public static final int P_FIRER_0_FORWARD = P_0;
-	public static final int P_FIRER_0_REVERSE = P_1;
-	public static final int P_FIRER_1_FORWARD = P_2;
-	public static final int P_FIRER_1_REVERSE = P_3;
-	public static final int P_FIRER_2_FORWARD = P_4;
-	public static final int P_FIRER_2_REVERSE = P_5;
-	public static final int P_FIRER_3_FORWARD = P_6;
-	public static final int P_FIRER_3_REVERSE = P_7;
-	
+	//[H]opper
+	public static final int H_PCM = CAN_0;
+	public static final int H_FIRER_0_FORWARD = P_0;
+	public static final int H_FIRER_0_REVERSE = P_1;
+	public static final int H_FIRER_1_FORWARD = P_2;
+	public static final int H_FIRER_1_REVERSE = P_3;
+	public static final int H_FIRER_2_FORWARD = P_4;
+	public static final int H_FIRER_2_REVERSE = P_5;
+	public static final int H_FIRER_3_FORWARD = P_6;
+	public static final int H_FIRER_3_REVERSE = P_7;
+	//[C]limber
+	public static final int C_MOTOR_1 = CAN_2;
+	public static final int C_MOTOR_2 = CAN_3;
 	//[T]est
 	public static final int T_TALON_PORT = PWM_9;
+	//[G]ear
+	public static final int G_PCM = CAN_1;
+	public static final int G_CATCHER_A = P_0;
+	public static final int G_CATCHER_B = P_1;
+	//[L]ights
+	public static final int L_PCM = G_PCM;
 	
-	/*@Deprecated
-	 
+	
+	/*@Deprecated 
 	//[A]ugar*/
 	@Deprecated
 	public static final int A_AUGER = PWM_7;

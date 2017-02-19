@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.drive;
 
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Gyro;
+import org.usfirst.frc.team1100.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -23,8 +23,8 @@ public class RotateCommand extends Command {
 	 */
     public RotateCommand(double angle) {
     	requires(Drive.getInstance());
-    	requires(Gyro.getInstance());
-    	endAngle = Gyro.getInstance().getAngleAverage() + angle;
+    	requires(Drive.getInstance());
+    	endAngle = Drive.getInstance().getAngleAverage() + angle;
     	setTimeout(3); // Ensure the gyro doesn't get stuck
     }
 
@@ -32,7 +32,7 @@ public class RotateCommand extends Command {
      * Called right before the command runs
      */
     protected void initialize() {
-    	Gyro.getInstance().resetGyro();
+    	Drive.getInstance().resetGyro();
     	finished = false;
     }
 
@@ -41,7 +41,8 @@ public class RotateCommand extends Command {
      */
     protected void execute() {
     	System.err.println("Rotate!!!");
-    	double currentAngleDifference = Gyro.getInstance().getAngleAverage() + endAngle;
+    	//double currentAngleDifference = Drive.getInstance().getAngleAverage() + endAngle;
+    	double currentAngleDifference = Drive.getInstance().getAngleAverage() + endAngle;
     	double power = 1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR));
     	if(1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR)) > 0) {
     		power = Math.min(1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR)),SPEED_LIMIT);
@@ -55,7 +56,7 @@ public class RotateCommand extends Command {
     		System.err.println("All set");
     		finished = true;
     	}
-    	//System.err.println("Current angle: " + Gyro.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
+    	//System.err.println("Current angle: " + Drive.getInstance().getAngleAverage() + ", Difference: " + currentAngleDifference + ", Power: " + power);
     }
 
     /**

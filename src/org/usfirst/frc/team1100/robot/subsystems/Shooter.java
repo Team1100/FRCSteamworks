@@ -44,10 +44,10 @@ public class Shooter extends Subsystem {
 	}
 	
 	public Shooter() {
-		flywheel = new CANTalon(RobotMap.CAN_0);
+		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
 		flywheel.setPID(P,I,D);
 		
-		flywheelFollower = new CANTalon(RobotMap.CAN_1);
+		flywheelFollower = new CANTalon(RobotMap.S_FLYWHEEL_FOLLOWER);
 		
 		flywheel.changeControlMode(TalonControlMode.Position);
 		flywheel.setFeedbackDevice(FeedbackDevice.AnalogEncoder);

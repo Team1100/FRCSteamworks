@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.subsystems;
+package org.usfirst.frc.team1100.robot.subsystems.vision;
 
 import java.io.File;
 import java.io.FileWriter;

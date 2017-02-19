@@ -1,6 +1,6 @@
-package org.usfirst.frc.team1100.robot.commands.pneumatics.pistons;
+package org.usfirst.frc.team1100.robot.commands.hopper.pistons;
 
-import org.usfirst.frc.team1100.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,11 +13,9 @@ public class FirePiston extends Command {
 	/**
 	 * Constructor for the FirePiston command
 	 * @param piston the piston to fire
-	 * @param timeout the time until the command stops
 	 */
-	public FirePiston(int piston, long timeout) {
-		requires(Pneumatics.getInstance());
-		setTimeout(timeout);
+	public FirePiston(int piston) {
+		requires(Hopper.getInstance());
 		finished = false;
 	}
 	
@@ -25,7 +23,7 @@ public class FirePiston extends Command {
 	 * Called many times a second while the FirePiston command is being run
 	 */
 	public void execute() {
-		Pneumatics.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kForward);
+		Hopper.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kForward);
 		finished = true;
 	}
 
@@ -34,7 +32,7 @@ public class FirePiston extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-		return finished || isTimedOut();
+		return finished;
 	}
 
 }
