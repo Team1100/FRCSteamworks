@@ -2,10 +2,10 @@ package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
-import org.usfirst.frc.team1100.robot.deprecated.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
-import org.usfirst.frc.team1100.robot.subsystems.Intake;
+import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
+import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 		Shooter.getInstance();
 		OI.getInstance();
 		Hopper.getInstance();
+		Gear.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		chooser.addObject("Gear then Ball", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
 		chooser.addObject("Ball then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
