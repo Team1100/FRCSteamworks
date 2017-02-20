@@ -5,7 +5,10 @@ import org.usfirst.frc.team1100.robot.commands.drive.UserDriveJoysticks;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Drive extends Subsystem {
 	
@@ -18,6 +21,8 @@ public class Drive extends Subsystem {
 	private AnalogGyro gyro1;
 	private long resetTime; // The time the gyro was last reset
 	
+	private Victor frontLeft, frontRight, backLeft, backRight;
+	
 	public static Drive getInstance() {
 		if(drive==null) {
 			drive = new Drive();
@@ -26,15 +31,34 @@ public class Drive extends Subsystem {
 	}
 
 	public Drive(){
-		driveTrain = new RobotDrive(RobotMap.D_FRONT_LEFT, RobotMap.D_BACK_LEFT, RobotMap.D_FRONT_RIGHT, RobotMap.D_BACK_RIGHT);
-		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kFrontLeft, true); // The left side has to be inverted for mecanum to work
-		driveTrain.setInvertedMotor(edu.wpi.first.wpilibj.RobotDrive.MotorType.kRearLeft, true);
+		frontLeft = new Victor(RobotMap.D_FRONT_LEFT);
+		frontRight = new Victor(RobotMap.D_FRONT_RIGHT);
+		backLeft = new Victor(RobotMap.D_BACK_LEFT);
+		backRight = new Victor(RobotMap.D_BACK_RIGHT);
+		
+		backRight.setInverted(true);
+		frontRight.setInverted(true);
+		
+		driveTrain = new RobotDrive(backLeft, frontLeft, backRight, frontRight);
+		driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		
+		
 		driveTrain.setSafetyEnabled(false);//TODO WTF IS THIS GUYS
 		
 		gyro0 = new AnalogGyro(RobotMap.D_GYRO0);
 		gyro1 = new AnalogGyro(RobotMap.D_GYRO1);
 		//System.err.println("Test");
 		resetGyro();
+	}
+	
+	public LiveWindowSendable[] driveLWS(){
+		LiveWindowSendable[] lws = new LiveWindowSendable[4];
+		lws[0] = (LiveWindowSendable) frontLeft;
+		lws[1] = (LiveWindowSendable) backLeft;
+		lws[2] = (LiveWindowSendable) frontRight;
+		lws[3] = (LiveWindowSendable) backRight;
+		return lws;
 	}
 	
 	/**

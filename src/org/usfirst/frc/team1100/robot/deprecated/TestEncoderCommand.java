@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.shooter;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
 
@@ -20,7 +20,7 @@ public class TestEncoderCommand extends Command {
 	public TestEncoderCommand(int time, double targetRate) {
 		setTimeout(time);
 		this.targetRate = targetRate;
-		talon = new Talon(RobotMap.T_TALON_PORT);
+		//talon = new Talon(RobotMap.T_TALON_PORT);
 		//encoder = new Encoder(RobotMap.T_ENCODER_PORT_1,RobotMap.T_ENCODER_PORT_2);
 		System.err.println("YESSES CONSTRUCTOR");
 	}

@@ -3,12 +3,10 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The shooter subsystem which using space age technology discovered by Sir. Randal P.I.D. can change the speed of a heavily weighted array of flywheels to a precise speed,
@@ -28,13 +26,13 @@ public class Shooter extends Subsystem {
 	
 
 	private CANTalon flywheel;
-	private CANTalon flywheelFollower;
+	private CANTalon flywheel2;
 	
 	private double P = 1.0;
 	private double I = 1.0;
 	private double D = 1.0;
 	
-	private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);
+	//private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);
 	
 	public static Shooter getInstance() {
 		if(shooter == null) {
@@ -44,15 +42,17 @@ public class Shooter extends Subsystem {
 	}
 	
 	public Shooter() {
+		P=I=D=1;
 		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
-		flywheel.setPID(P,I,D);
+		flywheel2 = new CANTalon(RobotMap.S_FLYWHEEL_2);
 		
-		flywheelFollower = new CANTalon(RobotMap.S_FLYWHEEL_FOLLOWER);
+		flywheel.setInverted(true);
 		
-		flywheel.changeControlMode(TalonControlMode.Position);
-		flywheel.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+		flywheel.setPID(P, I, D);
+		flywheel2.setPID(P, I, D);
 		
-		flywheelFollower.set(flywheel.getDeviceID());
+		SmartDashboard.putNumber("ShooterSpeed", 0);
+		//flywheel.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
 
 	}
 	
@@ -64,12 +64,17 @@ public class Shooter extends Subsystem {
 		return (LiveWindowSendable) flywheel;
 	}
 	
+	public LiveWindowSendable getFlywheel2LWS(){
+		return (LiveWindowSendable) flywheel2;
+	}
+	
 	/**
 	 * Sets the flywheel speed using a PID loop (hopefully)
 	 * @param speed the speed between -1 and 1 to set the motors to
 	 */
 	public void setFlywheelSpeed(double speed) {
-		flywheel.setSetpoint(speed);
+		flywheel.set(speed);
+		flywheel2.set(speed);//TODO PID
 	}
 	
 	/**
@@ -81,7 +86,18 @@ public class Shooter extends Subsystem {
 	 */
 	public void stopFlywheel() {
 		flywheel.set(0);
+		flywheel2.set(0);
 	}
+	
+	public void setSpeedFromDash(){
+		double speed = SmartDashboard.getNumber("ShooterSpeed", 0);
+		setFlywheelSpeed(speed);
+	}
+	
+	public double getSpeed(){
+		return flywheel.get();
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		

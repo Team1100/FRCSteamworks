@@ -41,7 +41,7 @@ public class UserDriveJoysticks extends Command {
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
 		
-		Drive.getInstance().driveMecanum(y, x, z); // In the future we should add in the proper gyro support
+		Drive.getInstance().driveMecanum(x, -y, -z); // In the future we should add in the proper gyro support
 	}
 	
 	/**

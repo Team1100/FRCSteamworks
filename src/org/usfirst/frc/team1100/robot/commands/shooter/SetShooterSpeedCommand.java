@@ -37,14 +37,15 @@ public class SetShooterSpeedCommand extends Command {
      * Called many times a second while the command is running
      */
     protected void execute() {
-    	Shooter.getInstance().setFlywheelSpeed(speed);
+    	//Shooter.getInstance().setFlywheelSpeed(speed);
+    	Shooter.getInstance().setSpeedFromDash();
     }
 
     /**
      * Returns if the command is finished or not
      */
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     /**
@@ -58,5 +59,6 @@ public class SetShooterSpeedCommand extends Command {
      * Called when the command is interrupted
      */
     protected void interrupted() {
+    	end();
     }
 }

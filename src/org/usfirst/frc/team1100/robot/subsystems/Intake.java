@@ -3,7 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
@@ -20,6 +20,7 @@ public class Intake extends Subsystem {
 	public static final double ROLL_OUT_SPEED = -1;
 	
 	private SpeedController roller;
+	private SpeedController roller2;
 	
 	public static Intake getInstance() {
 		if(intake == null) {
@@ -29,7 +30,10 @@ public class Intake extends Subsystem {
 	}
 	
 	public Intake() {
-		roller = new Talon(RobotMap.I_ROLLER);
+		roller = new Victor(RobotMap.I_ROLLER);
+		roller2 = new Victor(RobotMap.I_ROLLER_2);
+		
+		roller.setInverted(true);
 	}
 	
 	protected void initDefaultCommand() {
@@ -43,6 +47,9 @@ public class Intake extends Subsystem {
 	public LiveWindowSendable getRollerLWS() {
 		return (LiveWindowSendable) roller;
 	}
+	public LiveWindowSendable getRoller2LWS(){
+		return (LiveWindowSendable) roller2;
+	}
 	
 	/**
 	 * Sets the rollers speed, often using the constants defined in this class as parameters
@@ -50,6 +57,15 @@ public class Intake extends Subsystem {
 	 */
 	public void setRollerSpeed(double speed) {
 		roller.set(speed);
+		roller2.set(speed);
+	}
+	
+	/**
+	 * Returns roller speed
+	 */
+	
+	public double getRollerSpeed(){
+		return roller.get();
 	}
 	
 	/**
@@ -57,5 +73,6 @@ public class Intake extends Subsystem {
 	 */
 	public void stopRoller() {
 		roller.set(0);
+		roller2.set(0);
 	}
 }

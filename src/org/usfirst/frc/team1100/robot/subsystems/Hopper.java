@@ -4,6 +4,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Hopper extends Subsystem {
 	
@@ -20,6 +21,8 @@ public class Hopper extends Subsystem {
 		firers[1] = new DoubleSolenoid(RobotMap.H_PCM,RobotMap.H_FIRER_1_FORWARD,RobotMap.H_FIRER_1_REVERSE);
 		firers[2] = new DoubleSolenoid(RobotMap.H_PCM,RobotMap.H_FIRER_2_FORWARD,RobotMap.H_FIRER_2_REVERSE);
 		firers[3] = new DoubleSolenoid(RobotMap.H_PCM,RobotMap.H_FIRER_3_FORWARD,RobotMap.H_FIRER_3_REVERSE);
+	
+		for(DoubleSolenoid f:firers)f.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public static Hopper getInstance() {
@@ -27,6 +30,10 @@ public class Hopper extends Subsystem {
 			p = new Hopper();
 		}
 		return p;
+	}
+	
+	public LiveWindowSendable hopperLWS(int index){
+		return (LiveWindowSendable)firers[index];
 	}
 	
 	/**

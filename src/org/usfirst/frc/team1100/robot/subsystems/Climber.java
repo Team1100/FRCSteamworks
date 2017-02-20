@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Climber extends Subsystem {
 
@@ -22,10 +23,11 @@ public class Climber extends Subsystem {
 	talon1 = new CANTalon(RobotMap.C_MOTOR_1);
 	talon2 = new CANTalon(RobotMap.C_MOTOR_2);
 	
+	talon1.setInverted(true);
+	
+	P=I=D=1;
 	talon1.setPID(P, I, D);
-		
-	talon2.changeControlMode(TalonControlMode.Follower);
-	talon2.set(talon1.getDeviceID());
+	talon2.setPID(P, I, D);
 	}
 	
 	public static Climber getInstance() {
@@ -37,6 +39,14 @@ public class Climber extends Subsystem {
 	
 	public void setSpeed(double value) {
 		talon1.set(Math.max(value,-0.2));
+		talon2.set(Math.max(value,-0.2));
+	}
+	
+	public LiveWindowSendable ClimbLWS(){
+		return (LiveWindowSendable) talon1;
+	}
+	public LiveWindowSendable Climb2LWS(){
+		return (LiveWindowSendable) talon2;
 	}
 	
 	@Override

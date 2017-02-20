@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
+import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
@@ -13,6 +14,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -57,11 +59,25 @@ public class Robot extends IterativeRobot {
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
+		LiveWindow.addActuator("Intake", "Roller2", Intake.getInstance().getRoller2LWS());
+		
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
-		//LiveWindow.addActuator("Drive Train", "Front Left", new Talon(RobotMap.D_FRONT_LEFT)); TODO: Re add before competition
-		//LiveWindow.addActuator("Drive Train", "Front Right", new Talon(RobotMap.D_FRONT_RIGHT));
-		//LiveWindow.addActuator("Drive Train", "Rear Left", new Talon(RobotMap.D_BACK_LEFT));
-		//LiveWindow.addActuator("Drive Train", "Rear Right", new Talon(RobotMap.D_BACK_RIGHT));
+		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFlywheel2LWS());
+		
+		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().ClimbLWS());
+		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().Climb2LWS());
+		
+		LiveWindow.addActuator("Hopper", "Piston 1", Hopper.getInstance().hopperLWS(0));
+		LiveWindow.addActuator("Hopper", "Piston 2", Hopper.getInstance().hopperLWS(1));
+		LiveWindow.addActuator("Hopper", "Piston 3", Hopper.getInstance().hopperLWS(2));
+		LiveWindow.addActuator("Hopper", "Piston 4", Hopper.getInstance().hopperLWS(3));
+		
+		LiveWindow.addActuator("Gear", "Catcher", Gear.getInstance().gearLWS());
+		
+		LiveWindow.addActuator("Drive", "Paul", Drive.getInstance().driveLWS()[0]);
+		LiveWindow.addActuator("Drive", "John", Drive.getInstance().driveLWS()[1]);
+		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
+		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
 		
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
@@ -147,6 +163,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		for(DoubleSolenoid f :Hopper.getInstance().getFirers()){
+			f.set(DoubleSolenoid.Value.kForward);
+		}
 	}
 
 	/**

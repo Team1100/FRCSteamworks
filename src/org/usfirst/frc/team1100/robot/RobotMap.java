@@ -73,51 +73,42 @@ public class RobotMap {
 	public static final int P_7 = 7;
 	
 	//[D]rive
-	public final static int D_BACK_RIGHT = PWM_0;
-	public final static int D_FRONT_RIGHT = PWM_1;
-	public final static int D_FRONT_LEFT = PWM_2;
-	public final static int D_BACK_LEFT = PWM_3;
+	public final static int D_BACK_RIGHT = PWM_6;//George
+	public final static int D_FRONT_RIGHT = PWM_7;//Ringo
+	public final static int D_FRONT_LEFT = PWM_9;//Paul
+	public final static int D_BACK_LEFT = PWM_8;//John
 	public final static int D_GYRO0 = ANALOG_0;
 	public final static int D_GYRO1 = ANALOG_1;
 	public final static int D_ACCEL_1 = ANALOG_2;
-	public final static int D_ENC_A = DIO_0;
-	public final static int D_ENC_B = DIO_0;
 	//[U]ser Input
 	public static final int U_XBOX = USB_1;
 	public static final int U_STICK = USB_0;
 	//[I]ntake
 	public static final int I_ROLLER = PWM_4;
+	public static final int I_ROLLER_2 = PWM_5;
 	//[S]hooter
 	public static final int S_ENCODER = ANALOG_3;
-	public static final int S_FLYWHEEL = CAN_3;
-	public static final int S_FLYWHEEL_FOLLOWER = CAN_4;
+	public static final int S_FLYWHEEL = CAN_4;
+	public static final int S_FLYWHEEL_2 = CAN_5;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
 	//[H]opper
-	public static final int H_PCM = CAN_0;
-	public static final int H_FIRER_0_FORWARD = P_0;
-	public static final int H_FIRER_0_REVERSE = P_1;
-	public static final int H_FIRER_1_FORWARD = P_2;
-	public static final int H_FIRER_1_REVERSE = P_3;
-	public static final int H_FIRER_2_FORWARD = P_4;
-	public static final int H_FIRER_2_REVERSE = P_5;
-	public static final int H_FIRER_3_FORWARD = P_6;
-	public static final int H_FIRER_3_REVERSE = P_7;
+	public static final int H_PCM = CAN_1;
+	public static final int H_FIRER_0_FORWARD = P_2;
+	public static final int H_FIRER_0_REVERSE = P_3;
+	public static final int H_FIRER_1_FORWARD = P_0;
+	public static final int H_FIRER_1_REVERSE = P_1;
+	public static final int H_FIRER_2_FORWARD = P_6;
+	public static final int H_FIRER_2_REVERSE = P_7;
+	public static final int H_FIRER_3_FORWARD = P_4;
+	public static final int H_FIRER_3_REVERSE = P_5;
 	//[C]limber
 	public static final int C_MOTOR_1 = CAN_2;
 	public static final int C_MOTOR_2 = CAN_3;
-	//[T]est
-	public static final int T_TALON_PORT = PWM_9;
 	//[G]ear
-	public static final int G_PCM = CAN_1;
+	public static final int G_PCM = CAN_0;
 	public static final int G_CATCHER_A = P_0;
 	public static final int G_CATCHER_B = P_1;
 	//[L]ights
 	public static final int L_PCM = G_PCM;
-	
-	
-	/*@Deprecated 
-	//[A]ugar*/
-	@Deprecated
-	public static final int A_AUGER = PWM_7;
 }

@@ -17,6 +17,7 @@ public class FirePiston extends Command {
 	public FirePiston(int piston) {
 		requires(Hopper.getInstance());
 		finished = false;
+		this.piston = piston;
 	}
 	
 	/**

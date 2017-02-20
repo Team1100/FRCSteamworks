@@ -4,6 +4,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 public class Gear extends Subsystem{
 
@@ -31,6 +32,10 @@ public class Gear extends Subsystem{
 		if(catcher.get()==DoubleSolenoid.Value.kForward){
 			closeCatcher();
 		}else openCatcher();
+	}
+	
+	public LiveWindowSendable gearLWS(){
+		return (LiveWindowSendable) catcher;
 	}
 	
 	@Override
