@@ -3,9 +3,9 @@ package org.usfirst.frc.team1100.robot.commands.auto;
 import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
 import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
 import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequenceSimult;
 import org.usfirst.frc.team1100.robot.commands.shooter.SetShooterState;
-import org.usfirst.frc.team1100.robot.commands.vision.CenterContoursCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;

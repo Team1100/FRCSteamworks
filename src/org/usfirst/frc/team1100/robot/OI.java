@@ -36,6 +36,7 @@ private static OI instance;
 		stick = new Extreme3DPro(RobotMap.U_STICK,.15,.2);
 		
 		// Now the assignments
+		stick.getButton(11).whenPressed(new ToggleCatcher());
 		
 		stick.getButton(9).whenPressed(new ToggleShooterCommand());
 		stick.getButton(10).whenPressed(new OpenThenCloseAll());
@@ -53,12 +54,13 @@ private static OI instance;
 		stick.getButton(1).whileHeld(new FireSequence());
 		stick.getButton(1).whenReleased(new CloseAll());
 		
+		
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
 		xbox.getButtonA().whenPressed(new ToggleCatcher());
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
 		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
-		
-		//HOLD DOWN OUTAKE- left trigger
+		//Right trigger runs hopper sequence
+		//Left trigger reverses intake
 		
 		
 	}
