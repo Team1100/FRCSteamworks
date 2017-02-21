@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.drive;
+package org.usfirst.frc.team1100.robot.commands.drive.user;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
  * The command which allows the user control of the drive train
  * @author supremesteak1
  */
-public class UserDriveJoysticks extends Command {
+public class UserDriveAbsolute extends Command {
 	
 	/**
 	 * The constructor for the UserDrive command
 	 */
-	public UserDriveJoysticks() {
+	public UserDriveAbsolute() {
 		requires(Drive.getInstance());
 	}
 	
@@ -41,7 +41,7 @@ public class UserDriveJoysticks extends Command {
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
 		
-		Drive.getInstance().driveMecanum(x, -y, -z/2); // In the future we should add in the proper gyro support
+		Drive.getInstance().driveAbsoluteMecanum(x, -y, -z/2); // In the future we should add in the proper gyro support
 	}
 	
 	/**

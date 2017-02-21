@@ -106,8 +106,7 @@ public class RobotMap {
 	public static final int C_MOTOR_2 = CAN_3;
 	//[G]ear
 	public static final int G_PCM = CAN_1;
-	public static final int G_CATCHER_A = P_0;
-	public static final int G_CATCHER_B = P_1;
+	public static final int G_CATCHER = P_0;
 	//[L]ights
 	public static final int L_PCM = G_PCM;
 }

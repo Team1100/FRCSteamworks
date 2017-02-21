@@ -7,13 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleShooterCommand extends Command {
+public class SetShooterState extends Command {
 
- 
+	private boolean value;
 	private boolean done;
 
-	public ToggleShooterCommand() {
+	public SetShooterState(boolean value) {
         requires(Shooter.getInstance());
+        this.value = value;
     }
 
 	public void initialize(){
@@ -21,13 +22,13 @@ public class ToggleShooterCommand extends Command {
 	}
 	
     public void execute(){
-    	Shooter.getInstance().setOn(!Shooter.getInstance().getOn());
+    	Shooter.getInstance().setOn(value);
     	done = true;
     }
     
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
+		
 		return done;
 	}
 }

@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1100.robot.commands.hopper;
+package org.usfirst.frc.team1100.robot.commands.hopper.sequences;
+
+import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenClose;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1100.robot;
 
+import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoBlue;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
@@ -7,7 +8,12 @@ import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -71,7 +77,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
 		
-		 /*new Thread(() -> {
+		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              camera.setExposureManual(30);
              camera.setResolution(640, 480);
@@ -94,7 +100,7 @@ public class Robot extends IterativeRobot {
                  Vision.imageRequested = false;
             	 }
              }
-         }).start();*/
+         }).start();
 	}
 
 	/**

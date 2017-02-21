@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.shooter;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+@Deprecated
 public class ShooterSpeedPID extends Command {
 
 	private double speed;

@@ -2,10 +2,10 @@ package org.usfirst.frc.team1100.robot.commands.hopper;
 
 import org.usfirst.frc.team1100.robot.commands.hopper.pistons.FirePiston;
 import org.usfirst.frc.team1100.robot.commands.hopper.pistons.RetractPiston;
+import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *@author NotSupremeSteak1
@@ -15,7 +15,7 @@ public class OpenThenClose extends CommandGroup {
 
     public OpenThenClose(int index) {
         addSequential(new RetractPiston(index));
-        addSequential(new WaitCommand(.2));
+        addSequential(new WaitCommand(Hopper.HOP_DELAY));
         addSequential(new FirePiston(index));
     }
 }

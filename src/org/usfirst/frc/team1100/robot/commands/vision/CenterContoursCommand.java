@@ -23,8 +23,6 @@ public class CenterContoursCommand extends Command {
 	
 	public void execute() {
 		System.err.println("Centering contours!!!");
-		//Gyro.getInstance().resetGyro();
-		Drive.getInstance().resetGyro();
 		ArrayList<double[]> conts = Vision.getInstance().requestContours();
 		double centerX = 0;
 		for(double[] d : conts) {	

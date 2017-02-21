@@ -3,6 +3,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 import org.usfirst.frc.team1100.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
@@ -10,7 +11,7 @@ public class Gear extends Subsystem{
 
 	private static Gear instance;
 	
-	private DoubleSolenoid catcher;
+	private Solenoid catcher;
 	
 	public static Gear getInstance(){
 		if(instance==null)instance=new Gear();
@@ -18,20 +19,18 @@ public class Gear extends Subsystem{
 	}
 	
 	public Gear(){
-		catcher = new DoubleSolenoid(RobotMap.G_PCM, RobotMap.G_CATCHER_A, RobotMap.G_CATCHER_B);
+		catcher = new Solenoid(RobotMap.G_PCM, RobotMap.G_CATCHER);
 	}
 	
 	public void openCatcher(){
-		catcher.set(DoubleSolenoid.Value.kForward);
+		catcher.set(true);
 	}
 	public void closeCatcher(){
-		catcher.set(DoubleSolenoid.Value.kReverse);
+		catcher.set(false);
 	}
 	
 	public void toggleCatcher(){
-		if(catcher.get()==DoubleSolenoid.Value.kForward){
-			closeCatcher();
-		}else openCatcher();
+		catcher.set(!catcher.get());
 	}
 	
 	public LiveWindowSendable gearLWS(){

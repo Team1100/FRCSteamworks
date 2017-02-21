@@ -1,14 +1,14 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.drive.UserDriveJoysticks;
+import org.usfirst.frc.team1100.robot.commands.drive.user.UserDriveJoysticks;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends Subsystem {
 	
@@ -44,12 +44,18 @@ public class Drive extends Subsystem {
 		driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		
-		driveTrain.setSafetyEnabled(false);//TODO WTF IS THIS GUYS
+		driveTrain.setSafetyEnabled(false);
 		
 		gyro0 = new AnalogGyro(RobotMap.D_GYRO0);
 		gyro1 = new AnalogGyro(RobotMap.D_GYRO1);
 		//System.err.println("Test");
 		resetGyro();
+	}
+	
+	public void displayGyroValues(){
+		SmartDashboard.putNumber("Gyro0", getAngle0());
+		SmartDashboard.putNumber("Gyro1", getAngle1());
+		SmartDashboard.putNumber("GyroAverage", getAngleAverage());
 	}
 	
 	public LiveWindowSendable[] driveLWS(){
@@ -63,12 +69,25 @@ public class Drive extends Subsystem {
 	
 	/**
 	 * This drives the robot with mecanum
-	 * @param x x distance
-	 * @param y y distance
+	 * @param x x power
+	 * @param y y power
 	 * @param rotation is it radians or degrees? We just do not know.
+	 * ^whatever it is touchy so i cut the joysitck in half in UserDrive
 	 */
 	public void driveMecanum(double x, double y, double rotation){
 		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
+		displayGyroValues();
+	}
+	
+	/**
+	 * Drive the robot in the more fancy fashion with absolute direction
+	 * @param x power
+	 * @param y power
+	 * @param rotation power
+	 */
+	public void driveAbsoluteMecanum(double x, double y, double rotation){
+		driveTrain.mecanumDrive_Cartesian(x, y, rotation, getAngleAverage());
+		displayGyroValues();
 	}
 	
 	/**

@@ -1,6 +1,7 @@
-package org.usfirst.frc.team1100.robot.commands.hopper;
+package org.usfirst.frc.team1100.robot.commands.hopper.sequences;
 
 import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.commands.hopper.util.CloseAll;
 import org.usfirst.frc.team1100.robot.input.XboxController.XboxAxis;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

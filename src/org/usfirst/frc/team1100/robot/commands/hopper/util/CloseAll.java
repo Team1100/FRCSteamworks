@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.hopper;
+package org.usfirst.frc.team1100.robot.commands.hopper.util;
 
 import org.usfirst.frc.team1100.robot.commands.hopper.pistons.FirePiston;
 

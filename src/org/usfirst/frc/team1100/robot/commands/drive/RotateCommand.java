@@ -32,7 +32,7 @@ public class RotateCommand extends Command {
      * Called right before the command runs
      */
     protected void initialize() {
-    	Drive.getInstance().resetGyro();
+    	//Drive.getInstance().resetGyro();
     	finished = false;
     }
 
@@ -41,7 +41,7 @@ public class RotateCommand extends Command {
      */
     protected void execute() {
     	System.err.println("Rotate!!!");
-    	//double currentAngleDifference = Drive.getInstance().getAngleAverage() + endAngle;
+    	
     	double currentAngleDifference = Drive.getInstance().getAngleAverage() + endAngle;
     	double power = 1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR));
     	if(1 - (Math.pow(Math.E, -currentAngleDifference/RAMP_FACTOR)) > 0) {

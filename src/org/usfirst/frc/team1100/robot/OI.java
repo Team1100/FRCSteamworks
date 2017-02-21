@@ -2,10 +2,10 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
-import org.usfirst.frc.team1100.robot.commands.hopper.CloseAll;
-import org.usfirst.frc.team1100.robot.commands.hopper.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenClose;
-import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenCloseAll;
+import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequence;
+import org.usfirst.frc.team1100.robot.commands.hopper.util.CloseAll;
+import org.usfirst.frc.team1100.robot.commands.hopper.util.OpenThenCloseAll;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.ToggleShooterCommand;

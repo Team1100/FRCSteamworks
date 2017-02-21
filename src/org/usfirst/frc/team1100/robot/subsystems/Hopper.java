@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
-import org.usfirst.frc.team1100.robot.commands.hopper.SequenceFromTrigger;
+import org.usfirst.frc.team1100.robot.commands.hopper.sequences.SequenceFromTrigger;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
