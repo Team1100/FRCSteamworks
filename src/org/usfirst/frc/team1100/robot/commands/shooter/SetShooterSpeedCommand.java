@@ -38,7 +38,7 @@ public class SetShooterSpeedCommand extends Command {
      */
     protected void execute() {
     	//Shooter.getInstance().setFlywheelSpeed(speed);
-    	Shooter.getInstance().setSpeedFromDash();
+    	Shooter.getInstance().setFlywheelSpeed(speed);
     }
 
     /**

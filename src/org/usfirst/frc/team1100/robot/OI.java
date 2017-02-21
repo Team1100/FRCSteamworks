@@ -5,6 +5,7 @@ import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
 import org.usfirst.frc.team1100.robot.commands.hopper.CloseAll;
 import org.usfirst.frc.team1100.robot.commands.hopper.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenClose;
+import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenCloseAll;
 import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.ToggleShooterCommand;
@@ -34,7 +35,10 @@ private static OI instance;
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
 		stick = new Extreme3DPro(RobotMap.U_STICK,.15,.2);
 		
-		stick.getButton(9).whenPressed(new ToggleShooterCommand(.5));
+		// Now the assignments
+		
+		stick.getButton(9).whenPressed(new ToggleShooterCommand());
+		stick.getButton(10).whenPressed(new OpenThenCloseAll());
 		
 		stick.getButton(2).whileHeld(new SetIntakeSpeedCommand(1));
 		
@@ -52,10 +56,10 @@ private static OI instance;
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
 		xbox.getButtonA().whenPressed(new ToggleCatcher());
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
+		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
+		
 		//HOLD DOWN OUTAKE- left trigger
-		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand(.6));
-		//RIGHT TRIGGER - piston sequence
-		// Now the assignments
+		
 		
 	}
 	

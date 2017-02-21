@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1100.robot.commands.vision;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import org.usfirst.frc.team1100.robot.subsystems.vision.GripPipeline;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.intake.RollOutFromTrigger;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -33,11 +34,11 @@ public class Intake extends Subsystem {
 		roller = new Victor(RobotMap.I_ROLLER);
 		roller2 = new Victor(RobotMap.I_ROLLER_2);
 		
-		roller.setInverted(true);
+		roller2.setInverted(true);
 	}
 	
 	protected void initDefaultCommand() {
-		// Nothing right now as OI handles it all
+		//setDefaultCommand(new RollOutFromTrigger());
 	}
 	
 	/**

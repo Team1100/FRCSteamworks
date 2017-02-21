@@ -17,7 +17,8 @@ public class RetractPiston extends Command {
 	}
 	
 	public void execute() {
-		Hopper.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kReverse);
+		if(Hopper.getInstance().getFirers()[piston].get()==DoubleSolenoid.Value.kForward)
+			Hopper.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kReverse);
 		finished = true;
 	}
 

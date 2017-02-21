@@ -1,19 +1,13 @@
 package org.usfirst.frc.team1100.robot;
 
-import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
+import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoBlue;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
-import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -45,16 +39,14 @@ public class Robot extends IterativeRobot {
 		// PLEASE: remember to initialize all of the subsystems by calling their respective getInstance() method
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		Drive.getInstance();
-		Vision.getInstance();
+		//Vision.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
 		Hopper.getInstance();
 		Gear.getInstance();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
-		chooser.addObject("Gear then Ball", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
-		chooser.addObject("Ball then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
-		chooser.addObject("Hopper then Gear", new AutoDrive(0,0,0,1)); // TODO: PLEASE make this so we have an actual auto command called
+		chooser.addObject("Gear then Ball", new BallGearAutoBlue());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// The following is the test mode stuff
@@ -79,7 +71,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
 		
-		 new Thread(() -> {
+		 /*new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              camera.setExposureManual(30);
              camera.setResolution(640, 480);
@@ -102,7 +94,7 @@ public class Robot extends IterativeRobot {
                  Vision.imageRequested = false;
             	 }
              }
-         }).start();
+         }).start();*/
 	}
 
 	/**
@@ -112,7 +104,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		//Shooter.getInstance().writeData();
+		//Shooter.getInstance().setOn(false);
 	}
 
 	@Override
@@ -166,6 +159,7 @@ public class Robot extends IterativeRobot {
 		for(DoubleSolenoid f :Hopper.getInstance().getFirers()){
 			f.set(DoubleSolenoid.Value.kForward);
 		}
+		Shooter.getInstance().setOn(false);
 	}
 
 	/**

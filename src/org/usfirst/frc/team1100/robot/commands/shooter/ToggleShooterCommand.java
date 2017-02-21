@@ -12,16 +12,16 @@ public class ToggleShooterCommand extends Command {
     private double speed;
 	private boolean done;
 
-	public ToggleShooterCommand(double speed) {
+	public ToggleShooterCommand() {
         requires(Shooter.getInstance());
-        this.speed = speed;
-        this.done = false;
     }
 
+	public void initialize(){
+		done = false;
+	}
+	
     public void execute(){
-    	if(Shooter.getInstance().getSpeed()==0){
-    		Shooter.getInstance().setSpeedFromDash();
-    	}else Shooter.getInstance().stopFlywheel();
+    	Shooter.getInstance().setOn(!Shooter.getInstance().getOn());
     	done = true;
     }
     

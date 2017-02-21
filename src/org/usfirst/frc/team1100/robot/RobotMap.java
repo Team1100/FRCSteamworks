@@ -87,13 +87,12 @@ public class RobotMap {
 	public static final int I_ROLLER = PWM_4;
 	public static final int I_ROLLER_2 = PWM_5;
 	//[S]hooter
-	public static final int S_ENCODER = ANALOG_3;
 	public static final int S_FLYWHEEL = CAN_4;
 	public static final int S_FLYWHEEL_2 = CAN_5;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
 	//[H]opper
-	public static final int H_PCM = CAN_1;
+	public static final int H_PCM = CAN_0;
 	public static final int H_FIRER_0_FORWARD = P_2;
 	public static final int H_FIRER_0_REVERSE = P_3;
 	public static final int H_FIRER_1_FORWARD = P_0;
@@ -106,7 +105,7 @@ public class RobotMap {
 	public static final int C_MOTOR_1 = CAN_2;
 	public static final int C_MOTOR_2 = CAN_3;
 	//[G]ear
-	public static final int G_PCM = CAN_0;
+	public static final int G_PCM = CAN_1;
 	public static final int G_CATCHER_A = P_0;
 	public static final int G_CATCHER_B = P_1;
 	//[L]ights

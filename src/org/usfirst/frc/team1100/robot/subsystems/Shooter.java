@@ -1,9 +1,11 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.shooter.ShooterDefault;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,23 +19,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Josh-Gordon
  *
  */
+
+
+
 public class Shooter extends Subsystem {
 
+	public static final double SHOOT_SPEED = 40;
+	
 	private static Shooter shooter;
-	
-	public static final double SHOOT_OUT_SPEED = 1;
-	public static final double SHOOT_REVERSE_SPEED = -0.5; // In case something happens
-	
 
 	private CANTalon flywheel;
 	private CANTalon flywheel2;
+	private Encoder enc;
 	
-	private double P = 1.0;
-	private double I = 1.0;
-	private double D = 1.0;
+	private boolean on;
 	
-	//private AnalogInput flyShaftEncoder = new AnalogInput(RobotMap.S_ENCODER);
-	
+	public boolean getOn() {
+		return on;
+	}
+
+	public void setOn(boolean on) {
+		this.on = on;
+	}
+
 	public static Shooter getInstance() {
 		if(shooter == null) {
 			shooter = new Shooter();
@@ -42,17 +50,18 @@ public class Shooter extends Subsystem {
 	}
 	
 	public Shooter() {
-		P=I=D=1;
+		on = false;
 		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
 		flywheel2 = new CANTalon(RobotMap.S_FLYWHEEL_2);
 		
 		flywheel.setInverted(true);
 		
-		flywheel.setPID(P, I, D);
-		flywheel2.setPID(P, I, D);
+		enc = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
+		enc.reset();
 		
-		SmartDashboard.putNumber("ShooterSpeed", 0);
-		//flywheel.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+		SmartDashboard.putNumber("TargetShooterSpeed", 0);
+		SmartDashboard.putNumber("ActualShooterSpeed", 0);
+		SmartDashboard.putNumber("EncoderVal", 0);
 
 	}
 	
@@ -74,32 +83,36 @@ public class Shooter extends Subsystem {
 	 */
 	public void setFlywheelSpeed(double speed) {
 		flywheel.set(speed);
-		flywheel2.set(speed);//TODO PID
+		flywheel2.set(speed);
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * Makes the flywheel stop spinning.
-=======
 	 * Sets the flywheel speed to 0, stopping it
->>>>>>> eea4e71ed87286c369c3fc45ffd6a5953085cfc5
+
 	 */
 	public void stopFlywheel() {
 		flywheel.set(0);
 		flywheel2.set(0);
 	}
 	
-	public void setSpeedFromDash(){
-		double speed = SmartDashboard.getNumber("ShooterSpeed", 0);
-		setFlywheelSpeed(speed);
+	public void setSpeedToTarget(){
+		if (getSpeed()>=SHOOT_SPEED){
+			setFlywheelSpeed(0);
+		}else{
+			setFlywheelSpeed(1);
+		}
 	}
 	
 	public double getSpeed(){
-		return flywheel.get();
+		SmartDashboard.putNumber("ActualShooterSpeed", -enc.getRate()/2048);
+		SmartDashboard.putNumber("Encoder Val", enc.get());
+		return -enc.getRate()/2048;
 	}
+	
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(new ShooterDefault());
 	}
 }

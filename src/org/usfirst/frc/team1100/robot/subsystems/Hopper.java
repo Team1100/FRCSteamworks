@@ -1,16 +1,19 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.hopper.SequenceFromTrigger;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hopper extends Subsystem {
 	
-	private static Hopper p;
+	private static Hopper hopper;
 
 	private DoubleSolenoid[] firers;
+	public static final double HOP_DELAY = .2;
 	
 	/**
 	 * The constructor for Pneumatics which sets up firers 1-4 in order with 0-1+2x as the PCM spots
@@ -26,10 +29,10 @@ public class Hopper extends Subsystem {
 	}
 	
 	public static Hopper getInstance() {
-		if(p == null) {
-			p = new Hopper();
+		if(hopper == null) {
+			hopper = new Hopper();
 		}
-		return p;
+		return hopper;
 	}
 	
 	public LiveWindowSendable hopperLWS(int index){
@@ -48,7 +51,7 @@ public class Hopper extends Subsystem {
 	protected void initDefaultCommand() {
 		
 		//This is also known as the Wire Management Memorial Subsystem. Rest in peace.
-		
+		setDefaultCommand(new SequenceFromTrigger());
 	}
 
 	

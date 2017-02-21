@@ -24,7 +24,8 @@ public class FirePiston extends Command {
 	 * Called many times a second while the FirePiston command is being run
 	 */
 	public void execute() {
-		Hopper.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kForward);
+		if(Hopper.getInstance().getFirers()[piston].get()==DoubleSolenoid.Value.kReverse)
+			Hopper.getInstance().getFirers()[piston].set(DoubleSolenoid.Value.kForward);
 		finished = true;
 	}
 

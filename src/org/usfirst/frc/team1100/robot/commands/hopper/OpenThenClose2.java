@@ -27,7 +27,7 @@ public class OpenThenClose2 extends Command {
     
     @Override
     public void initialize(){
-    	setTimeout(.25);
+    	setTimeout(Hopper.HOP_DELAY);
     	p1.set(DoubleSolenoid.Value.kReverse);
     	p2.set(DoubleSolenoid.Value.kReverse);
     }
