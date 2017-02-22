@@ -119,7 +119,7 @@ public class Drive extends Subsystem {
 	 * @return the current angle of gyro1
 	 */
 	public double getAngle1() {
-		return (gyro1.getAngle());
+		return (-gyro1.getAngle());
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class Drive extends Subsystem {
 	 * @return the current average angle of the gyros
 	 */
 	public double getAngleAverage() {
-		return ((gyro0.getAngle()/* + gyro1.getAngle()) / 2.0*/)) + (DRIFT*(System.currentTimeMillis()-resetTime));
+		return ((gyro0.getAngle() - gyro1.getAngle()) / 2.0) + (DRIFT*(System.currentTimeMillis()-resetTime));
 	}
 	
 	public double getGyroDriftPerMillisecond() {

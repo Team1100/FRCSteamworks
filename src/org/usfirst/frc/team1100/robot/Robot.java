@@ -13,6 +13,7 @@ import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -62,8 +63,8 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFlywheel2LWS());
 		
-		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().ClimbLWS());
-		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().Climb2LWS());
+		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
+		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().climb2LWS());
 		
 		LiveWindow.addActuator("Hopper", "Piston 1", Hopper.getInstance().hopperLWS(0));
 		LiveWindow.addActuator("Hopper", "Piston 2", Hopper.getInstance().hopperLWS(1));
@@ -78,17 +79,14 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
 		
 		 new Thread(() -> {
-             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+			 
+             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
              camera.setExposureManual(30);
              camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
-             @SuppressWarnings("unused")
-			CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
              
              Mat source = new Mat();
-             @SuppressWarnings("unused")
-			 Mat output = new Mat();
              
              while(!Thread.interrupted()) {
             	 if(Vision.isImageRequested()) {
@@ -133,7 +131,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
+		autonomousCommand = new BallGearAutoBlue();
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

@@ -23,6 +23,7 @@ public class CorrectedStrafe extends Command{
 	
 	@Override
 	public void initialize(){
+		Drive.getInstance().resetGyro();
 		setTimeout(this.timeout);
 		this.angle = Drive.getInstance().getAngleAverage();
 	}
@@ -32,9 +33,9 @@ public class CorrectedStrafe extends Command{
 		double y = 0;
 		double x = speed;
 		double z = 0;
-		if(this.angle>Drive.getInstance().getAngleAverage()){
+		if(this.angle>Drive.getInstance().getAngleAverage()+5){
 			z = .1;
-		}else if(this.angle<Drive.getInstance().getAngleAverage()){
+		}else if(this.angle<Drive.getInstance().getAngleAverage()-5){
 			z = -.1;
 		}
 		Drive.getInstance().driveAbsoluteMecanum(x, y, z);

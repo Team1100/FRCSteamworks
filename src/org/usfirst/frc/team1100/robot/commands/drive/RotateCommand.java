@@ -32,7 +32,7 @@ public class RotateCommand extends Command {
      * Called right before the command runs
      */
     protected void initialize() {
-    	//Drive.getInstance().resetGyro();
+    	Drive.getInstance().resetGyro();
     	finished = false;
     }
 

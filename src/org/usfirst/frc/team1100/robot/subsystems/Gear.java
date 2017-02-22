@@ -37,6 +37,10 @@ public class Gear extends Subsystem{
 		return (LiveWindowSendable) catcher;
 	}
 	
+	public boolean get(){
+		return catcher.get();
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub

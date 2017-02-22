@@ -42,10 +42,10 @@ public class Climber extends Subsystem {
 		talon2.set(Math.max(value,-0.2));
 	}
 	
-	public LiveWindowSendable ClimbLWS(){
+	public LiveWindowSendable climbLWS(){
 		return (LiveWindowSendable) talon1;
 	}
-	public LiveWindowSendable Climb2LWS(){
+	public LiveWindowSendable climb2LWS(){
 		return (LiveWindowSendable) talon2;
 	}
 	

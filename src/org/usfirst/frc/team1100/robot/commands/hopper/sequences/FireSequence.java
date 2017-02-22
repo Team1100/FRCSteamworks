@@ -12,6 +12,7 @@ public class FireSequence extends CommandGroup {
 	 */
 	public FireSequence() {
 		for(int i = 0; i<4;i++){
+			System.err.println("Fire Sequence Running!");
 			addSequential(new OpenThenClose(i));
 		}
 	}

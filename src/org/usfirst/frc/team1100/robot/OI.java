@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
+import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
 import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenClose;
 import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequence;
@@ -46,10 +49,10 @@ private static OI instance;
 		stick.getButton(7).whileHeld(new SetClimberSpeedCommand(1));
 		stick.getButton(8).whileHeld(new SetClimberSpeedCommand(-1));
 		
-		stick.getButton(6).whenPressed(new OpenThenClose(0));
-		stick.getButton(4).whenPressed(new OpenThenClose(1));
-		stick.getButton(3).whenPressed(new OpenThenClose(2));
-		stick.getButton(5).whenPressed(new OpenThenClose(3));
+		stick.getButton(4).whenPressed(new CorrectedStrafe(-.75,1));
+		stick.getButton(6).whenPressed(new RotateCommand(-90));
+		stick.getButton(3).whenPressed(new CorrectedStrafe(.75,1));
+		stick.getButton(5).whenPressed(new CenterContoursCommand(2));
 		
 		stick.getButton(1).whileHeld(new FireSequence());
 		stick.getButton(1).whenReleased(new CloseAll());
