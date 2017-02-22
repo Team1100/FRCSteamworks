@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.hopper.sequences;
 
+import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -24,15 +26,17 @@ public class SequenceFromTrigger extends Command {
 	}
 	
 	public void execute(){
-		if(!fired){
-			p[index].set(DoubleSolenoid.Value.kReverse);
-			fired = true;
-			setTimeout(delay);
-		}
-		if(isTimedOut()){
-			p[index].set(DoubleSolenoid.Value.kForward);
-			if(index<3)index++; else index=0;
-			fired = false;
+		if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
+			if(!fired){
+				p[index].set(DoubleSolenoid.Value.kReverse);
+				fired = true;
+				setTimeout(delay);
+			}
+			if(isTimedOut()){
+				p[index].set(DoubleSolenoid.Value.kForward);
+				if(index<3)index++; else index=0;
+				fired = false;
+			}
 		}
 	}
 	

@@ -49,9 +49,7 @@ public class Hopper extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		
-		//This is also known as the Wire Management Memorial Subsystem. Rest in peace.
-		//setDefaultCommand(new SequenceFromTrigger());
+		setDefaultCommand(new SequenceFromTrigger());
 	}
 
 	

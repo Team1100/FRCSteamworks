@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.hopper.sequences;
 
+import org.usfirst.frc.team1100.robot.OI;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,24 +27,26 @@ public class SequenceFromTriggerSimult extends Command {
 	}
 	
 	public void execute(){
-		if(first){
-			i1 = 0;
-			i2 = 2;
-		}else{
-			i1 = 1;
-			i2 = 2;
-		}
-		if(!fired){
-			p[i1].set(DoubleSolenoid.Value.kReverse);
-			p[i2].set(DoubleSolenoid.Value.kReverse);
-			fired = true;
-			setTimeout(delay);
-		}
-		if(isTimedOut()){
-			p[i1].set(DoubleSolenoid.Value.kForward);
-			p[i2].set(DoubleSolenoid.Value.kForward);
-			first=!first;
-			fired = false;
+		if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
+			if(first){
+				i1 = 0;
+				i2 = 2;
+			}else{
+				i1 = 1;
+				i2 = 2;
+			}
+			if(!fired){
+				p[i1].set(DoubleSolenoid.Value.kReverse);
+				p[i2].set(DoubleSolenoid.Value.kReverse);
+				fired = true;
+				setTimeout(delay);
+			}
+			if(isTimedOut()){
+				p[i1].set(DoubleSolenoid.Value.kForward);
+				p[i2].set(DoubleSolenoid.Value.kForward);
+				first=!first;
+				fired = false;
+			}
 		}
 	}
 	
