@@ -8,12 +8,11 @@ import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
+import org.usfirst.frc.team1100.robot.subsystems.vision.CameraServer2;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -32,6 +31,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+	private Thread t;
+	
 	//Subsystem init
 
 	Command autonomousCommand;
@@ -78,12 +79,12 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
 		
-		 new Thread(() -> {
+		this.t = new Thread(() -> {
 			 
-             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
+             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0",0);
              camera.setExposureManual(30);
              camera.setResolution(640, 480);
-             
+                          
              CvSink cvSink = CameraServer.getInstance().getVideo();
              
              Mat source = new Mat();
@@ -98,7 +99,8 @@ public class Robot extends IterativeRobot {
                  Vision.imageRequested = false;
             	 }
              }
-         }).start();
+         });
+		
 	}
 
 	/**
@@ -130,6 +132,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		CameraServer.getInstance().removeCamera("cam1");
+		t.start();
+		
 		autonomousCommand = chooser.getSelected();
 		autonomousCommand = new BallGearAutoBlue();
 		
@@ -165,6 +171,13 @@ public class Robot extends IterativeRobot {
 			f.set(DoubleSolenoid.Value.kForward);
 		}
 		Shooter.getInstance().setOn(false);
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		UsbCamera teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1); 
 	}
 
 	/**
