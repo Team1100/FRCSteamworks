@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1100.robot.commands.auto;
 
 import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
-import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
 import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequenceSimult;
 import org.usfirst.frc.team1100.robot.commands.shooter.auto.AutoWheel;
 
@@ -14,7 +14,7 @@ public class BallGearAutoBlue extends CommandGroup {
 		//Start wheel spinup
 		addParallel(new AutoWheel(5));
 		//Boiler is on the right of drive wall
-		addSequential(new AutoDrive(-AutoMap.BALL_STRAFE_POWER,0,0,AutoMap.BALL_STRAFE_TIMEOUT));
+		addSequential(new AutoDrive(-AutoMap.BOILER_STRAFE_POWER,0,0,AutoMap.BOILER_STRAFE_TIMEOUT));
 		//Wait for spinup
 		addSequential(new WaitCommand(AutoMap.WHEEL_SPINUP_DELAY));
 		//ShootTheDoot
@@ -26,7 +26,7 @@ public class BallGearAutoBlue extends CommandGroup {
 		//Turn to have gear facing
 		addSequential(new RotateCommand(-AutoMap.FACE_GEAR_ANGLE));
 		//Line up
-		//addSequential(new CenterContoursCommand(AutoMap.CONTOUR_TIMEOUT));
+		addSequential(new CenterContoursCommand(AutoMap.CONTOUR_TIMEOUT));
 		//Move in
 		//addSequential(new CorrectedStrafe(-AutoMap.GEAR_STRAFE_POWER,AutoMap.GEAR_STRAFE_TIMEOUT));
 		addSequential(new AutoDrive(-AutoMap.GEAR_STRAFE_POWER,0,0,AutoMap.GEAR_STRAFE_TIMEOUT));

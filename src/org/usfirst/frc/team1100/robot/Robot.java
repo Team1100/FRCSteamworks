@@ -2,13 +2,13 @@ package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoBlue;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
 import org.usfirst.frc.team1100.robot.subsystems.Hopper;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
-import org.usfirst.frc.team1100.robot.subsystems.vision.CameraServer2;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.cscore.CvSink;
@@ -134,7 +134,12 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		
 		CameraServer.getInstance().removeCamera("cam1");
-		t.start();
+		try{
+			t.start();
+		}catch(IllegalThreadStateException e){
+			
+		}
+		
 		
 		autonomousCommand = chooser.getSelected();
 		autonomousCommand = new BallGearAutoBlue();
