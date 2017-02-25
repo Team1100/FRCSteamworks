@@ -13,7 +13,7 @@ public class Hopper extends Subsystem {
 	private static Hopper hopper;
 
 	private DoubleSolenoid[] firers;
-	public static final double HOP_DELAY = .2;
+	public static final double HOP_DELAY = .25;
 	
 	/**
 	 * The constructor for Pneumatics which sets up firers 1-4 in order with 0-1+2x as the PCM spots

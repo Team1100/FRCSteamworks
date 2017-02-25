@@ -6,6 +6,7 @@ import org.usfirst.frc.team1100.robot.commands.shooter.ShooterDefault;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +25,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem {
 
-	public static final double SHOOT_SPEED = 40;
+	public static final double SHOOT_SPEED = 42.5;
+
+	public static final double THRESHOLD = Double.POSITIVE_INFINITY;
 	
 	private static Shooter shooter;
 
@@ -33,6 +36,8 @@ public class Shooter extends Subsystem {
 	private Encoder enc;
 	
 	private boolean on;
+	
+	private PowerDistributionPanel panel;
 	
 	public boolean getOn() {
 		return on;
@@ -63,6 +68,7 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("ActualShooterSpeed", 0);
 		SmartDashboard.putNumber("EncoderVal", 0);
 
+		panel = new PowerDistributionPanel(RobotMap.P_PANEL);
 	}
 	
 	/**
@@ -73,8 +79,13 @@ public class Shooter extends Subsystem {
 		return (LiveWindowSendable) flywheel;
 	}
 	
+	
 	public LiveWindowSendable getFlywheel2LWS(){
 		return (LiveWindowSendable) flywheel2;
+	}
+	
+	public double getAverageFlywheelCurrent(){
+		return panel.getCurrent(RobotMap.P_SHOOTER_A)/*+panel.getCurrent(RobotMap.P_SHOOTER_B)/2*/;
 	}
 	
 	/**

@@ -28,14 +28,14 @@ public class RobotMap {
 	private final static int PWM_8 = 8;
 	private final static int PWM_9 = 9;
 	
-	public final static int CAN_0 = 0;
-	public final static int CAN_1 = 1;
-	public final static int CAN_2 = 2;
-	public final static int CAN_3 = 3;
-	public final static int CAN_4 = 4;
-	public final static int CAN_5 = 5;
-	public final static int CAN_6 = 6;
-	public final static int CAN_7 = 7;
+	private final static int CAN_0 = 0;
+	private final static int CAN_1 = 1;
+	private final static int CAN_2 = 2;
+	private final static int CAN_3 = 3;
+	private final static int CAN_4 = 4;
+	private final static int CAN_5 = 5;
+	private final static int CAN_6 = 6;
+	private final static int CAN_7 = 7;
 	
 	private final static int ANALOG_0 = 0;
 	private final static int ANALOG_1 = 1;
@@ -63,14 +63,32 @@ public class RobotMap {
 	private static final int USB_2 = 2;
 	private static final int USB_3 = 3;
 	
-	public static final int P_0 = 0;
-	public static final int P_1 = 1;
-	public static final int P_2 = 2;
-	public static final int P_3 = 3;
-	public static final int P_4 = 4;
-	public static final int P_5 = 5;
-	public static final int P_6 = 6;
-	public static final int P_7 = 7;
+	private static final int P_0 = 0;
+	private static final int P_1 = 1;
+	private static final int P_2 = 2;
+	private static final int P_3 = 3;
+	private static final int P_4 = 4;
+	private static final int P_5 = 5;
+	private static final int P_6 = 6;
+	private static final int P_7 = 7;
+	
+	private static final int PDP_0 = 0;
+	private static final int PDP_1 = 1;
+	private static final int PDP_2 = 2;
+	private static final int PDP_3 = 3;
+	private static final int PDP_4 = 4;
+	private static final int PDP_5 = 5;
+	private static final int PDP_6 = 6;
+	private static final int PDP_7 = 7;
+	private static final int PDP_8 = 8;
+	private static final int PDP_9 = 9;
+	private static final int PDP_10 = 10;
+	private static final int PDP_11 = 11;
+	private static final int PDP_12 = 12;
+	private static final int PDP_13 = 13;
+	private static final int PDP_14 = 14;
+	private static final int PDP_15 = 15;
+	private static final int PDP_16 = 16;
 	
 	//[D]rive
 	public final static int D_BACK_RIGHT = PWM_6;//George
@@ -109,4 +127,7 @@ public class RobotMap {
 	public static final int G_CATCHER = P_0;
 	//[L]ights
 	public static final int L_PCM = G_PCM;
+	//[P]ower Distribution Panel
+	public static final int P_PANEL = CAN_6; //TODO double check
+	public static final int P_SHOOTER_A = PDP_13;//TODO arbitrary
 }
