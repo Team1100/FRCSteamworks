@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +26,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shooter extends Subsystem {
 
-	public static final double SHOOT_SPEED = 42.5;
+	public static final double CURRENT_THRESHOLD = 70;
+	
+	public static final double SHOOT_SPEED = 40;
 
 	public static final double THRESHOLD = Double.POSITIVE_INFINITY;
 	
@@ -34,6 +37,8 @@ public class Shooter extends Subsystem {
 	private CANTalon flywheel;
 	private CANTalon flywheel2;
 	private Encoder enc;
+	
+	private Servo shooterFlap;
 	
 	private boolean on;
 	
@@ -61,6 +66,8 @@ public class Shooter extends Subsystem {
 		
 		flywheel.setInverted(true);
 		
+		shooterFlap = new Servo(RobotMap.S_FLAP);
+		
 		enc = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
 		enc.reset();
 		
@@ -84,8 +91,16 @@ public class Shooter extends Subsystem {
 		return (LiveWindowSendable) flywheel2;
 	}
 	
-	public double getAverageFlywheelCurrent(){
-		return panel.getCurrent(RobotMap.P_SHOOTER_A)/*+panel.getCurrent(RobotMap.P_SHOOTER_B)/2*/;
+	public double getShooterCurrentA(){
+		return panel.getCurrent(RobotMap.P_SHOOTER_A);
+	}
+	
+	public double getShooterCurrentB(){
+		return panel.getCurrent(RobotMap.P_SHOOTER_B);
+	}
+	
+	public double getAverageCurrent(){
+		return (getShooterCurrentA()+getShooterCurrentB())/2;
 	}
 	
 	/**
@@ -119,6 +134,11 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("ActualShooterSpeed", -enc.getRate()/2048);
 		SmartDashboard.putNumber("Encoder Val", enc.get());
 		return -enc.getRate()/2048;
+	}
+	
+	public void setFlap(boolean state) {
+		shooterFlap.set(state ? 1 : 0); //Ayyyyyyyyyy
+		//lmao
 	}
 	
 	

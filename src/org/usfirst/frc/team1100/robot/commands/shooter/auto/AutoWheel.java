@@ -19,11 +19,16 @@ public class AutoWheel extends Command{
 	
 	public void execute(){
 		Shooter.getInstance().setSpeedToTarget();
+		Shooter.getInstance().setFlap(true);
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		return isTimedOut();
+	}
+	
+	protected void end(){
+		Shooter.getInstance().setFlap(false);
 	}
 
 }

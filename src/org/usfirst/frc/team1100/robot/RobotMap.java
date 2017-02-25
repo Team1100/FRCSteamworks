@@ -109,6 +109,7 @@ public class RobotMap {
 	public static final int S_FLYWHEEL_2 = CAN_5;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
+	public static final int S_FLAP = PWM_3;
 	//[H]opper
 	public static final int H_PCM = CAN_0;
 	public static final int H_FIRER_0_FORWARD = P_2;
@@ -128,6 +129,7 @@ public class RobotMap {
 	//[L]ights
 	public static final int L_PCM = G_PCM;
 	//[P]ower Distribution Panel
-	public static final int P_PANEL = CAN_6; //TODO double check
-	public static final int P_SHOOTER_A = PDP_13;//TODO arbitrary
+	public static final int P_PANEL = CAN_6; 
+	public static final int P_SHOOTER_A = PDP_2;
+	public static final int P_SHOOTER_B = PDP_3;
 }

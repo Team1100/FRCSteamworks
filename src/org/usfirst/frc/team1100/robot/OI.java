@@ -4,8 +4,9 @@ import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
 import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
 import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
+import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
+import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
-import org.usfirst.frc.team1100.robot.commands.hopper.OpenThenClose;
 import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequence;
 import org.usfirst.frc.team1100.robot.commands.hopper.util.CloseAll;
 import org.usfirst.frc.team1100.robot.commands.hopper.util.OpenThenCloseAll;
@@ -59,7 +60,8 @@ private static OI instance;
 		
 		
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
-		xbox.getButtonA().whenPressed(new ToggleCatcher());
+		xbox.getButtonA().whenPressed(new OpenCatcher());
+		xbox.getButtonB().whenPressed(new CloseCatcher());
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
 		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
 		//Right trigger runs hopper sequence

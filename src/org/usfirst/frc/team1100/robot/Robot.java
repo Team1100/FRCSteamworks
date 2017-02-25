@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	//Subsystem init
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser ;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -59,6 +59,8 @@ public class Robot extends IterativeRobot {
 		
 		
 		//Autonomous Chooser
+		chooser = new SendableChooser<Command>();
+		
 		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
 		chooser.addObject("Boiler Side Red", new BallGearAutoRed());
 		
@@ -68,8 +70,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Loader Side Blue", new GearAutoNoBoilerBlue());
 		chooser.addObject("Loader Side Red", new GearAutoNoBoilerRed());
 		
-		
 		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto Selector",chooser);
 		
 		// The following is the test mode stuff
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
@@ -147,7 +149,19 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		
-		CameraServer.getInstance().removeCamera("cam1");
+		try{
+			CameraServer.getInstance().removeCamera("cam0");
+			CameraServer.getInstance().removeServer("serve_cam0");
+		}catch(Exception e){
+			
+		}
+		try{
+			CameraServer.getInstance().removeServer("serve_cam1");
+			CameraServer.getInstance().removeCamera("cam1");
+		}catch(Exception e){
+			
+		}
+		
 		try{
 			t.start();
 		}catch(IllegalThreadStateException e){
@@ -170,6 +184,8 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
+	private UsbCamera teleCam;
+	
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
@@ -185,10 +201,22 @@ public class Robot extends IterativeRobot {
 		try {
 			t.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		UsbCamera teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1); 
+		try{
+			CameraServer.getInstance().removeCamera("cam0");
+			CameraServer.getInstance().removeServer("serve_cam0");
+		}catch(Exception e){
+			
+		}
+		try{
+			CameraServer.getInstance().removeServer("serve_cam1");
+			CameraServer.getInstance().removeCamera("cam1");
+		}catch(Exception e){
+			
+		}
+		teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1);  
+		teleCam.setResolution(640, 480);
 	}
 
 	/**
