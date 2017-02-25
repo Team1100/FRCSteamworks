@@ -2,7 +2,10 @@ package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
 import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoBlue;
-import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
+import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoRed;
+import org.usfirst.frc.team1100.robot.commands.auto.GearAutoCenter;
+import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerBlue;
+import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerRed;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
@@ -53,8 +56,19 @@ public class Robot extends IterativeRobot {
 		OI.getInstance();
 		Hopper.getInstance();
 		Gear.getInstance();
-		//chooser.addDefault("Default Auto", new ExampleCommand());
-		chooser.addObject("Gear then Ball", new BallGearAutoBlue());
+		
+		
+		//Autonomous Chooser
+		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
+		chooser.addObject("Boiler Side Red", new BallGearAutoRed());
+		
+		chooser.addObject("Center", new GearAutoCenter());
+		chooser.addDefault("Default", new GearAutoCenter());
+		
+		chooser.addObject("Loader Side Blue", new GearAutoNoBoilerBlue());
+		chooser.addObject("Loader Side Red", new GearAutoNoBoilerRed());
+		
+		
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// The following is the test mode stuff
@@ -142,14 +156,6 @@ public class Robot extends IterativeRobot {
 		
 		
 		autonomousCommand = chooser.getSelected();
-		autonomousCommand = new BallGearAutoBlue();
-		
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
