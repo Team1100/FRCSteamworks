@@ -16,4 +16,7 @@ public class AutoMap {
 	protected static final double LINE_CHARGE_TIMEOUT = 1;
 	protected static final double BALL_STRAFE_POWER =.75;
 	protected static final double BALL_STRAFE_TIMEOUT = 1;
+	
+	protected static final double GEAR_CENTER_SPEED = 0.6;
+	protected static final double GEAR_CENTER_TIMEOUT = 4;
 }
