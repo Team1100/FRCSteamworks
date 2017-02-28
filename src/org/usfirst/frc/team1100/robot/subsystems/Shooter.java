@@ -29,6 +29,7 @@ public class Shooter extends Subsystem {
 	public static final double CURRENT_THRESHOLD = 70;
 	
 	public static final double SHOOT_SPEED = 40;
+	public static final double MIN_SPEED = 37;
 
 	public static final double THRESHOLD = Double.POSITIVE_INFINITY;
 	
