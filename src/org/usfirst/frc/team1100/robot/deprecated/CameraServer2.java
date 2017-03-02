@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team1100.robot.subsystems.vision;
+package org.usfirst.frc.team1100.robot.deprecated;
 
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CameraServerJNI;
@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
  * Singleton class for creating and keeping camera servers.
  * Also publishes camera information to NetworkTables.
  */
+@Deprecated
 public class CameraServer2 {
   public static final int kBasePort = 1181;
 

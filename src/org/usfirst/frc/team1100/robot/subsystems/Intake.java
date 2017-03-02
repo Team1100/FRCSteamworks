@@ -38,7 +38,7 @@ public class Intake extends Subsystem {
 	}
 	
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new RollOutFromTrigger());
+		setDefaultCommand(new RollOutFromTrigger());
 	}
 	
 	/**
