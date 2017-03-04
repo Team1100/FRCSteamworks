@@ -45,6 +45,11 @@ public class ShooterDefault extends Command{
 				&&(System.currentTimeMillis()-timeEnabled)>1000){
 			new OpenThenCloseAll().start();
 		}
+		
+		// Block hopper if shooter is off
+		if(!Shooter.getInstance().getOn()){
+			new CloseAll().start();
+		}
 	}
 	
 	@Override

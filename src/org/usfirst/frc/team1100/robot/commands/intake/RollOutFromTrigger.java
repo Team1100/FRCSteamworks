@@ -17,7 +17,7 @@ public class RollOutFromTrigger extends Command{
 	public void execute(){
 		if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kLeftTrigger)!=0){
 			Intake.getInstance().setRollerSpeed(-1);
-		}
+		}else Intake.getInstance().setRollerSpeed(0);
 	}
 	
 	@Override
