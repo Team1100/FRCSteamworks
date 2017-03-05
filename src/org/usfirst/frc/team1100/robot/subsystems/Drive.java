@@ -100,7 +100,8 @@ public class Drive extends Subsystem {
 	}
 	
 	@Override
-	protected void initDefaultCommand() {
+	public void initDefaultCommand() {
+		System.err.println("INIT JOYSTICKS");
 		setDefaultCommand(new UserDriveJoysticks()); //TODO: Change to UserDriveJoysticks as soon as we switch to, well... joysticks
 	}
 

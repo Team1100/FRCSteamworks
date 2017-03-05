@@ -28,7 +28,7 @@ public class Shooter extends Subsystem {
 
 	public static final double CURRENT_THRESHOLD = 70;
 	
-	public static final double SHOOT_SPEED = 40;
+	public static final double SHOOT_SPEED = 42;
 	public static final double MIN_SPEED = 37;
 
 	public static final double THRESHOLD = Double.POSITIVE_INFINITY;
@@ -93,11 +93,11 @@ public class Shooter extends Subsystem {
 	}
 	
 	public double getShooterCurrentA(){
-		return panel.getCurrent(RobotMap.P_SHOOTER_A);
+		return 0;//panel.getCurrent(RobotMap.P_SHOOTER_A);
 	}
 	
 	public double getShooterCurrentB(){
-		return panel.getCurrent(RobotMap.P_SHOOTER_B);
+		return 0;//panel.getCurrent(RobotMap.P_SHOOTER_B);
 	}
 	
 	public double getAverageCurrent(){

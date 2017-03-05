@@ -1,18 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
-import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
-import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
-import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequence;
-import org.usfirst.frc.team1100.robot.commands.hopper.util.CloseAll;
-import org.usfirst.frc.team1100.robot.commands.hopper.util.OpenThenCloseAll;
-import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.ToggleShooterCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.auto.AutoWheel;
 import org.usfirst.frc.team1100.robot.input.Extreme3DPro;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 
@@ -48,6 +41,8 @@ private static OI instance;
 		//Right trigger runs hopper sequence- see SequenceFromTriggrer() 
 		//Left trigger reverses intake- see RollOutFromTrigger()
 		
+		//Temp
+		xbox.getButtonY().whenPressed(new AutoWheel(5));
 		
 	}
 	

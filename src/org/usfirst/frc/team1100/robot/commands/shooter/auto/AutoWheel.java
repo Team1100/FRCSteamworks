@@ -14,6 +14,7 @@ public class AutoWheel extends Command{
 	}
 	
 	public void initialize(){
+		System.err.println("AutoWheel");
 		setTimeout(this.timeout);
 	}
 	

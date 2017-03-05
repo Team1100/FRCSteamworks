@@ -6,7 +6,6 @@ import org.usfirst.frc.team1100.robot.commands.hopper.sequences.SequenceFromTrig
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hopper extends Subsystem {
 	
@@ -48,7 +47,7 @@ public class Hopper extends Subsystem {
 	}
 	
 	@Override
-	protected void initDefaultCommand() {
+	public void initDefaultCommand() {
 		setDefaultCommand(new SequenceFromTrigger());
 	}
 

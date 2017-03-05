@@ -34,6 +34,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+	public static boolean tele;
+	
 	private Thread t;
 	
 	//Subsystem init
@@ -50,12 +52,13 @@ public class Robot extends IterativeRobot {
 		// PLEASE: remember to initialize all of the subsystems by calling their respective getInstance() method
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		Drive.getInstance();
-		//Vision.getInstance();
+		Vision.getInstance();
 		Intake.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
 		Hopper.getInstance();
 		Gear.getInstance();
+		Climber.getInstance();
 		
 		
 		//Autonomous Chooser
@@ -148,7 +151,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		tele = false;
 		try{
 			CameraServer.getInstance().removeCamera("cam0");
 			CameraServer.getInstance().removeServer("serve_cam0");
@@ -168,8 +171,9 @@ public class Robot extends IterativeRobot {
 			
 		}
 		
+		//Shooter.getInstance().setOn(true);
 		
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand =  chooser.getSelected();
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
@@ -188,35 +192,58 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopInit() {
+		Drive.getInstance();
+		//Vision.getInstance();
+		Intake.getInstance();
+		Shooter.getInstance();
+		OI.getInstance();
+		Hopper.getInstance();
+		Gear.getInstance();
+		Climber.getInstance();
+		
+		System.err.println("Teleop init running");
+		tele = true;
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		for(DoubleSolenoid f :Hopper.getInstance().getFirers()){
-			f.set(DoubleSolenoid.Value.kForward);
-		}
-		Shooter.getInstance().setOn(false);
 		try {
-			t.join();
-		} catch (InterruptedException e) {
+			for(DoubleSolenoid f :Hopper.getInstance().getFirers()){
+				f.set(DoubleSolenoid.Value.kForward);
+			}
+		} catch (Exception e) {
+			System.err.println("Problem with DoubleSolenoid Loop");
+		}
+		try {
+			Shooter.getInstance().setOn(false);
+		} catch(Exception e) {
+			System.err.println("Problem with shooter set on");
+		}
+		try {
+			t.stop();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		try{
 			CameraServer.getInstance().removeCamera("cam0");
 			CameraServer.getInstance().removeServer("serve_cam0");
 		}catch(Exception e){
-			
+			System.err.println("Camera server cam0");
 		}
 		try{
 			CameraServer.getInstance().removeServer("serve_cam1");
 			CameraServer.getInstance().removeCamera("cam1");
 		}catch(Exception e){
-			
+			System.err.println("Camera server cam1");
 		}
-		teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1);  
-		teleCam.setResolution(640, 480);
+		try{
+			teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1);  
+			teleCam.setResolution(640, 480);
+		}catch(Exception e){
+			System.err.println("Telecam");
+		}
 	}
 
 	/**
@@ -224,6 +251,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
 		Scheduler.getInstance().run();
 	}
 
