@@ -24,7 +24,7 @@ public class BallGearAutoBlue extends CommandGroup {
 		//Back Up
 		addSequential(new AutoDrive(0,AutoMap.REVERSE_FROM_BOILER_POWER,0,AutoMap.REVERSE_FROM_BOILER_TIMEOUT));
 		//Turn to have gear facing
-		addSequential(new RotateCommand(AutoMap.FACE_GEAR_ANGLE));
+		addSequential(new RotateCommand(45));
 		//Line up
 		/*
 		addSequential(new CenterContoursCommand(AutoMap.CONTOUR_TIMEOUT));

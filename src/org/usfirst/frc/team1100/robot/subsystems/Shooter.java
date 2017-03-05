@@ -138,7 +138,7 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void setFlap(boolean state) {
-		shooterFlap.set(state ? 1 : 0); //Ayyyyyyyyyy
+		shooterFlap.set(state ? .5 : 0); //Ayyyyyyyyyy
 		//lmao
 	}
 	

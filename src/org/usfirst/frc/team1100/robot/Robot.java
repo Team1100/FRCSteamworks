@@ -6,6 +6,7 @@ import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoRed;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoCenter;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerBlue;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerRed;
+import org.usfirst.frc.team1100.robot.commands.auto.GoStraightAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
@@ -66,6 +67,7 @@ public class Robot extends IterativeRobot {
 		
 		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
 		chooser.addObject("Boiler Side Red", new BallGearAutoRed());
+		chooser.addObject("Gear Straight Auto", new GearAutoCenter());
 		
 		chooser.addObject("Center", new GearAutoCenter());
 		chooser.addDefault("Default", new GearAutoCenter());

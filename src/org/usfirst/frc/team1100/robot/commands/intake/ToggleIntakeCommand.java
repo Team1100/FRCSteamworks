@@ -26,13 +26,15 @@ public class ToggleIntakeCommand extends Command {
     protected void execute() {
     	if(Intake.getInstance().getRollerSpeed()==0){
     		Intake.getInstance().setRollerSpeed(speed);
-    	}else Intake.getInstance().stopRoller();
+    	} else {
+    		Intake.getInstance().stopRoller();
+    	}
     	done = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return done;
     }
 
     // Called once after isFinished returns true
