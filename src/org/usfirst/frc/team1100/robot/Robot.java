@@ -1,3 +1,9 @@
+/*
+ * This is the fossilized version of robot.
+ * 
+ * By the time you are reading this, the robot will not reflect the contents 
+ * of these classes. Do not change the code from this branch!!!
+ */
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
@@ -6,7 +12,6 @@ import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoRed;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoCenter;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerBlue;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerRed;
-import org.usfirst.frc.team1100.robot.commands.auto.GoStraightAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
