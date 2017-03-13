@@ -26,7 +26,9 @@ public class ToggleIntakeCommand extends Command {
     protected void execute() {
     	if(Intake.getInstance().getRollerSpeed()==0){
     		Intake.getInstance().setRollerSpeed(speed);
-    	}else Intake.getInstance().stopRoller();
+    	} else {
+    		Intake.getInstance().stopRoller();
+    	}
     	done = true;
     }
 

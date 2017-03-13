@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1100.robot.commands.climber;
 
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
+import org.usfirst.frc.team1100.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,6 +14,7 @@ public class SetClimberSpeedCommand extends Command {
 
 	public SetClimberSpeedCommand(double speed) {
         requires(Climber.getInstance());
+        requires(Intake.getInstance());
         this.speed = speed;
     }
 
@@ -23,6 +25,7 @@ public class SetClimberSpeedCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Climber.getInstance().setSpeed(speed);
+    	Intake.getInstance().stopRoller();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -33,7 +33,7 @@ public class UserDriveJoysticks extends Command {
 	 * Called many times a second while the command is running
 	 */
 	protected void execute() {
-		
+		System.err.println("Driving!");
 		double x = OI.getInstance().getStick().getAxis(Joystick.AxisType.kX);
 		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);

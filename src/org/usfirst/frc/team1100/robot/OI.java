@@ -1,18 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.CorrectedStrafe;
-import org.usfirst.frc.team1100.robot.commands.drive.RotateCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.vision.CenterContoursCommand;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
-import org.usfirst.frc.team1100.robot.commands.gear.ToggleCatcher;
-import org.usfirst.frc.team1100.robot.commands.hopper.sequences.FireSequence;
-import org.usfirst.frc.team1100.robot.commands.hopper.util.CloseAll;
-import org.usfirst.frc.team1100.robot.commands.hopper.util.OpenThenCloseAll;
-import org.usfirst.frc.team1100.robot.commands.intake.SetIntakeSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.ToggleShooterCommand;
+import org.usfirst.frc.team1100.robot.commands.shooter.auto.AutoWheel;
 import org.usfirst.frc.team1100.robot.input.Extreme3DPro;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 
@@ -39,34 +32,17 @@ private static OI instance;
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
 		stick = new Extreme3DPro(RobotMap.U_STICK,.15,.2);
 		
-		// Now the assignments
-		stick.getButton(11).whenPressed(new ToggleCatcher());
-		
-		stick.getButton(9).whenPressed(new ToggleShooterCommand());
-		stick.getButton(10).whenPressed(new OpenThenCloseAll());
-		
-		stick.getButton(2).whileHeld(new SetIntakeSpeedCommand(1));
-		
-		stick.getButton(7).whileHeld(new SetClimberSpeedCommand(1));
-		stick.getButton(8).whileHeld(new SetClimberSpeedCommand(-1));
-		
-		stick.getButton(4).whenPressed(new CorrectedStrafe(-.75,1));
-		stick.getButton(6).whenPressed(new RotateCommand(-90));
-		stick.getButton(3).whenPressed(new CorrectedStrafe(.75,1));
-		stick.getButton(5).whenPressed(new CenterContoursCommand(2));
-		
-		stick.getButton(1).whileHeld(new FireSequence());
-		stick.getButton(1).whenReleased(new CloseAll());
-		
-		
+		// Button assignments
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
 		xbox.getButtonA().whenPressed(new OpenCatcher());
 		xbox.getButtonB().whenPressed(new CloseCatcher());
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
 		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
-		//Right trigger runs hopper sequence
-		//Left trigger reverses intake
+		//Right trigger runs hopper sequence- see SequenceFromTriggrer() 
+		//Left trigger reverses intake- see RollOutFromTrigger()
 		
+		//Temp
+		xbox.getButtonY().whenPressed(new AutoWheel(5));
 		
 	}
 	
