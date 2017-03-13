@@ -62,7 +62,6 @@ public class Robot extends IterativeRobot {
 		Climber.getInstance();
 		
 		
-		//Autonomous Chooser
 		chooser = new SendableChooser<Command>();
 		
 		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
@@ -121,7 +120,14 @@ public class Robot extends IterativeRobot {
             	 }
              }
          });
-		
+		//Start camera
+			try{
+				if(!t.isAlive())t.start();
+			}catch(IllegalThreadStateException e){
+				System.err.println("Illegal Thread State Exception Bruv");
+			}catch(Exception e){
+				e.printStackTrace(System.err);
+			}		
 	}
 
 	/**
@@ -154,24 +160,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		tele = false;
-		try{
-			CameraServer.getInstance().removeCamera("cam0");
-			CameraServer.getInstance().removeServer("serve_cam0");
-		}catch(Exception e){
-			
-		}
-		try{
-			CameraServer.getInstance().removeServer("serve_cam1");
-			CameraServer.getInstance().removeCamera("cam1");
-		}catch(Exception e){
-			
-		}
-		
-		try{
-			t.start();
-		}catch(IllegalThreadStateException e){
-			
-		}
 		
 		//Shooter.getInstance().setOn(true);
 		
@@ -222,29 +210,6 @@ public class Robot extends IterativeRobot {
 			Shooter.getInstance().setOn(false);
 		} catch(Exception e) {
 			System.err.println("Problem with shooter set on");
-		}
-		try {
-			t.stop();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try{
-			CameraServer.getInstance().removeCamera("cam0");
-			CameraServer.getInstance().removeServer("serve_cam0");
-		}catch(Exception e){
-			System.err.println("Camera server cam0");
-		}
-		try{
-			CameraServer.getInstance().removeServer("serve_cam1");
-			CameraServer.getInstance().removeCamera("cam1");
-		}catch(Exception e){
-			System.err.println("Camera server cam1");
-		}
-		try{
-			teleCam = CameraServer.getInstance().startAutomaticCapture("cam1",1);  
-			teleCam.setResolution(640, 480);
-		}catch(Exception e){
-			System.err.println("Telecam");
 		}
 	}
 

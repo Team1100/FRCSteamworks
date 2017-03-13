@@ -93,11 +93,11 @@ public class Shooter extends Subsystem {
 	}
 	
 	public double getShooterCurrentA(){
-		return 0;//panel.getCurrent(RobotMap.P_SHOOTER_A);
+		return panel.getCurrent(RobotMap.P_SHOOTER_A);
 	}
 	
 	public double getShooterCurrentB(){
-		return 0;//panel.getCurrent(RobotMap.P_SHOOTER_B);
+		return panel.getCurrent(RobotMap.P_SHOOTER_B);
 	}
 	
 	public double getAverageCurrent(){
