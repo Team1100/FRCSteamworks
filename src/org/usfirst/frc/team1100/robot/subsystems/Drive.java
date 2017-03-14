@@ -23,6 +23,8 @@ public class Drive extends Subsystem {
 	
 	private Victor frontLeft, frontRight, backLeft, backRight;
 	
+	private boolean reversed;
+	
 	public static Drive getInstance() {
 		if(drive==null) {
 			drive = new Drive();
@@ -50,8 +52,19 @@ public class Drive extends Subsystem {
 		gyro1 = new AnalogGyro(RobotMap.D_GYRO1);
 		//System.err.println("Test");
 		resetGyro();
+		
+		reversed = false;
 	}
 	
+	
+	public boolean isReversed() {
+		return reversed;
+	}
+
+	public void setReversed(boolean reversed) {
+		this.reversed = reversed;
+	}
+
 	public void displayGyroValues(){
 		SmartDashboard.putNumber("Gyro0", getAngle0());
 		SmartDashboard.putNumber("Gyro1", getAngle1());

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class UserDriveJoysticks extends Command {
 	
-	private final double ROTATION_CORRECTION = .75;
+	private final double ROTATION_CORRECTION = -.75;
 	
 	/**
 	 * The constructor for the UserDrive command
@@ -38,9 +38,10 @@ public class UserDriveJoysticks extends Command {
 		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
+		y *= Drive.getInstance().isReversed()? 1:-1;
 		
 		
-		Drive.getInstance().driveMecanum(x, -y, -z*ROTATION_CORRECTION);
+		Drive.getInstance().driveMecanum(x, y, z*ROTATION_CORRECTION);
 	}
 	
 	/**

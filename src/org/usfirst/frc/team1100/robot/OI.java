@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.user.UserReverseDrive;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
@@ -40,6 +41,10 @@ private static OI instance;
 		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
 		//Right trigger runs hopper sequence- see SequenceFromTriggrer() 
 		//Left trigger reverses intake- see RollOutFromTrigger()
+		
+		stick.getButton(1).whenPressed(new UserReverseDrive());
+		stick.getButton(11).whenPressed(new UserReverseDrive());
+		
 		
 		//Temp
 		xbox.getButtonY().whenPressed(new AutoWheel(5));

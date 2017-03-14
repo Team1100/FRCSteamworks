@@ -6,7 +6,6 @@ import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoRed;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoCenter;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerBlue;
 import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerRed;
-import org.usfirst.frc.team1100.robot.commands.auto.GoStraightAuto;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
