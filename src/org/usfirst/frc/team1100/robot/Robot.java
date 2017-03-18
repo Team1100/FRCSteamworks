@@ -53,16 +53,16 @@ public class Robot extends IterativeRobot {
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		Drive.getInstance();
 		Vision.getInstance();
-		Intake.getInstance();
-		Shooter.getInstance();
+		//Intake.getInstance();
+		//Shooter.getInstance();
 		OI.getInstance();
-		Hopper.getInstance();
-		Gear.getInstance();
-		Climber.getInstance();
+		//Hopper.getInstance();
+		//Gear.getInstance();
+		//Climber.getInstance();
 		
 		
 		chooser = new SendableChooser<Command>();
-		
+		/*
 		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
 		chooser.addObject("Boiler Side Red", new BallGearAutoRed());
 		chooser.addObject("Gear Straight Auto", new GearAutoCenter());
@@ -97,11 +97,11 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "John", Drive.getInstance().driveLWS()[1]);
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
-		
+		*/
 		this.t = new Thread(() -> {
 			 
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0",0);
-             camera.setExposureManual(30);
+             camera.setExposureManual(50);
              camera.setResolution(640, 480);
                           
              CvSink cvSink = CameraServer.getInstance().getVideo();
@@ -120,13 +120,16 @@ public class Robot extends IterativeRobot {
              }
          });
 		//Start camera
+		
 			try{
-				if(!t.isAlive())t.start();
+				//t.stop();
+				
 			}catch(IllegalThreadStateException e){
 				System.err.println("Illegal Thread State Exception Bruv");
 			}catch(Exception e){
 				e.printStackTrace(System.err);
-			}		
+			}	
+			///*if(!t.isAlive())*/t.start();
 	}
 
 	/**
@@ -181,21 +184,20 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopInit() {
+		try{
+			t.start();
+		}catch(Exception e){
+			
+		}
 		Drive.getInstance();
 		//Vision.getInstance();
-		Intake.getInstance();
-		Shooter.getInstance();
-		OI.getInstance();
-		Hopper.getInstance();
-		Gear.getInstance();
-		Climber.getInstance();
 		
 		System.err.println("Teleop init running");
 		tele = true;
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		/*/ this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		try {
@@ -209,7 +211,7 @@ public class Robot extends IterativeRobot {
 			Shooter.getInstance().setOn(false);
 		} catch(Exception e) {
 			System.err.println("Problem with shooter set on");
-		}
+		}*/
 	}
 
 	/**

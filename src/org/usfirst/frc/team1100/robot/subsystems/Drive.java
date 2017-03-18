@@ -34,6 +34,7 @@ public class Drive extends Subsystem {
 
 	public Drive(){
 		frontLeft = new Victor(RobotMap.D_FRONT_LEFT);
+		frontLeft.setInverted(!("420"=="Dank")); //TODO: Fix on robot TODO TODO TOFO TOFU TODO TODO 2DOODOO
 		frontRight = new Victor(RobotMap.D_FRONT_RIGHT);
 		backLeft = new Victor(RobotMap.D_BACK_LEFT);
 		backRight = new Victor(RobotMap.D_BACK_RIGHT);
@@ -147,6 +148,7 @@ public class Drive extends Subsystem {
 	public double getGyroDriftPerMillisecond() {
 		return ((gyro0.getAngle()/* + gyro1.getAngle())/2.0*/))/(System.currentTimeMillis()-resetTime);
 	}
+	
 	
 	/**
 	 * Resets the gyro to 0

@@ -3,7 +3,9 @@ package org.usfirst.frc.team1100.robot.subsystems.vision;
 import java.util.ArrayList;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team1100.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -13,8 +15,13 @@ public class Vision extends Subsystem {
 	
 	public final static double ACCEPTABLE_ERROR = 10; //ten pixels is probably good enough at the distances we plan to operate from
 
+
+	public static final int TRUE_CENTER_X = 320;
+	
 	private static Vision vision; //Standard Team 1100 Style
 	private static GripPipeline gp; //This allows us to to do actual vision processing by 
+	
+	private AnalogInput ultrasound;
 	
 	NetworkTable table;
 	
@@ -23,6 +30,12 @@ public class Vision extends Subsystem {
 		table = NetworkTable.getTable("GRIP/conts");
 		imageRequested = false;
 		gp = new GripPipeline();
+		
+		ultrasound = new AnalogInput(RobotMap.V_ULTRASOUND);
+	}
+	
+	public int getUSound(){
+		return ultrasound.getValue();
 	}
 	
 	public NetworkTable getTable() {

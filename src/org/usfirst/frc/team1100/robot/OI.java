@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.drive.user.UserReverseDrive;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.GearTrackCommand;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
@@ -31,7 +32,7 @@ private static OI instance;
 	private OI() {
 		//Initialize input devices
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
-		stick = new Extreme3DPro(RobotMap.U_STICK,.15,.2);
+		stick = new Extreme3DPro(RobotMap.U_STICK,.2,.2);
 		
 		// Button assignments
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
@@ -44,6 +45,8 @@ private static OI instance;
 		
 		stick.getButton(1).whenPressed(new UserReverseDrive());
 		stick.getButton(11).whenPressed(new UserReverseDrive());
+		stick.getButton(2).whenPressed(new GearTrackCommand());
+		int floorPi = (int)Math.floor(Math.E) + 1; //Mmmmm, 5 second rule.
 		
 		
 		//Temp

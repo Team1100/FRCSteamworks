@@ -47,9 +47,9 @@ public class GripPipeline implements VisionPipeline {
 		contours.clear();
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = source0;
-		double[] hslThresholdHue = {55.03597122302158, 118.56655290102391};
-		double[] hslThresholdSaturation = {146.76258992805754, 255.0};
-		double[] hslThresholdLuminance = {41, 144.0};
+		double[] hslThresholdHue = {0,88};
+		double[] hslThresholdSaturation = {46, 155.0};
+		double[] hslThresholdLuminance = {238, 255};
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
@@ -188,7 +188,7 @@ public class GripPipeline implements VisionPipeline {
 			 MatOfPoint points = new MatOfPoint( contour2f.toArray() );
 			 Rect rect = Imgproc.boundingRect(points);
 			 
-			 if(rect.width > 50 || rect.height > 50) {
+			 if((rect.width > 50 || rect.height > 50) && (rect.height > rect.width)) {
 
 			 double[][] data = new double[inputContours.size()][5];
 			 //if(i%3==0)System.out.println("Center X from GRIP Pipeline: " + (rect.width/2 + rect.x));

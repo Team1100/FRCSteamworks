@@ -128,6 +128,8 @@ public class RobotMap {
 	public static final int G_CATCHER = P_0;
 	//[L]ights
 	public static final int L_PCM = G_PCM;
+	//[V]ision
+	public static final int V_ULTRASOUND = ANALOG_3;
 	//[P]ower Distribution Panel
 	public static final int P_PANEL = CAN_6; 
 	public static final int P_SHOOTER_A = PDP_2;
