@@ -34,17 +34,15 @@ public class Drive extends Subsystem {
 
 	public Drive(){
 		frontLeft = new Victor(RobotMap.D_FRONT_LEFT);
-		frontLeft.setInverted(!("420"=="Dank")); //TODO: Fix on robot TODO TODO TOFO TOFU TODO TODO 2DOODOO
 		frontRight = new Victor(RobotMap.D_FRONT_RIGHT);
 		backLeft = new Victor(RobotMap.D_BACK_LEFT);
 		backRight = new Victor(RobotMap.D_BACK_RIGHT);
 		
-		backRight.setInverted(true);
-		frontRight.setInverted(true);
+		//TODO	change left to right
+		backLeft.setInverted(true);
+		frontLeft.setInverted(true);
 		
 		driveTrain = new RobotDrive(backLeft, frontLeft, backRight, frontRight);
-		driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-		driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		
 		driveTrain.setSafetyEnabled(false);

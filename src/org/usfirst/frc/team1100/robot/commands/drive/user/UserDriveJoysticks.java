@@ -43,7 +43,8 @@ public class UserDriveJoysticks extends Command {
 		y *= Drive.getInstance().isReversed()? 1:-1;
 		
 		System.err.println(y);
-		Drive.getInstance().driveMecanum(x, y, z*ROTATION_CORRECTION);
+		//TODO check signs
+		Drive.getInstance().driveMecanum(x, y, -z*ROTATION_CORRECTION);
 		
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound());
 	}

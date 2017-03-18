@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.commands.drive.vision;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
@@ -15,8 +16,7 @@ public class GearTrackCommand extends Command {
 	private double integralConstant;
 	
 	private final double DRIVE_SPEED = .45;
-	private final double ERROR_THRESHOLD = 0.05;
-	private final double SPEED_LIMIT = 0.2; //Math.floor(Math.E)/10;
+	private final double SINGLE_STRIP_CORRECTION_RATIO = 1.625;
 	
 	public GearTrackCommand() {
 		requires(Vision.getInstance());
@@ -28,8 +28,8 @@ public class GearTrackCommand extends Command {
 	@Override
 	public void initialize(){
 		errorSum = 0;
-		proportionConstant = 1;
-		integralConstant = .1;
+		proportionConstant = 2;
+		integralConstant = .01;
 	}
 	
 	@Override
@@ -37,7 +37,6 @@ public class GearTrackCommand extends Command {
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound()); 
 		
 		double error = getError();
-		if(error < ERROR_THRESHOLD) end();
 		correctOffset(error);
 	}
 
@@ -53,11 +52,19 @@ public class GearTrackCommand extends Command {
 	private double getImageOffset() {
 		ArrayList<double[]> contours = Vision.getInstance().requestContours();
 		int perceivedCenterX = 0;
+		if(contours.size()==1){
+			/*perceivedCenterX = (int)contours.get(0)[1];
+			int correction = (int)Math.ceil(contours.get(0)[3]*SINGLE_STRIP_CORRECTION_RATIO);
+			Vision.getInstance();
+			perceivedCenterX -= (perceivedCenterX>Vision.TRUE_CENTER_X)? correction:-correction;
+			return Vision.TRUE_CENTER_X-perceivedCenterX;*/
+			return (Vision.TRUE_CENTER_X-contours.get(0)[1])*2;
+		}
 		try{
 			int max1 = 0;
 			int max2 = 0;
 			for(int i = 0; i<contours.size();i++) {
-				if(contours.get(i)[3]>contours.get(i)[4]){
+				if(contours.get(i)[3]>=contours.get(i)[4]){
 					continue;
 				}
 				if(contours.get(i)[2] > contours.get(max1)[2]) {
@@ -91,15 +98,16 @@ public class GearTrackCommand extends Command {
 	 */
 	private double getError() {
 		double tempError = getImageOffset();
-		errorSum += Math.abs(tempError);
+		errorSum += tempError;
 		double propError = tempError * proportionConstant;
-		return tempError/650;
-		//return (errorSum * integralConstant + propError)/10000;
+		//return tempError/650;
+		return (errorSum * integralConstant + propError)/10000;
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return Vision.getInstance().getUSound()<60;
+		return Vision.getInstance().getUSound()<60
+				|| OI.getInstance().getStick().getButton(5).get();
 	}
 
 }
