@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1100.robot.commands.drive.user;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
@@ -23,7 +21,7 @@ public class UserDriveJoysticks extends Command {
 	 */
 	public UserDriveJoysticks() {
 		requires(Drive.getInstance());
-		requires(org.usfirst.frc.team1100.robot.subsystems.vision.Vision.getInstance());
+		requires(Vision.getInstance());
 	}
 	
 	/**
@@ -47,28 +45,7 @@ public class UserDriveJoysticks extends Command {
 		System.err.println(y);
 		Drive.getInstance().driveMecanum(x, y, z*ROTATION_CORRECTION);
 		
-		SmartDashboard.putNumber("CenterX", getImageOffset());
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound());
-	}
-	
-	private double getImageOffset() {
-		ArrayList<double[]> contours = Vision.getInstance().requestContours();
-		int perceivedCenterX = 0;
-		try{
-		for(int i = 0; i<contours.size(); i++) {
-			perceivedCenterX += contours.get(i)[1];
-		}
-		perceivedCenterX /= contours.size();
-		System.err.println("Perceived Center X: " + perceivedCenterX);
-		return (perceivedCenterX);
-		} catch(ArithmeticException e) {
-			System.err.println("No contours found!");
-		} catch (NullPointerException e){
-			System.err.println("Contours be null or something");
-		} catch (IndexOutOfBoundsException e){
-			System.err.println("EEEEeeeEEEeeAweeeawimabaayy");
-		}
-		return 0;
 	}
 	
 	/**

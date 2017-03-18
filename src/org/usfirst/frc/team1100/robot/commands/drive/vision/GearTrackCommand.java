@@ -6,6 +6,7 @@ import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GearTrackCommand extends Command {
 
@@ -33,6 +34,8 @@ public class GearTrackCommand extends Command {
 	
 	@Override
 	public void execute() {
+		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound()); 
+		
 		double error = getError();
 		if(error < ERROR_THRESHOLD) end();
 		correctOffset(error);
@@ -54,6 +57,9 @@ public class GearTrackCommand extends Command {
 			int max1 = 0;
 			int max2 = 0;
 			for(int i = 0; i<contours.size();i++) {
+				if(contours.get(i)[3]>contours.get(i)[4]){
+					continue;
+				}
 				if(contours.get(i)[2] > contours.get(max1)[2]) {
 					max1 = i;
 				} else if(contours.get(i)[2] > contours.get(max2)[2]){
@@ -65,14 +71,16 @@ public class GearTrackCommand extends Command {
 		perceivedCenterX = (int)(contour1[1] + contour2[1]);
 		perceivedCenterX /= 2;
 		System.err.println("Perceived Center X: " + perceivedCenterX);
-		edu.wpi.first.wpilibj.smartdashboard.SmartDashboard.putNumber("CenterX", perceivedCenterX);
+		SmartDashboard.putNumber("CenterX", perceivedCenterX);
+		System.err.println("CENTER X FOUND");
 		return (Vision.TRUE_CENTER_X - perceivedCenterX);
 		} catch(ArithmeticException e) {
 			System.err.println("No contours found!");
 		} catch (NullPointerException e){
 			System.err.println("Contours be null or something");
 		} catch (IndexOutOfBoundsException e){
-			System.err.println("EEEEeeeEEEeeAweeeawimabaayy");
+			System.err.println("EEEEeeeEEEeeAweeeawimabaayy " + contours.size());
+			e.printStackTrace();
 		}
 		return 0;
 	}
@@ -85,14 +93,13 @@ public class GearTrackCommand extends Command {
 		double tempError = getImageOffset();
 		errorSum += Math.abs(tempError);
 		double propError = tempError * proportionConstant;
-		edu.wpi.first.wpilibj.smartdashboard.SmartDashboard.putNumber("Error: ", tempError/1000);
-		return tempError/700;
+		return tempError/650;
 		//return (errorSum * integralConstant + propError)/10000;
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Vision.getInstance().getUSound()<60;
 	}
 
 }

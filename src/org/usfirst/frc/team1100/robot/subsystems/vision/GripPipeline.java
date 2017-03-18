@@ -47,9 +47,9 @@ public class GripPipeline implements VisionPipeline {
 		contours.clear();
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = source0;
-		double[] hslThresholdHue = {0,88};
-		double[] hslThresholdSaturation = {46, 155.0};
-		double[] hslThresholdLuminance = {238, 255};
+		double[] hslThresholdHue = {68,97};
+		double[] hslThresholdSaturation = {50, 255.0};
+		double[] hslThresholdLuminance = {119, 255};
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
@@ -59,7 +59,7 @@ public class GripPipeline implements VisionPipeline {
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 0.0;
+		double filterContoursMinArea = 25.0;
 		double filterContoursMinPerimeter = 0;
 		double filterContoursMinWidth = 0;
 		double filterContoursMaxWidth = 1000;
