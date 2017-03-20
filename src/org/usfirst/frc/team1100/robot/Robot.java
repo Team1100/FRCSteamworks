@@ -19,6 +19,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,7 +39,12 @@ public class Robot extends IterativeRobot {
 	
 	private Thread t;
 	
-	//Subsystem init
+	private static PowerDistributionPanel panel;
+	
+	public static PowerDistributionPanel getPDP(){
+		if(panel==null)panel = new PowerDistributionPanel(RobotMap.P_PANEL);
+		return panel;
+	}
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser ;
@@ -53,12 +59,12 @@ public class Robot extends IterativeRobot {
 		// If you fail to do this, it will not work and then it will be considered a software issue
 		Drive.getInstance();
 		Vision.getInstance();
-		//Intake.getInstance();
-		//Shooter.getInstance();
+		Intake.getInstance();
+		Shooter.getInstance();
 		OI.getInstance();
-		//Hopper.getInstance();
-		//Gear.getInstance();
-		//Climber.getInstance();
+		Hopper.getInstance();
+		Gear.getInstance();
+		Climber.getInstance();
 		
 		
 		chooser = new SendableChooser<Command>();
@@ -139,8 +145,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		//Shooter.getInstance().writeData();
-		//Shooter.getInstance().setOn(false);
+		Shooter.getInstance().setOn(false);
 	}
 
 	@Override
@@ -163,7 +168,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		tele = false;
 		
-		//Shooter.getInstance().setOn(true);
+		Shooter.getInstance().setOn(true);
 		
 		autonomousCommand =  chooser.getSelected();
 
@@ -194,10 +199,7 @@ public class Robot extends IterativeRobot {
 		
 		System.err.println("Teleop init running");
 		tele = true;
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		/*/ this line or comment it out.
+	 
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		try {
@@ -211,7 +213,7 @@ public class Robot extends IterativeRobot {
 			Shooter.getInstance().setOn(false);
 		} catch(Exception e) {
 			System.err.println("Problem with shooter set on");
-		}*/
+		}
 	}
 
 	/**

@@ -134,4 +134,7 @@ public class RobotMap {
 	public static final int P_PANEL = CAN_6; 
 	public static final int P_SHOOTER_A = PDP_2;
 	public static final int P_SHOOTER_B = PDP_3;
+	public static final int P_CLIMBER_A = PDP_12;
+	public static final int P_CLIMBER_B = PDP_13;
+	
 }

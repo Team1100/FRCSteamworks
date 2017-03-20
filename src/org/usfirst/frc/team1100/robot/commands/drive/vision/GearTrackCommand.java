@@ -14,13 +14,23 @@ public class GearTrackCommand extends Command {
 	private double errorSum;
 	private double proportionConstant;
 	private double integralConstant;
+	private double motorCorrection;
 	
-	private final double DRIVE_SPEED = .45;
-	private final double SINGLE_STRIP_CORRECTION_RATIO = 1.625;
+	private final double DRIVE_SPEED = .5;
+	private double avgArea;
 	
 	public GearTrackCommand() {
 		requires(Vision.getInstance());
 		requires(Drive.getInstance());
+		
+		proportionConstant = 2.5;
+		integralConstant = .01;
+		motorCorrection = 1.5;
+		SmartDashboard.putNumber("P", proportionConstant);
+		SmartDashboard.putNumber("I", integralConstant);
+		SmartDashboard.putNumber("MC", motorCorrection);
+		
+		avgArea = 1;
 		
 		System.out.println("Gear tracking constructed!");
 	}
@@ -28,13 +38,15 @@ public class GearTrackCommand extends Command {
 	@Override
 	public void initialize(){
 		errorSum = 0;
-		proportionConstant = 2;
-		integralConstant = .01;
+		this.proportionConstant = SmartDashboard.getNumber("P", this.proportionConstant);
+		this.integralConstant = SmartDashboard.getNumber("I",this.integralConstant);
+		this.motorCorrection = SmartDashboard.getNumber("MC", this.motorCorrection);
 	}
 	
 	@Override
 	public void execute() {
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound()); 
+		
 		
 		double error = getError();
 		correctOffset(error);
@@ -46,7 +58,7 @@ public class GearTrackCommand extends Command {
 	 */
 	private void correctOffset(double error) {
 		System.err.println(error);
-		Drive.getInstance().driveTank(DRIVE_SPEED -(error<0? error:0),-DRIVE_SPEED -(error>0? error:0));
+		Drive.getInstance().driveTank(DRIVE_SPEED -(error<0? error:-error/2),(-DRIVE_SPEED -(error>0? error:-error/2)*motorCorrection));
 	}
 	
 	private double getImageOffset() {
@@ -58,7 +70,7 @@ public class GearTrackCommand extends Command {
 			Vision.getInstance();
 			perceivedCenterX -= (perceivedCenterX>Vision.TRUE_CENTER_X)? correction:-correction;
 			return Vision.TRUE_CENTER_X-perceivedCenterX;*/
-			return (Vision.TRUE_CENTER_X-contours.get(0)[1])*2;
+			return 0;//(Vision.TRUE_CENTER_X-contours.get(0)[1])*2;
 		}
 		try{
 			int max1 = 0;
@@ -77,8 +89,11 @@ public class GearTrackCommand extends Command {
 			double[] contour2 = contours.get(max2);
 		perceivedCenterX = (int)(contour1[1] + contour2[1]);
 		perceivedCenterX /= 2;
+		this.avgArea = (contour1[0]+contour2[0])/2;
 		System.err.println("Perceived Center X: " + perceivedCenterX);
 		SmartDashboard.putNumber("CenterX", perceivedCenterX);
+		SmartDashboard.putNumber("Area 1", contour1[0]);
+		SmartDashboard.putNumber("Area 2", contour2[0]);
 		System.err.println("CENTER X FOUND");
 		return (Vision.TRUE_CENTER_X - perceivedCenterX);
 		} catch(ArithmeticException e) {
@@ -86,7 +101,7 @@ public class GearTrackCommand extends Command {
 		} catch (NullPointerException e){
 			System.err.println("Contours be null or something");
 		} catch (IndexOutOfBoundsException e){
-			System.err.println("EEEEeeeEEEeeAweeeawimabaayy " + contours.size());
+			System.err.println("WE'RE BREAKIN THE INDEXES " + contours.size());
 			e.printStackTrace();
 		}
 		return 0;
@@ -100,13 +115,13 @@ public class GearTrackCommand extends Command {
 		double tempError = getImageOffset();
 		errorSum += tempError;
 		double propError = tempError * proportionConstant;
-		//return tempError/650;
+		//return tempError/1000;
 		return (errorSum * integralConstant + propError)/10000;
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return Vision.getInstance().getUSound()<60
+		return Vision.getInstance().getUSound()<100//TODO
 				|| OI.getInstance().getStick().getButton(5).get();
 	}
 

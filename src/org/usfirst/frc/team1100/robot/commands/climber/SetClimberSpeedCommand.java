@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetClimberSpeedCommand extends Command {
 
     private double speed;
+    private long timeEnabled;
 
 	public SetClimberSpeedCommand(double speed) {
         requires(Climber.getInstance());
@@ -20,11 +21,21 @@ public class SetClimberSpeedCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	timeEnabled = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climber.getInstance().setSpeed(speed);
+    
+    	//Prevent Damaging Climber
+    	if(System.currentTimeMillis()-timeEnabled>1000
+    			&&(Climber.getInstance().getClimberCurrentA()>45
+    			||Climber.getInstance().getClimberCurrentB()>45)){
+    		Climber.getInstance().setSpeed(0);
+    	}else{
+    		Climber.getInstance().setSpeed(speed);
+    	}
+    	
     	Intake.getInstance().stopRoller();
     }
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
+import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.shooter.ShooterDefault;
 
@@ -43,7 +44,6 @@ public class Shooter extends Subsystem {
 	
 	private boolean on;
 	
-	private PowerDistributionPanel panel;
 	
 	public boolean getOn() {
 		return on;
@@ -75,8 +75,6 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("TargetShooterSpeed", 0);
 		SmartDashboard.putNumber("ActualShooterSpeed", 0);
 		SmartDashboard.putNumber("EncoderVal", 0);
-
-		panel = new PowerDistributionPanel(RobotMap.P_PANEL);
 	}
 	
 	/**
@@ -93,11 +91,11 @@ public class Shooter extends Subsystem {
 	}
 	
 	public double getShooterCurrentA(){
-		return panel.getCurrent(RobotMap.P_SHOOTER_A);
+		return Robot.getPDP().getCurrent(RobotMap.P_SHOOTER_A);
 	}
 	
 	public double getShooterCurrentB(){
-		return panel.getCurrent(RobotMap.P_SHOOTER_B);
+		return Robot.getPDP().getCurrent(RobotMap.P_SHOOTER_B);
 	}
 	
 	public double getAverageCurrent(){
