@@ -4,11 +4,9 @@ import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.shooter.ShooterDefault;
 
-import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,18 +27,16 @@ public class Shooter extends Subsystem {
 
 	public static final double CURRENT_THRESHOLD = 70;
 	
-	public static final double SHOOT_SPEED = 42;
-	public static final double MIN_SPEED = 37;
+	public static final double SHOOT_SPEED = 20;
+	public static final double MIN_SPEED = 37; //TODO temp irrelevant
 
-	public static final double THRESHOLD = Double.POSITIVE_INFINITY;
+	public static final double CONVEYOR_POWER = .5;
 	
 	private static Shooter shooter;
 
-	private CANTalon flywheel;
-	private CANTalon flywheel2;
+	private Victor flywheel;
+	private Victor conveyor;
 	private Encoder enc;
-	
-	private Servo shooterFlap;
 	
 	private boolean on;
 	
@@ -62,12 +58,10 @@ public class Shooter extends Subsystem {
 	
 	public Shooter() {
 		on = false;
-		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
-		flywheel2 = new CANTalon(RobotMap.S_FLYWHEEL_2);
+		flywheel = new Victor(RobotMap.S_FLYWHEEL);
+		conveyor = new Victor(RobotMap.S_FLYWHEEL_2);
 		
 		flywheel.setInverted(true);
-		
-		shooterFlap = new Servo(RobotMap.S_FLAP);
 		
 		enc = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
 		enc.reset();
@@ -87,7 +81,7 @@ public class Shooter extends Subsystem {
 	
 	
 	public LiveWindowSendable getFlywheel2LWS(){
-		return (LiveWindowSendable) flywheel2;
+		return (LiveWindowSendable) conveyor;
 	}
 	
 	public double getShooterCurrentA(){
@@ -103,22 +97,29 @@ public class Shooter extends Subsystem {
 	}
 	
 	/**
-	 * Sets the flywheel speed using a PID loop (hopefully)
+	 * Sets the flywheel speed
 	 * @param speed the speed between -1 and 1 to set the motors to
 	 */
-	public void setFlywheelSpeed(double speed) {
+	private void setFlywheelSpeed(double speed) {
 		flywheel.set(speed);
-		flywheel2.set(speed);
+	}
+	
+	public void runConveyor(){
+		conveyor.set(CONVEYOR_POWER);
+	}
+	
+	public void stopConveyor(){
+		conveyor.set(Math.cos(Math.PI/Math.floor(Math.E)));
 	}
 	
 	/**
-	 * Makes the flywheel stop spinning.
-	 * Sets the flywheel speed to 0, stopping it
+	 * Makes the flywheel and conveyor stop spinning.
+	 * Sets the flywheel and conveyor speed to 0, stopping them
 
 	 */
-	public void stopFlywheel() {
+	public void stopShooter() {
 		flywheel.set(0);
-		flywheel2.set(0);
+		conveyor.set(0);
 	}
 	
 	public void setSpeedToTarget(){
@@ -134,12 +135,6 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("Encoder Val", enc.get());
 		return -enc.getRate()/2048;
 	}
-	
-	public void setFlap(boolean state) {
-		shooterFlap.set(state ? .5 : 0); //Ayyyyyyyyyy
-		//lmao
-	}
-	
 	
 	@Override
 	protected void initDefaultCommand() {

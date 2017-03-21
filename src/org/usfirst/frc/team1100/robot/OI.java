@@ -3,11 +3,13 @@ package org.usfirst.frc.team1100.robot;
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
 import org.usfirst.frc.team1100.robot.commands.drive.user.UserReverseDrive;
 import org.usfirst.frc.team1100.robot.commands.drive.vision.GearTrackCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.RotateToContour;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
 import org.usfirst.frc.team1100.robot.commands.gear.OpenCatcher;
+import org.usfirst.frc.team1100.robot.commands.gear2.CloseCatcher2;
+import org.usfirst.frc.team1100.robot.commands.gear2.OpenCatcher2;
 import org.usfirst.frc.team1100.robot.commands.intake.ToggleIntakeCommand;
 import org.usfirst.frc.team1100.robot.commands.shooter.ToggleShooterCommand;
-import org.usfirst.frc.team1100.robot.commands.shooter.auto.AutoWheel;
 import org.usfirst.frc.team1100.robot.input.Extreme3DPro;
 import org.usfirst.frc.team1100.robot.input.XboxController;
 
@@ -36,21 +38,27 @@ private static OI instance;
 		
 		// Button assignments
 		xbox.getButtonLeftStick().whileHeld(new SetClimberSpeedCommand(1));
+		
 		xbox.getButtonA().whenPressed(new OpenCatcher());
 		xbox.getButtonB().whenPressed(new CloseCatcher());
+		
+		xbox.getButtonX().whenPressed(new OpenCatcher2());
+		xbox.getButtonY().whenPressed(new CloseCatcher2());
+		
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
 		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
+		
 		//Right trigger runs hopper sequence- see SequenceFromTriggrer() 
 		//Left trigger reverses intake- see RollOutFromTrigger()
 		
 		stick.getButton(1).whenPressed(new UserReverseDrive());
 		stick.getButton(11).whenPressed(new UserReverseDrive());
+		
 		stick.getButton(2).whenPressed(new GearTrackCommand());
-		int floorPi = (int)Math.floor(Math.E) + 1; //Mmmmm, 5 second rule.
+		stick.getButton(3).whenPressed(new RotateToContour());
 		
-		
-		//Temp
-		xbox.getButtonY().whenPressed(new AutoWheel(5));
+		@Deprecated // its been longer than 5 seconds
+		int floorPi = (int)Math.floor(Math.E) + 1; 
 		
 	}
 	

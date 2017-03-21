@@ -1,15 +1,11 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
-import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoBlue;
-import org.usfirst.frc.team1100.robot.commands.auto.BallGearAutoRed;
-import org.usfirst.frc.team1100.robot.commands.auto.GearAutoCenter;
-import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerBlue;
-import org.usfirst.frc.team1100.robot.commands.auto.GearAutoNoBoilerRed;
+import org.usfirst.frc.team1100.robot.commands.drive.vision.GearTrackCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.Gear;
-import org.usfirst.frc.team1100.robot.subsystems.Hopper;
+import org.usfirst.frc.team1100.robot.subsystems.Gear2;
 import org.usfirst.frc.team1100.robot.subsystems.Intake;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
@@ -17,7 +13,6 @@ import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -62,27 +57,19 @@ public class Robot extends IterativeRobot {
 		Intake.getInstance();
 		Shooter.getInstance();
 		OI.getInstance();
-		Hopper.getInstance();
+		Gear2.getInstance();
 		Gear.getInstance();
 		Climber.getInstance();
 		
 		
 		chooser = new SendableChooser<Command>();
-		/*
-		chooser.addObject("Boiler Side Blue", new BallGearAutoBlue());
-		chooser.addObject("Boiler Side Red", new BallGearAutoRed());
-		chooser.addObject("Gear Straight Auto", new GearAutoCenter());
 		
-		chooser.addObject("Center", new GearAutoCenter());
-		chooser.addDefault("Default", new GearAutoCenter());
+		chooser.addObject("Boiler Side Blue", new GearTrackCommand());
 		
-		chooser.addObject("Loader Side Blue", new GearAutoNoBoilerBlue());
-		chooser.addObject("Loader Side Red", new GearAutoNoBoilerRed());
 		
 		SmartDashboard.putData("Auto mode", chooser);
-		SmartDashboard.putData("Auto Selector",chooser);
 		
-		// The following is the test mode stuff
+		// Add actuators to test mode
 		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
 		LiveWindow.addActuator("Intake", "Roller2", Intake.getInstance().getRoller2LWS());
 		
@@ -92,18 +79,16 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
 		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().climb2LWS());
 		
-		LiveWindow.addActuator("Hopper", "Piston 1", Hopper.getInstance().hopperLWS(0));
-		LiveWindow.addActuator("Hopper", "Piston 2", Hopper.getInstance().hopperLWS(1));
-		LiveWindow.addActuator("Hopper", "Piston 3", Hopper.getInstance().hopperLWS(2));
-		LiveWindow.addActuator("Hopper", "Piston 4", Hopper.getInstance().hopperLWS(3));
-		
 		LiveWindow.addActuator("Gear", "Catcher", Gear.getInstance().gearLWS());
+		
+		LiveWindow.addActuator("Gear2", "Catcher2.1", Gear2.getInstance().gear2LWS1());
+		LiveWindow.addActuator("Gear2", "Catcher2.2", Gear2.getInstance().gear2LWS2());
 		
 		LiveWindow.addActuator("Drive", "Paul", Drive.getInstance().driveLWS()[0]);
 		LiveWindow.addActuator("Drive", "John", Drive.getInstance().driveLWS()[1]);
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
-		*/
+		
 		this.t = new Thread(() -> {
 			 
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0",0);
@@ -189,26 +174,19 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopInit() {
+		
+		tele = true;
+		
 		try{
 			t.start();
 		}catch(Exception e){
 			
 		}
-		Drive.getInstance();
-		//Vision.getInstance();
-		
-		System.err.println("Teleop init running");
-		tele = true;
+		Drive.getInstance().setReversed(false);
 	 
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		try {
-			for(DoubleSolenoid f :Hopper.getInstance().getFirers()){
-				f.set(DoubleSolenoid.Value.kForward);
-			}
-		} catch (Exception e) {
-			System.err.println("Problem with DoubleSolenoid Loop");
-		}
+		
 		try {
 			Shooter.getInstance().setOn(false);
 		} catch(Exception e) {

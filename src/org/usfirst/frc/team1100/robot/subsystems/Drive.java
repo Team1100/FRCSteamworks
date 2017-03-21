@@ -38,9 +38,8 @@ public class Drive extends Subsystem {
 		backLeft = new Victor(RobotMap.D_BACK_LEFT);
 		backRight = new Victor(RobotMap.D_BACK_RIGHT);
 		
-		//TODO	change left to right
-		backLeft.setInverted(true);
-		frontLeft.setInverted(true);
+		backRight.setInverted(true);
+		frontRight.setInverted(true);
 		
 		driveTrain = new RobotDrive(backLeft, frontLeft, backRight, frontRight);
 		
@@ -87,7 +86,8 @@ public class Drive extends Subsystem {
 	 * ^whatever it is touchy so i cut the joysitck in half in UserDrive
 	 */
 	public void driveMecanum(double x, double y, double rotation){
-		driveTrain.mecanumDrive_Cartesian(x, y, rotation,0);
+		double q = reversed? 1:-1;
+		driveTrain.mecanumDrive_Cartesian(x*q, y*q, rotation,0);
 		displayGyroValues();
 	}
 	
@@ -108,13 +108,14 @@ public class Drive extends Subsystem {
 	 * @param right the right joystick value for the right side of the drive train
 	 */
 	public void driveTank(double left, double right) {
-		driveTrain.tankDrive(left, right);
+		double q = reversed? -1:1;
+		driveTrain.tankDrive(q*left, q*right);
 	}
 	
 	@Override
 	public void initDefaultCommand() {
 		System.err.println("INIT JOYSTICKS");
-		setDefaultCommand(new UserDriveJoysticks()); //TODO: Change to UserDriveJoysticks as soon as we switch to, well... joysticks
+		setDefaultCommand(new UserDriveJoysticks()); 
 	}
 
 	//GYRO COMMANDS
