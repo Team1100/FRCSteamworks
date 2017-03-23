@@ -130,7 +130,6 @@ public class GearTrackCommand extends Command {
 
 	@Override
 	protected void end(){
-		Drive.getInstance().setReversed(false);
 		Drive.getInstance().driveTank(0, 0);
 	}
 	

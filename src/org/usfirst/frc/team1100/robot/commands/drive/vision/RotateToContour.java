@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.commands.drive.vision;
 
 import java.util.ArrayList;
 
+import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -75,7 +76,8 @@ public class RotateToContour extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return offset <= org.usfirst.frc.team1100.robot.subsystems.vision.Vision.ACCEPTABLE_ERROR;
+		return offset <= org.usfirst.frc.team1100.robot.subsystems.vision.Vision.ACCEPTABLE_ERROR
+				||OI.getInstance().getStick().getButton(5).get();
 	}
 
 }

@@ -133,6 +133,8 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		Shooter.getInstance().setOn(false);
 		Gear2.getInstance().closeCatcher();
+		Gear2.getInstance().closeRamp();
+		Gear.getInstance().closeCatcher();
 	}
 
 	@Override

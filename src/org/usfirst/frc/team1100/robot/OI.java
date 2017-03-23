@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
-import org.usfirst.frc.team1100.robot.commands.drive.user.UserReverseDrive;
+import org.usfirst.frc.team1100.robot.commands.drive.user.UserSetDriveBackward;
+import org.usfirst.frc.team1100.robot.commands.drive.user.UserSetDriveForward;
 import org.usfirst.frc.team1100.robot.commands.drive.vision.GearTrackCommand;
 import org.usfirst.frc.team1100.robot.commands.drive.vision.RotateToContour;
 import org.usfirst.frc.team1100.robot.commands.gear.CloseCatcher;
@@ -55,11 +56,11 @@ private static OI instance;
 		
 		//Left trigger reverses intake- see RollOutFromTrigger()
 		
-		stick.getButton(1).whenPressed(new UserReverseDrive());
-		stick.getButton(11).whenPressed(new UserReverseDrive());
+		stick.getButton(1).whenPressed(new UserSetDriveForward());
+		stick.getButton(11).whenPressed(new UserSetDriveBackward());
 		
 		stick.getButton(2).whenPressed(new GearTrackCommand());
-		stick.getButton(3).whenPressed(new RotateToContour());
+		//stick.getButton(3).whenPressed(new RotateToContour());
 		
 		@Deprecated // its been longer than 5 seconds
 		int floorPi = (int)Math.floor(Math.E) + 1; 
