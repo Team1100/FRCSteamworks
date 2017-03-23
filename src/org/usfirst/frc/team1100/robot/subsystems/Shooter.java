@@ -4,8 +4,9 @@ import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.shooter.ShooterDefault;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
@@ -34,12 +35,12 @@ public class Shooter extends Subsystem {
 	
 	private static Shooter shooter;
 
-	private Victor flywheel;
+	private CANTalon flywheel;
+	private CANTalon flywheel2;
 	private Victor conveyor;
 	private Encoder enc;
 	
 	private boolean on;
-	
 	
 	public boolean getOn() {
 		return on;
@@ -58,10 +59,9 @@ public class Shooter extends Subsystem {
 	
 	public Shooter() {
 		on = false;
-		flywheel = new Victor(RobotMap.S_FLYWHEEL);
-		conveyor = new Victor(RobotMap.S_FLYWHEEL_2);
-		
-		flywheel.setInverted(true);
+		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
+		flywheel2 = new CANTalon(RobotMap.S_FLYWHEEL_2);
+		conveyor = new Victor(RobotMap.S_CONVEYOR);
 		
 		enc = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
 		enc.reset();
@@ -81,6 +81,10 @@ public class Shooter extends Subsystem {
 	
 	
 	public LiveWindowSendable getFlywheel2LWS(){
+		return (LiveWindowSendable) flywheel;
+	}
+	
+	public LiveWindowSendable getConveyorLWS(){
 		return (LiveWindowSendable) conveyor;
 	}
 	
@@ -102,6 +106,7 @@ public class Shooter extends Subsystem {
 	 */
 	private void setFlywheelSpeed(double speed) {
 		flywheel.set(speed);
+		flywheel2.set(speed);
 	}
 	
 	public void runConveyor(){
@@ -119,7 +124,7 @@ public class Shooter extends Subsystem {
 	 */
 	public void stopShooter() {
 		flywheel.set(0);
-		conveyor.set(0);
+		flywheel2.set(0);
 	}
 	
 	public void setSpeedToTarget(){

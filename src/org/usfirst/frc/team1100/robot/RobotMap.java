@@ -97,7 +97,6 @@ public class RobotMap {
 	public final static int D_BACK_LEFT = PWM_8;//John
 	public final static int D_GYRO0 = ANALOG_0;
 	public final static int D_GYRO1 = ANALOG_1;
-	public final static int D_ACCEL_1 = ANALOG_2;
 	//[U]ser Input
 	public static final int U_XBOX = USB_1;
 	public static final int U_STICK = USB_0;
@@ -105,17 +104,19 @@ public class RobotMap {
 	public static final int I_ROLLER = PWM_4;
 	public static final int I_ROLLER_2 = PWM_5;
 	//[S]hooter
-	public static final int S_FLYWHEEL = PWM_0;
-	public static final int S_FLYWHEEL_2 = PWM_1;
+	public static final int S_FLYWHEEL = CAN_2;
+	public static final int S_FLYWHEEL_2 = CAN_3;
+	public static final int S_CONVEYOR = PWM_0;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
 	public static final int S_FLAP = PWM_3;
 	//[G]ear 2
 	public static final int G2_PCM = CAN_0;
+	public static final int G_ULTRASOUND = ANALOG_2;
 	public static final int G_FIRER_0_FORWARD = P_2;
 	public static final int G_FIRER_0_REVERSE = P_3;
-	public static final int G_FIRER_1_FORWARD = P_0;
-	public static final int G_FIRER_1_REVERSE = P_1;
+	public static final int G_FIRER_1_FORWARD = P_1;
+	public static final int G_FIRER_1_REVERSE = P_0;
 	//[C]limber
 	public static final int C_MOTOR_1 = CAN_2;
 	public static final int C_MOTOR_2 = CAN_3;

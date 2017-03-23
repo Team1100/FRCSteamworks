@@ -25,7 +25,7 @@ public class GearTrackCommand extends Command {
 		requires(Vision.getInstance());
 		requires(Drive.getInstance());
 		
-		proportionConstant = 2.5;
+		proportionConstant = 3;
 		integralConstant = .01;
 		motorCorrection = 1;
 		turningCorrection = 3;
@@ -59,13 +59,13 @@ public class GearTrackCommand extends Command {
 		double error = getError();
 		correctOffset(error);
 	}
-
+	
 	/**
 	 * Gotta compartmentalize fast
 	 * @param error the current error from PIDing the offset
 	 */
 	private void correctOffset(double error) {
-		Drive.getInstance().driveTank((-DRIVE_SPEED -(error>0? error:-error/turningCorrection)*motorCorrection),DRIVE_SPEED -(error<0? error:-error/turningCorrection));
+		Drive.getInstance().driveTank((-DRIVE_SPEED -(error>0? error:-error/turningCorrection)),(DRIVE_SPEED -(error<0? error:-error/turningCorrection))*motorCorrection);
 	}
 	
 	private double getImageOffset() {

@@ -1,10 +1,11 @@
 package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.gear2.Gear2Default;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
@@ -13,7 +14,9 @@ public class Gear2 extends Subsystem{
 	private static Gear2 instance;
 	
 	private DoubleSolenoid clamp;
-	private DoubleSolenoid clamp2;
+	private DoubleSolenoid ramp;
+	
+	private AnalogInput ultrasound;
 	
 	public static Gear2 getInstance(){
 		if(instance==null)instance=new Gear2();
@@ -22,23 +25,47 @@ public class Gear2 extends Subsystem{
 	
 	public Gear2(){
 		clamp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G_FIRER_0_FORWARD,RobotMap.G_FIRER_0_REVERSE);
-		clamp2 = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G_FIRER_1_FORWARD, RobotMap.G_FIRER_1_REVERSE);
+		ramp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G_FIRER_1_FORWARD, RobotMap.G_FIRER_1_REVERSE);
+		
+		ultrasound = new AnalogInput(RobotMap.G_ULTRASOUND);
 	}
 	
-	private void setDirection(Value value){
+	private void setClamp(Value value){
 		clamp.set(value);
-		clamp2.set(value);
+	}
+	
+	private void setRamp(Value value){
+		ramp.set(value);
+	}
+	
+	public boolean isPegIn() {
+		return ultrasound.getValue() < 290;
+	}
+	
+	public int getU(){
+		return ultrasound.getValue();
 	}
 	
 	public void openCatcher(){
-		setDirection(Value.kForward);
+		setClamp(Value.kReverse);
 	}
 	public void closeCatcher(){
-		setDirection(Value.kReverse);
+		setClamp(Value.kForward);
 	}
 	
 	public void toggleCatcher(){
-		setDirection(clamp.get().equals(Value.kForward)? Value.kReverse:Value.kForward);
+		setClamp(clamp.get().equals(Value.kReverse)? Value.kForward:Value.kReverse);
+	}
+	
+	public void openRamp(){
+		setRamp(Value.kReverse);
+	}
+	public void closeRamp(){
+		setRamp(Value.kForward);
+	}
+	
+	public void toggleRamp(){
+		setRamp(clamp.get().equals(Value.kReverse)? Value.kForward:Value.kReverse);
 	}
 	
 	public LiveWindowSendable gear2LWS1(){
@@ -46,20 +73,19 @@ public class Gear2 extends Subsystem{
 	}
 	
 	public LiveWindowSendable gear2LWS2(){
-		return (LiveWindowSendable) clamp2;
+		return (LiveWindowSendable) ramp;
 	}
 	/**
 	 * 
 	 * @return True is open, False is closed
 	 */
 	public boolean get(){
-		return clamp.get().equals(Value.kForward);
+		return clamp.get().equals(Value.kReverse);
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
+		setDefaultCommand(new Gear2Default());
 	}
 
 }

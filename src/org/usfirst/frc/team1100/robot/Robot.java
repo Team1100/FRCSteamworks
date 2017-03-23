@@ -75,6 +75,7 @@ public class Robot extends IterativeRobot {
 		
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFlywheel2LWS());
+		LiveWindow.addActuator("SHooter", "Conveyor", Shooter.getInstance().getConveyorLWS());
 		
 		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
 		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().climb2LWS());
@@ -131,6 +132,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		Shooter.getInstance().setOn(false);
+		Gear2.getInstance().closeCatcher();
 	}
 
 	@Override
@@ -183,6 +185,7 @@ public class Robot extends IterativeRobot {
 			
 		}
 		Drive.getInstance().setReversed(false);
+		Gear2.getInstance().openRamp();
 	 
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();

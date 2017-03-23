@@ -2,7 +2,6 @@ package org.usfirst.frc.team1100.robot.commands.drive.vision;
 
 import java.util.ArrayList;
 
-import org.usfirst.frc.team1100.robot.deprecated.Gyro;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 

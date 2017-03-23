@@ -40,7 +40,7 @@ public class UserDriveJoysticks extends Command {
 		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
-		Drive.getInstance().driveMecanum(x, y, z*ROTATION_CORRECTION);
+		Drive.getInstance().driveMecanum(-x, y, z*ROTATION_CORRECTION);
 		
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound());
 	}
