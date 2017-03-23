@@ -44,16 +44,15 @@ private static OI instance;
 		xbox.getButtonA().whenPressed(new OpenCatcher());
 		xbox.getButtonB().whenPressed(new CloseCatcher());
 		
-		xbox.getButtonX().whenPressed(new OpenCatcher2());
-		xbox.getButtonY().whenPressed(new CloseCatcher2());
+		xbox.getButtonA().whenPressed(new OpenCatcher2());
+		xbox.getButtonB().whenPressed(new CloseCatcher2());
 
-		xbox.getButtonRightStick().whenPressed(new OpenRamp());
-		xbox.getButtonRightBumper().whenPressed(new CloseRamp());
+		xbox.getButtonX().whenPressed(new OpenRamp());
+		xbox.getButtonY().whenPressed(new CloseRamp());
 		
 		xbox.getButtonLeftBumper().whenPressed(new ToggleIntakeCommand(1));
-		//xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
+		xbox.getButtonRightBumper().whenPressed(new ToggleShooterCommand());
 		
-		//Right trigger runs hopper sequence- see SequenceFromTriggrer() 
 		//Left trigger reverses intake- see RollOutFromTrigger()
 		
 		stick.getButton(1).whenPressed(new UserReverseDrive());

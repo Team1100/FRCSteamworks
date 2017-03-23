@@ -54,7 +54,7 @@ public class Gear2 extends Subsystem{
 	}
 	
 	public void toggleCatcher(){
-		setClamp(clamp.get().equals(Value.kReverse)? Value.kForward:Value.kReverse);
+		setClamp(clamp.get()==(Value.kReverse)? Value.kForward:Value.kReverse);
 	}
 	
 	public void openRamp(){
@@ -65,7 +65,7 @@ public class Gear2 extends Subsystem{
 	}
 	
 	public void toggleRamp(){
-		setRamp(clamp.get().equals(Value.kReverse)? Value.kForward:Value.kReverse);
+		setRamp(clamp.get()==(Value.kReverse)? Value.kForward:Value.kReverse);
 	}
 	
 	public LiveWindowSendable gear2LWS1(){
