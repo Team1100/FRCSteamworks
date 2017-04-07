@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Gear2;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,16 +20,21 @@ public class GearTrackCommand extends Command {
 	
 	private double exponentialTurningCorrectorCorrector;
 	
-	private final double DRIVE_SPEED = .5;
+	private final double DRIVE_SPEED = .45;
+	
+	private boolean finished = false;
+	private boolean backing = false;
+	private long backTime = 0;
 	
 	public GearTrackCommand() {
 		requires(Vision.getInstance());
 		requires(Drive.getInstance());
+		requires(Gear2.getInstance());
 		
-		proportionConstant = 3;
+		proportionConstant = 10;
 		integralConstant = .01;
 		motorCorrection = 1;
-		turningCorrection = 3;
+		turningCorrection = 1;
 		exponentialTurningCorrectorCorrector = 50;
 		SmartDashboard.putNumber("P", proportionConstant);
 		SmartDashboard.putNumber("I", integralConstant);
@@ -49,15 +55,32 @@ public class GearTrackCommand extends Command {
 		this.exponentialTurningCorrectorCorrector = SmartDashboard.getNumber("ETCC", this.exponentialTurningCorrectorCorrector);
 		
 		Drive.getInstance().setReversed(false);
+		finished = backing = false;
+		backTime = 0;
 	}
 	
 	@Override
 	public void execute() {
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound()); 
 		
+		if(backing){
+			if(System.currentTimeMillis()-backTime>=500){
+				Drive.getInstance().driveTank(.6, -0.6);
+				Gear2.getInstance().closeCatcher();
+				finished = true;
+			}else{
+				Drive.getInstance().driveMecanum(0, DRIVE_SPEED, 0);
+			}
+		}else{
+			double error = getError();
+			correctOffset(error);
+		}
 		
-		double error = getError();
-		correctOffset(error);
+		if(Gear2.getInstance().isPegIn()){
+			Gear2.getInstance().openCatcher();
+			backing = true;
+			backTime = System.currentTimeMillis();
+		}
 	}
 	
 	/**
@@ -118,14 +141,12 @@ public class GearTrackCommand extends Command {
 		turningCorrection -= Math.exp(errorSum/exponentialTurningCorrectorCorrector); //TODO: Test this value
 		turningCorrection = Math.max(turningCorrection, 1);
 		double propError = tempError * proportionConstant;
-		//return tempError/1000;
 		return (errorSum * integralConstant + propError)/10000;
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return Vision.getInstance().getUSound()<100//TODO
-				|| OI.getInstance().getStick().getButton(5).get();
+		return finished || OI.getInstance().getStick().getButton(5).get();
 	}
 
 	@Override

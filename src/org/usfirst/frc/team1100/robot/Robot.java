@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1100.robot;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team1100.robot.commands.climber.SetClimberSpeedCommand;
+import org.usfirst.frc.team1100.robot.commands.drive.AutoDrive;
 import org.usfirst.frc.team1100.robot.commands.drive.vision.GearTrackCommand;
 import org.usfirst.frc.team1100.robot.subsystems.Climber;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
@@ -64,8 +66,9 @@ public class Robot extends IterativeRobot {
 		
 		chooser = new SendableChooser<Command>();
 		
-		chooser.addObject("Boiler Side Blue", new GearTrackCommand());
-		
+		chooser.addObject("Center Gear", new GearTrackCommand());
+		chooser.addObject("Line Cross", new AutoDrive(0,.5,0,3));
+		chooser.addObject("Climb", new SetClimberSpeedCommand(1));
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
@@ -74,7 +77,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Intake", "Roller2", Intake.getInstance().getRoller2LWS());
 		
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
-		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFlywheel2LWS());
+		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFeederLWS());
 		LiveWindow.addActuator("SHooter", "Conveyor", Shooter.getInstance().getConveyorLWS());
 		
 		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
@@ -89,6 +92,8 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addActuator("Drive", "John", Drive.getInstance().driveLWS()[1]);
 		LiveWindow.addActuator("Drive", "Ringo", Drive.getInstance().driveLWS()[2]);
 		LiveWindow.addActuator("Drive", "George", Drive.getInstance().driveLWS()[3]);
+		
+		
 		
 		this.t = new Thread(() -> {
 			 
@@ -111,17 +116,12 @@ public class Robot extends IterativeRobot {
             	 }
              }
          });
-		//Start camera
-		
-			try{
-				//t.stop();
-				
-			}catch(IllegalThreadStateException e){
-				System.err.println("Illegal Thread State Exception Bruv");
-			}catch(Exception e){
-				e.printStackTrace(System.err);
-			}	
-			///*if(!t.isAlive())*/t.start();
+		//Start camera	
+		try{
+			t.start();
+		}catch(Exception e){
+			System.err.println("Camera failed to start");
+		}		
 	}
 
 	/**
@@ -157,11 +157,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		tele = false;
 		
-		Shooter.getInstance().setOn(true);
-		
 		autonomousCommand =  chooser.getSelected();
-
-		// schedule the autonomous command (example)
+		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -181,11 +178,7 @@ public class Robot extends IterativeRobot {
 		
 		tele = true;
 		
-		try{
-			t.start();
-		}catch(Exception e){
-			
-		}
+		
 		Drive.getInstance().setReversed(false);
 		Gear2.getInstance().openRamp();
 	 

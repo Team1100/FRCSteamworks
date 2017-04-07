@@ -28,15 +28,15 @@ public class Shooter extends Subsystem {
 
 	public static final double CURRENT_THRESHOLD = 70;
 	
-	public static final double SHOOT_SPEED = 20;
+	public static final double SHOOT_SPEED = 30;
 	public static final double MIN_SPEED = 37; //TODO temp irrelevant
-
-	public static final double CONVEYOR_POWER = .5;
+	public static final double CONVEYOR_POWER = 1;
+	private static final double FEEDER_POWER = .8;
 	
 	private static Shooter shooter;
 
 	private CANTalon flywheel;
-	private CANTalon flywheel2;
+	private CANTalon feeder;
 	private Victor conveyor;
 	private Encoder enc;
 	
@@ -60,7 +60,7 @@ public class Shooter extends Subsystem {
 	public Shooter() {
 		on = false;
 		flywheel = new CANTalon(RobotMap.S_FLYWHEEL);
-		flywheel2 = new CANTalon(RobotMap.S_FLYWHEEL_2);
+		feeder = new CANTalon(RobotMap.S_FEEDER);
 		conveyor = new Victor(RobotMap.S_CONVEYOR);
 		
 		enc = new Encoder(RobotMap.S_ENCODER_A,RobotMap.S_ENCODER_B);
@@ -80,8 +80,8 @@ public class Shooter extends Subsystem {
 	}
 	
 	
-	public LiveWindowSendable getFlywheel2LWS(){
-		return (LiveWindowSendable) flywheel;
+	public LiveWindowSendable getFeederLWS(){
+		return (LiveWindowSendable) feeder;
 	}
 	
 	public LiveWindowSendable getConveyorLWS(){
@@ -106,7 +106,6 @@ public class Shooter extends Subsystem {
 	 */
 	private void setFlywheelSpeed(double speed) {
 		flywheel.set(speed);
-		flywheel2.set(speed);
 	}
 	
 	public void runConveyor(){
@@ -124,7 +123,6 @@ public class Shooter extends Subsystem {
 	 */
 	public void stopShooter() {
 		flywheel.set(0);
-		flywheel2.set(0);
 	}
 	
 	public void setSpeedToTarget(){
@@ -133,6 +131,14 @@ public class Shooter extends Subsystem {
 		}else{
 			setFlywheelSpeed(1);
 		}
+	}
+	
+	public void runFeeder(){
+		feeder.set(FEEDER_POWER);
+	}
+	
+	public void stopFeeder(){
+		feeder.set(0);
 	}
 	
 	public double getSpeed(){

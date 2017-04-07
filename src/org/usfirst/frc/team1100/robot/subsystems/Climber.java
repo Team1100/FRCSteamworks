@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.subsystems;
 
 import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.RobotMap;
+import org.usfirst.frc.team1100.robot.commands.climber.ClimberDefault;
 
 import com.ctre.CANTalon;
 
@@ -11,19 +12,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 public class Climber extends Subsystem {
 
 	private static Climber climber;
-	
-	private static CANTalon talon1;
-	private static CANTalon talon2;
-	
-	private int P;
-	private int I;
-	private int D;
-	
+	private  CANTalon motor1;
+	private  CANTalon motor2;
+
+
 	public Climber() {
-	talon1 = new CANTalon(RobotMap.C_MOTOR_1);
-	talon2 = new CANTalon(RobotMap.C_MOTOR_2);
+	motor1 = new CANTalon(RobotMap.C_MOTOR_1);
+	motor2 = new CANTalon(RobotMap.C_MOTOR_2);
 	
-	talon1.setInverted(true);
+	motor2.setInverted(true);
 	}
 	
 	public static Climber getInstance() {
@@ -34,15 +31,15 @@ public class Climber extends Subsystem {
 	}
 	
 	public void setSpeed(double value) {
-		talon1.set(Math.max(value,-0.2));
-		talon2.set(Math.max(value,-0.2));
+		motor1.set(Math.min(value,0));
+		motor2.set(Math.min(value,0));
 	}
 	
 	public LiveWindowSendable climbLWS(){
-		return (LiveWindowSendable) talon1;
+		return (LiveWindowSendable) motor1;
 	}
 	public LiveWindowSendable climb2LWS(){
-		return (LiveWindowSendable) talon2;
+		return (LiveWindowSendable) motor2;
 	}
 	
 	public double getClimberCurrentA(){
@@ -55,7 +52,7 @@ public class Climber extends Subsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-		
+		setDefaultCommand(new ClimberDefault());
 	}
 
 }

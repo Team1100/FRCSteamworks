@@ -9,6 +9,10 @@ boolean finished;
 	
 	public CloseCatcher2(){
 		requires(Gear2.getInstance());
+	}
+	
+	@Override
+	public void initialize(){
 		finished = false;
 	}
 	

@@ -23,10 +23,10 @@ public class Gear extends Subsystem{
 	}
 	
 	public void openCatcher(){
-		catcher.set(false);
+		catcher.set(true);
 	}
 	public void closeCatcher(){
-		catcher.set(true);
+		catcher.set(false);
 	}
 	
 	public void toggleCatcher(){

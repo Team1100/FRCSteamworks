@@ -101,25 +101,26 @@ public class RobotMap {
 	public static final int U_XBOX = USB_1;
 	public static final int U_STICK = USB_0;
 	//[I]ntake
-	public static final int I_ROLLER = PWM_4;
-	public static final int I_ROLLER_2 = PWM_5;
+	//public static final int I_ROLLER = PWM_4;
+	//public static final int I_ROLLER_2 = PWM_5;
 	//[S]hooter
 	public static final int S_FLYWHEEL = CAN_2;
-	public static final int S_FLYWHEEL_2 = CAN_3;
+	public static final int S_FEEDER = CAN_3;
 	public static final int S_CONVEYOR = PWM_0;
 	public static final int S_ENCODER_A = DIO_2;
 	public static final int S_ENCODER_B = DIO_3;
 	public static final int S_FLAP = PWM_3;
 	//[G]ear 2
 	public static final int G2_PCM = CAN_0;
-	public static final int G_ULTRASOUND = ANALOG_2;
-	public static final int G_FIRER_0_FORWARD = P_2;
-	public static final int G_FIRER_0_REVERSE = P_3;
-	public static final int G_FIRER_1_FORWARD = P_1;
-	public static final int G_FIRER_1_REVERSE = P_0;
+	public static final int G2_PLATE_0 = DIO_0;
+	public static final int G2_PLATE_1 = DIO_1;
+	public static final int G2_CLAMP_0_FORWARD = P_2;
+	public static final int G2_CLAMP_0_REVERSE = P_3;
+	public static final int G2_RAMP_1_FORWARD = P_1;
+	public static final int G2_RAMP_1_REVERSE = P_0;
 	//[C]limber
-	public static final int C_MOTOR_1 = CAN_2;
-	public static final int C_MOTOR_2 = CAN_3;
+	public static final int C_MOTOR_1 = PWM_4;
+	public static final int C_MOTOR_2 = PWM_5;
 	//[G]ear
 	public static final int G_PCM = CAN_1;
 	public static final int G_CATCHER = P_0;

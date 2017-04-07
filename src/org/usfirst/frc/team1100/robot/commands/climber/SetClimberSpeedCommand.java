@@ -12,6 +12,7 @@ public class SetClimberSpeedCommand extends Command {
 
     private double speed;
     private long timeEnabled;
+    private boolean finished;
 
 	public SetClimberSpeedCommand(double speed) {
         requires(Climber.getInstance());
@@ -22,31 +23,32 @@ public class SetClimberSpeedCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timeEnabled = System.currentTimeMillis();
+    	this.finished = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    
+    	/*
     	//Prevent Damaging Climber
     	if(System.currentTimeMillis()-timeEnabled>1000
     			&&(Climber.getInstance().getClimberCurrentA()>45
     			||Climber.getInstance().getClimberCurrentB()>45)){
     		Climber.getInstance().setSpeed(0);
-    	}else{
-    		Climber.getInstance().setSpeed(speed);
-    	}
-    	
+    	}else{*/
+    	Climber.getInstance().setSpeed(speed);
+    	//}
     	Intake.getInstance().stopRoller();
+    	this.finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Climber.getInstance().setSpeed(0);
+    	//Climber.getInstance().setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

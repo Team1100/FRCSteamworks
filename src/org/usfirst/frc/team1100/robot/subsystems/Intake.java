@@ -31,14 +31,14 @@ public class Intake extends Subsystem {
 	}
 	
 	public Intake() {
-		roller = new Victor(RobotMap.I_ROLLER);
-		roller2 = new Victor(RobotMap.I_ROLLER_2);
+		//roller = new Victor(RobotMap.I_ROLLER);
+		//roller2 = new Victor(RobotMap.I_ROLLER_2);
 		
-		roller2.setInverted(true);
+		//roller2.setInverted(true);
 	}
 	
 	protected void initDefaultCommand() {
-		setDefaultCommand(new RollOutFromTrigger());
+		//setDefaultCommand(new RollOutFromTrigger());
 	}
 	
 	/**
@@ -57,8 +57,8 @@ public class Intake extends Subsystem {
 	 * @param speed a value between -1 and 1 to set the roller motor to
 	 */
 	public void setRollerSpeed(double speed) {
-		roller.set(speed);
-		roller2.set(speed);
+		//roller.set(speed);
+		//roller2.set(speed);
 	}
 	
 	/**
@@ -66,14 +66,14 @@ public class Intake extends Subsystem {
 	 */
 	
 	public double getRollerSpeed(){
-		return roller.get();
+		return 0/*roller.get()*/;
 	}
 	
 	/**
 	 * Sets the rollers speed to 0, stopping it
 	 */
 	public void stopRoller() {
-		roller.set(0);
-		roller2.set(0);
+		/*roller.set(0);
+		roller2.set(0);*/
 	}
 }

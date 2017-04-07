@@ -51,7 +51,7 @@ public class Drive extends Subsystem {
 		//System.err.println("Test");
 		resetGyro();
 		
-		reversed = false;
+		reversed = true;
 	}
 	
 	

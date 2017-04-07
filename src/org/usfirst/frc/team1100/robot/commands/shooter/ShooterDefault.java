@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1100.robot.commands.shooter;
 
+import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.Robot;
+import org.usfirst.frc.team1100.robot.input.XboxController;
 import org.usfirst.frc.team1100.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,7 +23,12 @@ public class ShooterDefault extends Command {
 			SmartDashboard.putNumber("Current B", Shooter.getInstance().getShooterCurrentB());
 			SmartDashboard.putNumber("Average Current", Shooter.getInstance().getAverageCurrent());
 
-			// Blocks for controlling speed of wheel
+			//Run feeder if trigger is pulled 
+			if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
+				Shooter.getInstance().runFeeder();
+			}else Shooter.getInstance().stopFeeder();
+			
+			// Blocks for controlling speed of wheel and conveyer
 			if (Shooter.getInstance().getOn()) {
 				if (timeEnabled == 0)
 					timeEnabled = System.currentTimeMillis();
@@ -36,7 +43,7 @@ public class ShooterDefault extends Command {
 			// Prevent ball entry early on when speed is low
 			if (Shooter.getInstance().getSpeed() < Shooter.MIN_SPEED
 					&& System.currentTimeMillis() - timeEnabled < 1000) {
-				//TODO Force agitator to stop
+				Shooter.getInstance().stopFeeder();
 			}
 
 			//Prevent current spikes
@@ -56,7 +63,7 @@ public class ShooterDefault extends Command {
 			
 			// Block ball entry when shooter is off
 			if (!Shooter.getInstance().getOn()) {
-				//TODO
+				Shooter.getInstance().stopFeeder();
 			}
 		}
 	}

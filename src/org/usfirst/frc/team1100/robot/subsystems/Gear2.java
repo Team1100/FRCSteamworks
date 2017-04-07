@@ -4,6 +4,7 @@ import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.gear2.Gear2Default;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,7 +17,8 @@ public class Gear2 extends Subsystem{
 	private DoubleSolenoid clamp;
 	private DoubleSolenoid ramp;
 	
-	private AnalogInput ultrasound;
+	private DigitalInput plate;
+	private DigitalInput plate2;
 	
 	public static Gear2 getInstance(){
 		if(instance==null)instance=new Gear2();
@@ -24,10 +26,11 @@ public class Gear2 extends Subsystem{
 	}
 	
 	public Gear2(){
-		clamp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G_FIRER_0_FORWARD,RobotMap.G_FIRER_0_REVERSE);
-		ramp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G_FIRER_1_FORWARD, RobotMap.G_FIRER_1_REVERSE);
+		clamp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G2_CLAMP_0_FORWARD,RobotMap.G2_CLAMP_0_REVERSE);
+		ramp = new DoubleSolenoid(RobotMap.G2_PCM, RobotMap.G2_RAMP_1_FORWARD, RobotMap.G2_RAMP_1_REVERSE);
 		
-		ultrasound = new AnalogInput(RobotMap.G_ULTRASOUND);
+		plate = new DigitalInput(RobotMap.G2_PLATE_0);
+		plate2 = new DigitalInput(RobotMap.G2_PLATE_1);
 	}
 	
 	private void setClamp(Value value){
@@ -38,12 +41,8 @@ public class Gear2 extends Subsystem{
 		ramp.set(value);
 	}
 	
-	public boolean isPegIn() {
-		return ultrasound.getValue() < 290;
-	}
-	
-	public int getU(){
-		return ultrasound.getValue();
+	public boolean isPegIn(){
+		return !plate.get()||!plate2.get();
 	}
 	
 	public void openCatcher(){

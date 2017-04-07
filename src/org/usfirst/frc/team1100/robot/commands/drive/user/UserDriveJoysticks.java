@@ -2,6 +2,7 @@ package org.usfirst.frc.team1100.robot.commands.drive.user;
 
 import org.usfirst.frc.team1100.robot.OI;
 import org.usfirst.frc.team1100.robot.subsystems.Drive;
+import org.usfirst.frc.team1100.robot.subsystems.Gear2;
 import org.usfirst.frc.team1100.robot.subsystems.vision.Vision;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -40,7 +41,9 @@ public class UserDriveJoysticks extends Command {
 		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
-		Drive.getInstance().driveMecanum(-x, y, z*ROTATION_CORRECTION);
+		//if(!Gear2.getInstance().isPegIn()&&!OI.getInstance().getStick().getButton(5).get()){
+			Drive.getInstance().driveMecanum(-x, y, z*ROTATION_CORRECTION);
+		//}
 		
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound());
 	}

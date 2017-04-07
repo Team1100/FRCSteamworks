@@ -11,11 +11,11 @@ public class OpenCatcher2AutoClose extends Command{
 	
 	public OpenCatcher2AutoClose(){
 		requires(Gear2.getInstance());
-		finished = false;
 	}
 	
 	@Override
 	protected void initialize(){
+		finished = false;
 		timeOpened = 0;
 	}
 	
