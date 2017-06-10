@@ -61,6 +61,7 @@ public class Robot extends IterativeRobot {
 		OI.getInstance();
 		Gear2.getInstance();
 		Gear.getInstance();
+		//TOnotDO oooooo
 		Climber.getInstance();
 		
 		
@@ -73,15 +74,15 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		// Add actuators to test mode
-		LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
-		LiveWindow.addActuator("Intake", "Roller2", Intake.getInstance().getRoller2LWS());
+		//LiveWindow.addActuator("Intake", "Roller", Intake.getInstance().getRollerLWS());
+		//LiveWindow.addActuator("Intake", "Roller2", Intake.getInstance().getRoller2LWS());
 		
 		LiveWindow.addActuator("Shooter", "Flywheel", Shooter.getInstance().getFlywheelLWS());
 		LiveWindow.addActuator("Shooter", "Flywheel2", Shooter.getInstance().getFeederLWS());
 		LiveWindow.addActuator("SHooter", "Conveyor", Shooter.getInstance().getConveyorLWS());
 		
-		LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
-		LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().climb2LWS());
+		//LiveWindow.addActuator("Climber", "Motor", Climber.getInstance().climbLWS());
+		//LiveWindow.addActuator("Climber", "Motor2", Climber.getInstance().climb2LWS());
 		
 		LiveWindow.addActuator("Gear", "Catcher", Gear.getInstance().gearLWS());
 		

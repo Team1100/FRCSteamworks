@@ -48,6 +48,7 @@ public class Intake extends Subsystem {
 	public LiveWindowSendable getRollerLWS() {
 		return (LiveWindowSendable) roller;
 	}
+	
 	public LiveWindowSendable getRoller2LWS(){
 		return (LiveWindowSendable) roller2;
 	}

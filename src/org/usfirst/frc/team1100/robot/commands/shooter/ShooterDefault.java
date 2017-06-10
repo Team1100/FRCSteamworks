@@ -24,14 +24,17 @@ public class ShooterDefault extends Command {
 			SmartDashboard.putNumber("Average Current", Shooter.getInstance().getAverageCurrent());
 
 			//Run feeder if trigger is pulled 
-			if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger)!=0){
+			if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger) > 0.2){
 				Shooter.getInstance().runFeeder();
-			}else Shooter.getInstance().stopFeeder();
+			} else {
+				Shooter.getInstance().stopFeeder();
+			}
 			
 			// Blocks for controlling speed of wheel and conveyer
 			if (Shooter.getInstance().getOn()) {
-				if (timeEnabled == 0)
+				if (timeEnabled == 0) {
 					timeEnabled = System.currentTimeMillis();
+				}
 				Shooter.getInstance().setSpeedToTarget();
 				Shooter.getInstance().runConveyor();
 			} else {
@@ -43,7 +46,7 @@ public class ShooterDefault extends Command {
 			// Prevent ball entry early on when speed is low
 			if (Shooter.getInstance().getSpeed() < Shooter.MIN_SPEED
 					&& System.currentTimeMillis() - timeEnabled < 1000) {
-				Shooter.getInstance().stopFeeder();
+				//TODO Shooter.getInstance().stopFeeder();
 			}
 
 			//Prevent current spikes
@@ -55,15 +58,14 @@ public class ShooterDefault extends Command {
 			}
 
 			//Stop shooter if encoder fails
-			if(Shooter.getInstance().getSpeed()<=5
-				&& (System.currentTimeMillis() - timeEnabled) > 1000) {
-					Shooter.getInstance().setOn(false);
+			if(Shooter.getInstance().getSpeed()<=5 && (System.currentTimeMillis() - timeEnabled) > 1000) {
+					//Shooter.getInstance().setOn(false);
 					System.err.println("Yeah so the encoder done broke");
 				}
 			
 			// Block ball entry when shooter is off
 			if (!Shooter.getInstance().getOn()) {
-				Shooter.getInstance().stopFeeder();
+				//TODO Shooter.getInstance().stopFeeder();
 			}
 		}
 	}

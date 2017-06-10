@@ -35,7 +35,7 @@ private static OI instance;
 	private OI() {
 		//Initialize input devices
 		xbox = new XboxController(RobotMap.U_XBOX, 0.1);
-		stick = new Extreme3DPro(RobotMap.U_STICK,.2,.3);
+		stick = new Extreme3DPro(RobotMap.U_STICK,.2,.4);
 		
 		// Button assignments
 		xbox.getButtonA().whenPressed(new OpenCatcher());
