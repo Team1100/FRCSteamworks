@@ -22,6 +22,7 @@ public class ShooterDefault extends Command {
 			SmartDashboard.putNumber("Current A", Shooter.getInstance().getShooterCurrentA());
 			SmartDashboard.putNumber("Current B", Shooter.getInstance().getShooterCurrentB());
 			SmartDashboard.putNumber("Average Current", Shooter.getInstance().getAverageCurrent());
+			SmartDashboard.putNumber("Shooter Encoder Value", Shooter.getInstance().getSpeed());
 
 			//Run feeder if trigger is pulled 
 			if(OI.getInstance().getXbox().getAxis(XboxController.XboxAxis.kRightTrigger) > 0.2){
@@ -53,14 +54,15 @@ public class ShooterDefault extends Command {
 			if ((Shooter.getInstance().getShooterCurrentA() >= Shooter.CURRENT_THRESHOLD
 					|| Shooter.getInstance().getShooterCurrentB() >= Shooter.CURRENT_THRESHOLD)
 					&& (System.currentTimeMillis() - timeEnabled) > 1000) {
-				Shooter.getInstance().setOn(false);
+				//Shooter.getInstance().setOn(false);
 				System.err.println("Current hit Shooter.CURRENT_THRESHOLD");
 			}
 
 			//Stop shooter if encoder fails
 			if(Shooter.getInstance().getSpeed()<=5 && (System.currentTimeMillis() - timeEnabled) > 1000) {
-					//Shooter.getInstance().setOn(false);
-					System.err.println("Yeah so the encoder done broke");
+				//TODO I don't know what this is, but it doesn't seem to be doing anything
+				//Shooter.getInstance().setOn(false);
+					//System.err.println("Yeah so the encoder done broke");
 				}
 			
 			// Block ball entry when shooter is off

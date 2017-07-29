@@ -104,7 +104,7 @@ public class RobotMap {
 	//public static final int I_ROLLER = PWM_4;
 	//public static final int I_ROLLER_2 = PWM_5;
 	//[S]hooter
-	public static final int S_FLYWHEEL = PWM_3; // Was CAN_2 before
+	public static final int S_FLYWHEEL = CAN_2; // Was CAN_2 before
 	public static final int S_FEEDER = CAN_5; // Was CAN_3 before
 	public static final int S_CONVEYOR = CAN_3; // Was PWM_0 before
 	public static final int S_ENCODER_A = DIO_2;

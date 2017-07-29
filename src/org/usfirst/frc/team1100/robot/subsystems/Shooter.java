@@ -41,7 +41,7 @@ public class Shooter extends Subsystem {
 	
 	private static Shooter shooter;
 
-	private Victor flywheel;
+	private CANTalon flywheel;
 	private CANTalon feeder;//, TEMP1, TEMP2;
 	private CANTalon conveyor; // Was a Victor, but then it was changed to CAN, so thus a CANTalon
 	private Encoder enc;
@@ -64,7 +64,7 @@ public class Shooter extends Subsystem {
 	 */
 	public Shooter() {
 		on = false; // Sets the shooter to off as we don't want it starting up as soon as the robot is enabled
-		flywheel = new Victor(RobotMap.S_FLYWHEEL); // Initialize all the various motors that are needed
+		flywheel = new CANTalon(RobotMap.S_FLYWHEEL); // Initialize all the various motors that are needed
 		feeder = new CANTalon(RobotMap.S_FEEDER);
 		conveyor = new CANTalon(RobotMap.S_CONVEYOR);
 		// I think the temp motors were artifacts from the previous shooter. They are NOT needed. I'm leaving them here just in case we need to do a sudden rollback
