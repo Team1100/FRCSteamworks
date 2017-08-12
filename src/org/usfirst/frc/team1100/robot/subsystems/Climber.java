@@ -18,6 +18,7 @@ public class Climber extends Subsystem {
 	private CANTalon motor2,motor3,motor4; // And this???
 	private Talon motor1a, motor1b;
 
+	// this is a message brought to you by Grant
 
 	public Climber() {
 		// I have no idea what any of these motors are for. Please remove.
