@@ -69,7 +69,6 @@ public class Robot extends IterativeRobot {
 		
 		chooser.addObject("Center Gear", new GearTrackCommand());
 		chooser.addObject("Line Cross", new AutoDrive(0,.5,0,3));
-		chooser.addObject("Climb", new SetClimberSpeedCommand(1));
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
