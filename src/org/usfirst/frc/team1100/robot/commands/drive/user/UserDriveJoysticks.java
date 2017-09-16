@@ -38,11 +38,11 @@ public class UserDriveJoysticks extends Command {
 	protected void execute() {
 		
 		double x = -OI.getInstance().getStick().getAxis(Joystick.AxisType.kX);
-		double y = -OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
+		double y = OI.getInstance().getStick().getAxis(Joystick.AxisType.kY);
 		double z = OI.getInstance().getStick().getAxis(Joystick.AxisType.kZ);
 		
 		//if(!Gear2.getInstance().isPegIn()&&!OI.getInstance().getStick().getButton(5).get()){
-			Drive.getInstance().driveMecanum(-x, y, z*ROTATION_CORRECTION);
+			Drive.getInstance().driveMecanum(x, y, z*ROTATION_CORRECTION);
 		//}
 		
 		SmartDashboard.putNumber("USound",Vision.getInstance().getUSound());

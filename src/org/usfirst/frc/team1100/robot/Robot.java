@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 		Drive.getInstance();
 		Vision.getInstance();
 		Intake.getInstance();
-		Shooter.getInstance();
+		//Shooter.getInstance();
 		OI.getInstance();
 		Gear2.getInstance();
 		Gear.getInstance();

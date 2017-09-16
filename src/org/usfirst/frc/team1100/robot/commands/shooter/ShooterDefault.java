@@ -45,10 +45,10 @@ public class ShooterDefault extends Command {
 			}
 
 			// Prevent ball entry early on when speed is low
-			if (Shooter.getInstance().getSpeed() < Shooter.MIN_SPEED
-					&& System.currentTimeMillis() - timeEnabled < 1000) {
+			//if (Shooter.getInstance().getSpeed() < Shooter.MIN_SPEED
+			//		&& System.currentTimeMillis() - timeEnabled < 1000) {
 				//TODO Shooter.getInstance().stopFeeder();
-			}
+			//}
 
 			//Prevent current spikes
 			if ((Shooter.getInstance().getShooterCurrentA() >= Shooter.CURRENT_THRESHOLD
@@ -59,12 +59,13 @@ public class ShooterDefault extends Command {
 			}
 
 			//Stop shooter if encoder fails
+			/*
 			if(Shooter.getInstance().getSpeed()<=5 && (System.currentTimeMillis() - timeEnabled) > 1000) {
 				//TODO I don't know what this is, but it doesn't seem to be doing anything
 				//Shooter.getInstance().setOn(false);
 					//System.err.println("Yeah so the encoder done broke");
 				}
-			
+			*/
 			// Block ball entry when shooter is off
 			if (!Shooter.getInstance().getOn()) {
 				//TODO Shooter.getInstance().stopFeeder();

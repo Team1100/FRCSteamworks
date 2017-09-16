@@ -33,11 +33,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
 
 	public static final double CURRENT_THRESHOLD = 70; // This is the limit of current before the subsystem shuts itself off (citation needed)
-	
-	public static final double SHOOT_SPEED = 40;
-	public static final double MIN_SPEED = 37; //TODO temp irrelevant
-	public static final double CONVEYOR_POWER = .6;
-	private static final double FEEDER_POWER = .3; //TODO -.4;
+	public static final double SHOOT_PWM_VOLTAGE = 0.5; //PWM SPEED
+	public static final double SHOOT_SPEED = 15; //0.05 is a reasonable low speed.
+	//public static final double MIN_SPEED = 37; //TODO temp irrelevant
+	public static final double CONVEYOR_POWER = .7;
+	private static final double FEEDER_POWER = .4; //TODO -.4;
 	
 	private static Shooter shooter;
 
@@ -188,11 +188,14 @@ public class Shooter extends Subsystem {
 	 * Sets the shooter speed to a target speed using a bang-bang controller
 	 */
 	public void setSpeedToTarget() {
+		/*
 		if (getSpeed()>=SHOOT_SPEED) {
 			setFlywheelSpeed(0);
 		} else {
 			setFlywheelSpeed(1);
 		}
+		*/
+		setFlywheelSpeed(SHOOT_PWM_VOLTAGE);
 	}
 	
 	/**
