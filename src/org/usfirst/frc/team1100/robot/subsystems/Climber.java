@@ -4,7 +4,7 @@ import org.usfirst.frc.team1100.robot.Robot;
 import org.usfirst.frc.team1100.robot.RobotMap;
 import org.usfirst.frc.team1100.robot.commands.climber.ClimberDefault;
 
-import com.ctre.CANTalon;
+//import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 public class Climber extends Subsystem {
 
 	private static Climber climber;
-	private CANTalon motor1; // What even is this?
-	private CANTalon motor2,motor3,motor4; // And this???
+	//private CANTalon motor1; // What even is this?
+	//private CANTalon motor2,motor3,motor4; // And this???
 	private Talon motor1a, motor1b;
 
 	// this is a message brought to you by Grant
@@ -60,22 +60,25 @@ public class Climber extends Subsystem {
 		motor1b.set(value);
 	}
 	
-	/**
+	/*
 	 * Used for the test mode smartdashboard display
 	 * @return the LiveWindowSendable instances of motor1
 	 */
+	/*
 	public LiveWindowSendable climbLWS(){
 		return (LiveWindowSendable) motor1;
 	}
+	*/
 	
-	/**
+	/*
 	 * Used for the test mode smartdashboard display
 	 * @return the LiveWindowSendable instances of motor2
 	 */
+	/*
 	public LiveWindowSendable climb2LWS(){
 		return (LiveWindowSendable) motor2;
 	}
-	
+	*/
 	/**
 	 * Used for getting the current of climber motor A
 	 * @return the current current (ha) of climber motor A
