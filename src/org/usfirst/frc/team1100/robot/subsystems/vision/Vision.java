@@ -25,7 +25,7 @@ public class Vision extends Subsystem {
 	
 	NetworkTable table;
 	
-	public Vision() {
+	private Vision() {
 		//setDefaultCommand(new VisionInitCommand(table, gp));
 		table = NetworkTable.getTable("GRIP/conts");
 		imageRequested = false;
