@@ -62,7 +62,7 @@ public class Shooter extends Subsystem {
 	/**
 	 * Initializes the shooter subsystem.
 	 */
-	public Shooter() {
+	private Shooter() {
 		on = false; // Sets the shooter to off as we don't want it starting up as soon as the robot is enabled
 		flywheel = new Victor(RobotMap.S_FLYWHEEL); // Initialize all the various motors that are needed
 		feeder = new WPI_TalonSRX(RobotMap.S_FEEDER);

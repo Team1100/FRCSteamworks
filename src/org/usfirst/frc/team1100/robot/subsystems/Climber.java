@@ -20,7 +20,7 @@ public class Climber extends Subsystem {
 
 	// this is a message brought to you by Grant
 
-	public Climber() {
+	private Climber() {
 		// I have no idea what any of these motors are for. Please remove.
 		//motor1 = new CANTalon(RobotMap.C_MOTOR_1); // This is the same motor as 1a, just being used in a CAN context
 		//motor2 = new CANTalon(RobotMap.C_MOTOR_2); // This is the same motor as 1b

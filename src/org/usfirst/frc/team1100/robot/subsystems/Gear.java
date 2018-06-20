@@ -18,7 +18,7 @@ public class Gear extends Subsystem{
 		return instance;
 	}
 	
-	public Gear(){
+	private Gear(){
 		catcher = new Solenoid(RobotMap.G_PCM, RobotMap.G_CATCHER);
 	}
 	

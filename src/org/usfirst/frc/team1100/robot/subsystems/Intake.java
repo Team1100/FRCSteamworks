@@ -30,7 +30,7 @@ public class Intake extends Subsystem {
 		return intake;
 	}
 	
-	public Intake() {
+	private Intake() {
 		//roller = new Victor(RobotMap.I_ROLLER);
 		//roller2 = new Victor(RobotMap.I_ROLLER_2);
 		

@@ -20,7 +20,7 @@ public class Gear2 extends Subsystem{
 	private DigitalInput plate;
 	private DigitalInput plate2;
 	
-	public static Gear2 getInstance(){
+	private static Gear2 getInstance(){
 		if(instance==null)instance=new Gear2();
 		return instance;
 	}

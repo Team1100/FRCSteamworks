@@ -32,7 +32,7 @@ public class Drive extends Subsystem {
 		return drive;
 	}
 
-	public Drive(){
+	private Drive(){
 		frontLeft = new Victor(RobotMap.D_FRONT_LEFT);
 		frontRight = new Victor(RobotMap.D_FRONT_RIGHT);
 		backLeft = new Victor(RobotMap.D_BACK_LEFT);
